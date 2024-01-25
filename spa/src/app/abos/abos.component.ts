@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
+import {Abo} from "../model/abos.model";
+import {AbosStore} from "../service/abos.store";
 
 
 @Component({
@@ -8,8 +11,22 @@ import { Component } from '@angular/core';
   templateUrl: './abos.component.html',
   styleUrl: './abos.component.scss'
 })
-export class AbosComponent {
+export class AbosComponent implements OnInit {
 
+    // @ts-ignore
+    abos$ : Observable<Abo[]>;
 
+    constructor(
+      private abosStore : AbosStore
+    ) {
+    }
+
+  ngOnInit() {
+    this.reloadAbos();
+  }
+
+  reloadAbos() {
+    this.abos$ = this.abosStore.abos$;
+  }
 
 }
