@@ -24,7 +24,12 @@
 
   <ng-container matColumnDef="active">
     <th mat-header-cell *matHeaderCellDef> Active </th>
-    <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+    <td mat-cell *matCellDef="let element">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    [checked]="element.active"
+                    disabled="true">
+      </mat-checkbox>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

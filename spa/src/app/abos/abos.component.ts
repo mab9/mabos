@@ -7,12 +7,13 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {AsyncPipe, NgIf} from "@angular/common";
+import {MatCheckbox} from "@angular/material/checkbox";
 
 
 @Component({
   selector: 'app-abos',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox],
   templateUrl: './abos.component.html',
   styleUrl: './abos.component.scss',
   animations: [
