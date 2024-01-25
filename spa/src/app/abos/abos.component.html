@@ -1,1 +1,33 @@
-<p>abos works!</p>
+<ng-container *ngIf="(abos$ | async) as abos">
+
+
+
+<table mat-table [dataSource]="abos" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="period">
+    <th mat-header-cell *matHeaderCellDef> Period </th>
+    <td mat-cell *matCellDef="let element"> {{element.period}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="active">
+    <th mat-header-cell *matHeaderCellDef> Active </th>
+    <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</ng-container>

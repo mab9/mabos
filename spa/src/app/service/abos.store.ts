@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, catchError, map, Observable, tap} from "rxjs";
+import {BehaviorSubject, catchError, map, Observable, tap, throwError} from "rxjs";
 import {Abo} from "../model/abos.model";
 
 @Injectable({
@@ -21,16 +21,25 @@ export class AbosStore {
   }
 
   private loadAll() {
-    console.info("load abos")
-    const loadedCourses$ = this.http.get<Abo[]>('/api/abos')
+    //const loadedCourses$ = this.http.get<Abo[]>('/api/abos')
+    this.http.get<Abo[]>('/api/abos')
       .pipe(
         // @ts-ignore
         map(response => response['payload']),
+        catchError(err => {
+          return this.handleError("Could not load abos", err);
+        }),
         /// if no error occurs we receive the abos
-        tap(courses => this.subject.next(courses))
-      )
+        tap(abos => this.subject.next(abos))
+      ).subscribe()
 
     //this.loading.showLoaderUntilCompleted(loadedCourses$).subscribe();
+  }
+
+  private handleError(message : string, err : Error) : Observable<never> {
+    // this.messages.showErrors(message);
+    console.error(message,err);
+    return throwError(err);
   }
 
 
