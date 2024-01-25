@@ -3,10 +3,9 @@ import {Period} from "./period.enum";
 export interface Abo {
   id: string;
   title: string;
-  price: number;
+  price: number; // in month
   period : Period;
   active: boolean;
-  validUntil : string;
   description: string;
 }
 

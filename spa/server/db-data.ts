@@ -1,16 +1,27 @@
 export const ABOS: any = {
   1: {
-    id: 17,
-    description: 'Reactive Angular Course',
-    longDescription: 'How to build Angular applications in Reactive style using plain RxJs - Patterns and Anti-Patterns',
-    iconUrl: 'https://angular-university.s3-us-west-1.amazonaws.com/course-images/reactive-angular-course.jpg',
-    courseListIcon: 'https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png',
-    category: 'BEGINNER',
-    lessonsCount: 10,
-    seqNo: 0,
-    url: 'reactive-angular-course',
-    price: 50
-
+    id: 12,
+    title: 'Spotify Family',
+    price: 15.00,
+    period: 1,
+    active: true,
+    description: "Family Abo with 5 user",
+  },
+  2: {
+    id: 13,
+    title: 'Contabo V Server',
+    price: 16.00,
+    period: 12,
+    active: true,
+    description: "Contabo virtual server",
+  },
+  3: {
+    id: 14,
+    title: 'Mobile Abo',
+    price: 18.00,
+    period: 1,
+    active: true,
+    description: "Sunrise Mobile Abo",
   },
 }
 
