@@ -25,11 +25,3 @@ export const ABOS: any = {
   },
 }
 
-
-
-
-export function findCourseById(courseId: number) {
-  return ABOS[courseId];
-}
-
-
