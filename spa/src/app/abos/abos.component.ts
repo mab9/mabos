@@ -16,6 +16,7 @@ import {MatChip, MatChipOption} from "@angular/material/chips";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {format} from "date-fns";
 
 
 @Component({
@@ -36,7 +37,6 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 })
 export class AbosComponent {
 
-    protected readonly Period = Period;
     displayedColumns: string[] = ['title', 'price', 'period', 'active', 'actions'];
 
     constructor(
@@ -48,16 +48,7 @@ export class AbosComponent {
   }
 
   onAdd() {
-      const item : Abo = {
-        id: null,
-        title: 'New Abo',
-        price: 0,
-        period : Period.MONTH,
-        active: false,
-        description: '',
-        isEditing : false,
-      }
-      this.abosStore.createItem(item).subscribe();
+      this.abosStore.createItem().subscribe();
   }
 
   onEdit(element: Abo) {

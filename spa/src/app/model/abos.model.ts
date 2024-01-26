@@ -8,8 +8,5 @@ export interface Abo {
   active: boolean;
   description: string;
   isEditing: boolean;
-}
-
-export function sortCoursesByTitle(a1: Abo, a2: Abo) {
-  return a1.title > a2.title;
+  starteDate: string;
 }

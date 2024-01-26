@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, catchError, debounceTime, map, Observable, shareReplay, tap, throwError} from "rxjs";
 import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
+import {format} from "date-fns";
 
 @Injectable({
   providedIn : "root" // one instance for the whole application
@@ -61,11 +62,27 @@ export class AbosStore {
     }
   }
 
-  createItem(newItem: Abo) {
+  createItem() {
+    const newItem = this.newAbo();
     const currentData = this.subject.value;
     const updatedData = [...currentData, newItem];
     this.subject.next(updatedData);
     return this.postItem(newItem);
+  }
+
+  private newAbo() : Abo {
+    const today = new Date();
+    const formattedDate = format(today, 'yyyy-MM-dd');
+    return {
+      id: null,
+      title: 'New Abo',
+      price: 0,
+      period : Period.MONTH,
+      active: false,
+      description: '',
+      isEditing : false,
+      starteDate : formattedDate
+    }
   }
 
   removeItem(itemId: number) {

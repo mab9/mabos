@@ -6,6 +6,7 @@ export let ABOS: any = {
     period: 'MONTH',
     active: true,
     description: "Family Abo with 5 user",
+    starteDate: "2024-01-26",
   },
   2: {
     id: 2,
@@ -14,6 +15,7 @@ export let ABOS: any = {
     period: 'YEAR',
     active: true,
     description: "Contabo virtual server",
+    starteDate: "2023-09-07",
   },
   3: {
     id: 3,
@@ -22,6 +24,7 @@ export let ABOS: any = {
     period: 'MONTH',
     active: true,
     description: "Sunrise Mobile Abo",
+    starteDate: "2024-01-07",
   },
 }
 

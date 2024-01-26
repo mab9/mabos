@@ -16,12 +16,18 @@ import {FormsModule} from "@angular/forms";
 import {Period} from "../model/period.enum";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {it} from "node:test";
+import {
+  MatDatepicker,
+  MatDatepickerActions, MatDatepickerApply, MatDatepickerCancel,
+  MatDatepickerInput,
+  MatDatepickerToggle
+} from "@angular/material/datepicker";
 
 
 @Component({
   selector: 'app-abos-inline',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe, MatSlideToggle],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe, MatSlideToggle, MatDatepickerToggle, MatDatepicker, MatDatepickerActions, MatDatepickerInput, MatDatepickerApply, MatDatepickerCancel],
   templateUrl: './abos-inline.component.html',
   styleUrl: './abos-inline.component.scss'
 })
@@ -29,7 +35,7 @@ export class AbosInlineComponent {
 
   protected readonly Object = Object;
   protected readonly Period = Period;
-  displayedColumns: string[] = ['title', 'price', 'period', 'active', 'actions'];
+  displayedColumns: string[] = ['title', 'price', 'period','starteDate', 'active', 'actions'];
 
   constructor(
     public abosStore : AbosStore
@@ -41,16 +47,7 @@ export class AbosInlineComponent {
   }
 
   onAdd() {
-    const item : Abo = {
-      id: null,
-      title: 'New Abo',
-      price: 0,
-      period : Period.MONTH,
-      active: false,
-      description: '',
-      isEditing : false,
-    }
-    this.abosStore.createItem(item).subscribe();
+    this.abosStore.createItem().subscribe();
   }
   onRemove(element : Abo) {
     this.abosStore.removeItem(element.id!).subscribe();
