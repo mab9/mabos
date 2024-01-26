@@ -20,6 +20,17 @@ export class AbosStore {
     this.loadAll();
   }
 
+  addData(newItem: Abo) {
+    const currentData = this.subject.value;
+    const updatedData = [...currentData, newItem];
+    this.subject.next(updatedData);
+  }
+
+  removeData(item: Abo) {
+    const updatedData = this.subject.value.filter(i => i !== item);
+    this.subject.next(updatedData);
+  }
+
   private loadAll() {
     //const loadedCourses$ = this.http.get<Abo[]>('/api/abos')
     this.http.get<Abo[]>('/api/abos')
