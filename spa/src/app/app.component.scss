@@ -1,3 +1,34 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+
+/* Basic styling for content */
+.content-wrapper {
+  margin: 20px auto;
+  padding: 20px;
+  box-sizing: border-box; /* Ensures padding does not affect the set width */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) { /* For tablets and below */
+  .content-wrapper {
+    margin: 10px auto;
+    padding: 15px;
+    width: 100%; /* Use full width on smaller screens */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) { /* For landscape tablets and small desktops */
+  .content-wrapper {
+    margin: 20px auto;
+    width: 80%; /* Slightly narrower width for medium screens */
+  }
+}
+
+@media (min-width: 1025px) { /* For desktops */
+  .content-wrapper {
+    margin: 20px auto; /* Centered with automatic margins */
+    width: 60%; /* Optimal reading width for large screens */
+  }
+}
