@@ -87,4 +87,6 @@ export class AbosComponent implements OnInit {
   remove(element : Abo) {
     this.abosStore.removeData(element);
   }
+
+  protected readonly Period = Period;
 }
