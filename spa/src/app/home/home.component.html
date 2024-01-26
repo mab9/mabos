@@ -7,10 +7,10 @@
   </mat-card-header>
   <mat-card-content>
     <mat-list>
-      <mat-list-item><span>Yearly Costs: 1200.00.- </span></mat-list-item>
-      <mat-list-item><span>Monthly Costs: 100.00.-  </span></mat-list-item>
-      <mat-list-item><span>Total Abos: 7</span></mat-list-item>
-      <mat-list-item><span>Total active Abos: 5  </span></mat-list-item>
+      <mat-list-item><span>Yearly Costs: {{ abosStore.abosTotalYearlyPrice$ | async | currency }} </span></mat-list-item>
+      <mat-list-item><span>Monthly Costs: {{ abosStore.abosTotalMonthlyCosts$ | async | currency }}  </span></mat-list-item>
+      <mat-list-item><span>Total Abos: {{ abosStore.abosCount$ | async }} </span></mat-list-item>
+      <mat-list-item><span>Total active Abos: {{ abosStore.abosActive$ | async }}  </span></mat-list-item>
     </mat-list>
   </mat-card-content>
   <mat-card-actions>

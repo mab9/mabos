@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, Observable, shareReplay, tap, throwError} from "rxjs";
 import {Abo} from "../model/abos.model";
-import {saveAbo} from "../../../server/abos.route";
+import {Period} from "../model/period.enum";
 
 @Injectable({
   providedIn : "root" // one instance for the whole application
@@ -12,6 +12,21 @@ export class AbosStore {
 
   private subject = new BehaviorSubject<Abo[]>([])
   abos$ = this.subject.asObservable();
+  abosCount$: Observable<number> = this.abos$.pipe(
+    map(abos => abos.length)
+  );
+  abosActive$: Observable<number> = this.abos$.pipe(
+    map(abos => abos.filter(abo => abo.active).length)
+  );
+  abosTotalMonthlyCosts$: Observable<number> = this.abos$.pipe(
+    map(abos => abos.reduce((acc, abo) => acc + this.normalizePriceToPricePerMonth(abo), 0)),
+    map(total => this.roundUpToNearestFiveCents(total))
+  );
+
+  abosTotalYearlyPrice$: Observable<number> = this.abos$.pipe(
+    map(abos => abos.reduce((acc, abo) => acc + this.normalizePriceToPricePerYear(abo), 0)),
+    map(total => this.roundUpToNearestFiveCents(total))
+  );
 
   constructor(
     private http: HttpClient,
@@ -19,6 +34,29 @@ export class AbosStore {
     //private messages: MessagesService
   ) {
     this.loadAll();
+  }
+
+  normalizePriceToPricePerYear(abo: Abo) {
+    return 12 * this.normalizePriceToPricePerMonth(abo);
+  }
+
+  normalizePriceToPricePerMonth(abo : Abo) {
+      const divider = this.getPriceToMonthDivider(abo);
+      return abo.price / divider;
+  }
+
+  roundUpToNearestFiveCents(amount: number): number {
+    const multiplier = 20; // Since 1 / 0.05 = 20
+    return Math.ceil(amount * multiplier) / multiplier;
+  }
+
+  getPriceToMonthDivider(abo: Abo) {
+    switch (abo.period) {
+      case Period.YEAR: return 12;
+      case Period.QUARTER_YEAR: return 3;
+      case Period.HALF_YEAR: return 6;
+      default: return 1;
+    }
   }
 
   createItem(newItem: Abo) {

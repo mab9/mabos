@@ -33,7 +33,7 @@
       <div *ngIf="!element.isEditing">{{ element.price }}</div>
       <input *ngIf="element.isEditing" [(ngModel)]="element.price">
     </td>
-    <td mat-footer-cell *matFooterCellDef> {{ getTotalCost() | currency}} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ abosStore.abosTotalYearlyPrice$ | async | currency}} </td>
 
   </ng-container>
 
@@ -55,7 +55,7 @@
     <td mat-cell *matCellDef="let element">
       <mat-checkbox (click)="$event.stopPropagation()" [disabled]="!element.isEditing" [(ngModel)]="element.active"></mat-checkbox>
     </td>
-    <td mat-footer-cell *matFooterCellDef> {{ getTotalActiveAbos() }} </td>
+    <td mat-footer-cell *matFooterCellDef> {{ abosStore.abosActive$ | async }} </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">

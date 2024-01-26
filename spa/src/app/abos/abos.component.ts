@@ -1,4 +1,4 @@
-import {Component, OnInit, TrackByFunction} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {Abo} from "../model/abos.model";
 import {AbosStore} from "../service/abos.store";
@@ -40,7 +40,7 @@ export class AbosComponent implements OnInit {
     displayedColumns: string[] = ['title', 'price', 'period', 'active', 'actions'];
 
     constructor(
-      private abosStore : AbosStore
+      public abosStore : AbosStore
     ) {
     }
 
@@ -76,18 +76,9 @@ export class AbosComponent implements OnInit {
   save(item: Abo) {
     item.isEditing = false;
     this.abosStore.saveItem(item.id!, item).subscribe();
-    // Implement saving logic here, e.g., update the dataSource or send changes to the backend
-  }
-  getTotalCost() {
-    return this.abosStore.getTotalCostOfAbos();
-  }
-
-  getTotalActiveAbos() {
-      return this.abosStore.getTotalActiveAbos();
   }
 
   remove(element : Abo) {
     this.abosStore.removeItem(element.id!).subscribe();
   }
-
 }

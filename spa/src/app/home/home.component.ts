@@ -9,6 +9,8 @@ import {
 } from "@angular/material/card";
 import {MatList, MatListItem} from "@angular/material/list";
 import {MatIcon} from "@angular/material/icon";
+import {AsyncPipe, CurrencyPipe} from "@angular/common";
+import {AbosStore} from "../service/abos.store";
 
 @Component({
   selector: 'app-home',
@@ -22,11 +24,17 @@ import {MatIcon} from "@angular/material/icon";
     MatCardSubtitle,
     MatList,
     MatListItem,
-    MatIcon
+    MatIcon,
+    AsyncPipe,
+    CurrencyPipe
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+
+
+  constructor(public abosStore : AbosStore) {
+  }
 
 }
