@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, catchError, map, Observable, shareReplay, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, debounceTime, map, Observable, shareReplay, tap, throwError} from "rxjs";
 import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
 

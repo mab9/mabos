@@ -20,8 +20,10 @@
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
       <td mat-cell *matCellDef="let element">
-        <div *ngIf="!element.isEditing">{{ element.title }}</div>
-        <input *ngIf="element.isEditing" [(ngModel)]="element.title">
+
+        <mat-form-field>
+          <input matInput [(ngModel)]="element.title" (ngModelChange)="onModelChange(element)" >
+        </mat-form-field>
       </td>
       <td mat-footer-cell *matFooterCellDef> Total yearly costs active Abos</td>
 
@@ -30,11 +32,11 @@
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
       <td mat-cell *matCellDef="let element">
-        <div *ngIf="!element.isEditing">{{ element.price }}</div>
-        <input *ngIf="element.isEditing" [(ngModel)]="element.price">
+        <mat-form-field>
+          <input type="number" matInput [(ngModel)]="element.price" (ngModelChange)="onModelChange(element)">
+        </mat-form-field>
       </td>
       <td mat-footer-cell *matFooterCellDef> {{ abosStore.abosTotalYearlyPrice$ | async | currency}} </td>
-
     </ng-container>
 
     <ng-container matColumnDef="period">
@@ -42,7 +44,7 @@
       <td mat-cell *matCellDef="let element">
 
         <mat-form-field>
-          <mat-select [(ngModel)]="element.period">
+          <mat-select [(ngModel)]="element.period" (ngModelChange)="onModelChange(element)">
             @for (item of Object.keys(Period); track item) {
               <mat-option [value]="item">{{ item }}</mat-option>
             }
@@ -57,7 +59,9 @@
     <ng-container matColumnDef="active">
       <th mat-header-cell *matHeaderCellDef> Active </th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox (click)="$event.stopPropagation()" [disabled]="!element.isEditing" [(ngModel)]="element.active"></mat-checkbox>
+        <mat-checkbox (click)="$event.stopPropagation()" [(ngModel)]="element.active"
+                      (ngModelChange)="onModelChange(element)"
+        ></mat-checkbox>
       </td>
       <td mat-footer-cell *matFooterCellDef> {{ abosStore.abosActive$ | async }} </td>
     </ng-container>
@@ -65,8 +69,6 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button color="basic"   *ngIf="!element.isEditing" (click)="edit(element)">Edit</button>
-        <button mat-button color="primary" *ngIf="element.isEditing"  (click)="save(element)">Save</button>
         <mat-icon (click)="remove(element)" color="warn">delete</mat-icon>
       </td>
       <td mat-footer-cell *matFooterCellDef> - </td>

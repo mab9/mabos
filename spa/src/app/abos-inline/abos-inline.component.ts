@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Observable} from "rxjs";
+import {debounceTime, Observable, shareReplay} from "rxjs";
 import {Abo} from "../model/abos.model";
 import {AbosStore} from "../service/abos.store";
 import {MatTableModule} from "@angular/material/table";
@@ -60,19 +60,13 @@ export class AbosInlineComponent {
     }
     this.abosStore.createItem(item).subscribe();
   }
-
-  edit(element: Abo) {
-    element.isEditing = true;
-  }
-
-  save(item: Abo) {
-    item.isEditing = false;
-    this.abosStore.saveItem(item.id!, item).subscribe();
-  }
-
   remove(element : Abo) {
     this.abosStore.removeItem(element.id!).subscribe();
   }
 
   protected readonly Object = Object;
+
+  onModelChange(item: Abo) {
+    this.abosStore.saveItem(item.id!, item).subscribe();
+  }
 }
