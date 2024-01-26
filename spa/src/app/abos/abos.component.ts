@@ -14,12 +14,13 @@ import {MatInputModule} from "@angular/material/input";
 import {Period} from "../model/period.enum";
 import {MatChip, MatChipOption} from "@angular/material/chips";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
+import {FormsModule} from "@angular/forms";
 
 
 @Component({
   selector: 'app-abos',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule],
   templateUrl: './abos.component.html',
   styleUrl: './abos.component.scss',
   animations: [
@@ -34,7 +35,7 @@ export class AbosComponent implements OnInit {
 
     // @ts-ignore
     abos$ : Observable<Abo[]>;
-    displayedColumns: string[] = ['title', 'price', 'period', 'active'];
+    displayedColumns: string[] = ['title', 'price', 'period', 'active', 'actions'];
 
     constructor(
       private abosStore : AbosStore
@@ -60,8 +61,19 @@ export class AbosComponent implements OnInit {
         price: 20,
         period : Period.YEAR,
         active: true,
-        description: 'expensive new abo'
+        description: 'expensive new abo',
+        isEditing : false,
       }
       this.abosStore.addData(abo);
+  }
+
+  edit(element: Abo) {
+    element.isEditing = true;
+  }
+
+  save(element: Abo) {
+    element.isEditing = false;
+
+    // Implement saving logic here, e.g., update the dataSource or send changes to the backend
   }
 }

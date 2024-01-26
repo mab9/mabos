@@ -7,6 +7,7 @@ export interface Abo {
   period : Period;
   active: boolean;
   description: string;
+  isEditing: boolean;
 }
 
 export function sortCoursesByTitle(a1: Abo, a2: Abo) {
