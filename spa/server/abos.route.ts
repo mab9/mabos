@@ -44,6 +44,19 @@ export const createAbo = (req : Request, res : Response) => {
   }, 500);
 }
 
+export const deleteItem = (req : Request, res : Response) => {
+  const { id } = req.params; // Extract the id from request parameters
+  console.log("Delete item with id", id);
+
+
+  if (ABOS[id]) {
+    delete ABOS[id]; // Delete the item from the store
+    res.status(200).json({ message: `Abo with id ${id} deleted successfully.` });
+  } else {
+    res.status(404).json({ message: `Abo with id ${id} not found.` });
+  }
+};
+
 export function saveAbo(req: Request, res: Response) {
 
   /*

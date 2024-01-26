@@ -33,7 +33,9 @@ import {FormsModule} from "@angular/forms";
 })
 export class AbosComponent implements OnInit {
 
-    // @ts-ignore
+    protected readonly Period = Period;
+
+  // @ts-ignore
     abos$ : Observable<Abo[]>;
     displayedColumns: string[] = ['title', 'price', 'period', 'active', 'actions'];
 
@@ -64,7 +66,7 @@ export class AbosComponent implements OnInit {
         description: '',
         isEditing : false,
       }
-      this.abosStore.createItem(item);
+      this.abosStore.createItem(item).subscribe();
   }
 
   edit(element: Abo) {
@@ -85,8 +87,7 @@ export class AbosComponent implements OnInit {
   }
 
   remove(element : Abo) {
-    this.abosStore.removeItem(element);
+    this.abosStore.removeItem(element.id!).subscribe();
   }
 
-  protected readonly Period = Period;
 }

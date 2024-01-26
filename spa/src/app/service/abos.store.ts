@@ -25,16 +25,17 @@ export class AbosStore {
     const currentData = this.subject.value;
     const updatedData = [...currentData, newItem];
     this.subject.next(updatedData);
-    this.postItem(newItem);
+    return this.postItem(newItem);
   }
 
-  removeItem(item: Abo) {
-    const updatedData = this.subject.value.filter(i => i !== item);
-    this.subject.next(updatedData);
+  removeItem(itemId: number) {
+    const newItems = this.subject.getValue().filter(item => item.id !== itemId);
+    this.subject.next(newItems);
+    return this.deleteItem(itemId);
   }
 
   private postItem(abo: Abo) {
-    this.http.post<{id: number}>('/api/abos', abo)
+    return this.http.post<{id: number}>('/api/abos', abo)
       .pipe(
         catchError(err => {
           return this.handleError("Could not create the abo", err);
@@ -51,7 +52,7 @@ export class AbosStore {
             this.subject.next(updatedData); // Update the subject with the new data
           }
         })
-      ).subscribe();
+      )
   }
 
   saveItem(itemId : number, changes : Partial<Abo>) : Observable<any> {
@@ -74,6 +75,19 @@ export class AbosStore {
       .pipe(
         catchError(err => {
           return this.handleError("Could not save abo", err);
+        }),
+        shareReplay()
+      );
+  }
+
+  private deleteItem(itemId: number): Observable<any> {
+    return this.http.delete(`/api/abos/${itemId}`)
+      .pipe(
+        catchError(err => {
+          return this.handleError("Could not delete abo", err);
+        }),
+        tap(() => {
+          // Optionally perform additional actions on successful deletion
         }),
         shareReplay()
       );
