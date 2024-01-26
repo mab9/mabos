@@ -14,5 +14,4 @@ import {MatSidenavContainer, MatSidenavModule} from "@angular/material/sidenav";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'mabos';
 }

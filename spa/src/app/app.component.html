@@ -3,34 +3,17 @@
     <mat-toolbar-row>
       <span>Mabos</span>
 
-      <button [routerLink]="'/home'"  mat-icon-button aria-label="Example icon-button with heart icon">
-        <mat-icon>home</mat-icon>
-      </button>
+      <button [routerLink]="'/home'"  mat-icon-button><mat-icon>home</mat-icon></button>
+      <button [routerLink]="'/dashboard'"  mat-icon-button><mat-icon>dashboard</mat-icon></button>
+      <button [routerLink]="'/abos'"  mat-icon-button><mat-icon>category</mat-icon></button>
+      <button [routerLink]="'/abos-inline'" mat-icon-button><mat-icon>egg_alt</mat-icon></button>
+      <button [routerLink]="'/login'"  mat-icon-button><mat-icon>login</mat-icon></button>
 
-      <button [routerLink]="'/abos'"  mat-icon-button aria-label="Example icon-button with heart icon">
-        <mat-icon>category</mat-icon>
-      </button>
-
-
-      <button [routerLink]="'/abos-inline'"  mat-icon-button aria-label="Example icon-button with heart icon">
-        <mat-icon>category</mat-icon>
-      </button>
-
-      <button [routerLink]="'/login'"  mat-icon-button aria-label="Example icon-button with heart icon">
-        <mat-icon>login</mat-icon>
-      </button>
-
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>logout</mat-icon>
-      </button>
+      <button mat-icon-button><mat-icon>logout</mat-icon></button>
 
       <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button>
+      <button mat-icon-button><mat-icon>favorite</mat-icon></button>
+      <button mat-icon-button><mat-icon>share</mat-icon></button>
     </mat-toolbar-row>
   </mat-toolbar>
 </main>
