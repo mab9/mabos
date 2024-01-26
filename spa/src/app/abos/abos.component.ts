@@ -84,4 +84,7 @@ export class AbosComponent implements OnInit {
       return this.abosStore.getTotalActiveAbos();
   }
 
+  remove(element : Abo) {
+    this.abosStore.removeData(element);
+  }
 }
