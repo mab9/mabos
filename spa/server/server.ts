@@ -1,6 +1,6 @@
 import express from 'express';
 import {Application} from "express";
-import {getAllAbos, getAboById, saveAbo} from "./abos.route";
+import {getAllAbos, getAboById, saveAbo, createAbo} from "./abos.route";
 
 const bodyParser = require('body-parser');
 
@@ -13,6 +13,7 @@ const cors = require('cors');
 app.use(cors({origin: true}));
 
 app.route('/api/abos').get(getAllAbos);
+app.route('/api/abos').post(createAbo);
 app.route('/api/abos/:id').get(getAboById);
 app.route('/api/abos/:id').put(saveAbo);
 

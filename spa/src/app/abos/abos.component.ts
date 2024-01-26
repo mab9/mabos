@@ -55,25 +55,24 @@ export class AbosComponent implements OnInit {
   }
 
   onAdd() {
-      const abo : Abo = {
-        id: '20',
-        title: 'new abo',
-        price: 20,
-        period : Period.YEAR,
-        active: true,
-        description: 'expensive new abo',
+      const item : Abo = {
+        id: null,
+        title: 'New Abo',
+        price: 0,
+        period : Period.MONTH,
+        active: false,
+        description: '',
         isEditing : false,
       }
-      this.abosStore.addData(abo);
+      this.abosStore.createItem(item);
   }
 
   edit(element: Abo) {
     element.isEditing = true;
   }
 
-  save(element: Abo) {
-    element.isEditing = false;
-
+  save(item: Abo) {
+    item.isEditing = false;
     // Implement saving logic here, e.g., update the dataSource or send changes to the backend
   }
   getTotalCost() {
@@ -85,7 +84,7 @@ export class AbosComponent implements OnInit {
   }
 
   remove(element : Abo) {
-    this.abosStore.removeData(element);
+    this.abosStore.removeItem(element);
   }
 
   protected readonly Period = Period;

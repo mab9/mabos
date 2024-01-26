@@ -3,6 +3,8 @@
 import {Request, Response} from 'express';
 import {ABOS} from "./db-data";
 import {setTimeout} from "timers";
+import {Abo} from "../src/app/model/abos.model";
+import {it} from "node:test";
 
 
 
@@ -15,7 +17,7 @@ export function getAllAbos(req: Request, res: Response) {
   */
         setTimeout(() => {
 
-             res.status(200).json({payload:Object.values(ABOS)});
+             res.status(200).json(Object.values(ABOS));
 
         }, 1200);
 }
@@ -23,10 +25,23 @@ export function getAllAbos(req: Request, res: Response) {
 
 export function getAboById(req: Request, res: Response) {
     const aboId = req.params["id"];
-    const abos:any = Object.values(ABOS);
+    const abos: Abo[] = Object.values(ABOS);
 
-    const abo = abos.find(abo => abo.id == aboId);
+    const abo = abos.find(abo => abo.id == parseInt(aboId));
     res.status(200).json(abo);
+}
+
+export const createAbo = (req : Request, res : Response) => {
+  let item = req.body;
+  console.log("Create new abo", JSON.stringify(item));
+
+  const nextId = Object.keys(ABOS).length + 1;
+  item.id = nextId;
+  ABOS[nextId] = item;
+
+  setTimeout(() => {
+    res.status(200).json(item);
+  }, 500);
 }
 
 export function saveAbo(req: Request, res: Response) {

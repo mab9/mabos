@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, catchError, map, Observable, tap, throwError} from "rxjs";
 import {Abo} from "../model/abos.model";
+import {saveAbo} from "../../../server/abos.route";
 
 @Injectable({
   providedIn : "root" // one instance for the whole application
@@ -20,15 +21,37 @@ export class AbosStore {
     this.loadAll();
   }
 
-  addData(newItem: Abo) {
+  createItem(newItem: Abo) {
     const currentData = this.subject.value;
     const updatedData = [...currentData, newItem];
     this.subject.next(updatedData);
+    this.saveItem(newItem);
   }
 
-  removeData(item: Abo) {
+  removeItem(item: Abo) {
     const updatedData = this.subject.value.filter(i => i !== item);
     this.subject.next(updatedData);
+  }
+
+  private saveItem(abo: Abo) {
+    this.http.post<{id: number}>('/api/abos', abo)
+      .pipe(
+        catchError(err => {
+          return this.handleError("Could not save the abos", err);
+        }),
+        // @ts-ignore
+        tap(savedItem => {
+          const permanentId = savedItem.id; // Assuming the response contains the new ID
+          const currentData = this.subject.value;
+          const itemIndex = currentData.findIndex(item => item === abo);
+          if (itemIndex !== -1) {
+            const updatedItem = { ...currentData[itemIndex], id: permanentId };
+            let updatedData = [...currentData];
+            updatedData[itemIndex] = updatedItem;
+            this.subject.next(updatedData); // Update the subject with the new data
+          }
+        })
+      ).subscribe();
   }
 
   private loadAll() {
@@ -36,7 +59,6 @@ export class AbosStore {
     this.http.get<Abo[]>('/api/abos')
       .pipe(
         // @ts-ignore
-        map(response => response['payload']),
         catchError(err => {
           return this.handleError("Could not load abos", err);
         }),

@@ -1,7 +1,7 @@
 import {Period} from "./period.enum";
 
 export interface Abo {
-  id: string;
+  id: number | null;
   title: string;
   price: number; // in month
   period : Period;

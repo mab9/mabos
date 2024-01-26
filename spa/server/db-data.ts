@@ -1,6 +1,6 @@
-export const ABOS: any = {
+export let ABOS: any = {
   1: {
-    id: 12,
+    id: 1,
     title: 'Spotify Family',
     price: 15.00,
     period: 'MONTH',
@@ -8,7 +8,7 @@ export const ABOS: any = {
     description: "Family Abo with 5 user",
   },
   2: {
-    id: 13,
+    id: 2,
     title: 'Contabo V Server',
     price: 16.00,
     period: 'YEAR',
@@ -16,7 +16,7 @@ export const ABOS: any = {
     description: "Contabo virtual server",
   },
   3: {
-    id: 14,
+    id: 3,
     title: 'Mobile Abo',
     price: 18.00,
     period: 'MONTH',
