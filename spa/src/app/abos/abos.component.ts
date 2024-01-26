@@ -34,27 +34,15 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
     ]),
   ],
 })
-export class AbosComponent implements OnInit {
+export class AbosComponent {
 
     protected readonly Period = Period;
-
-  // @ts-ignore
-    abos$ : Observable<Abo[]>;
     displayedColumns: string[] = ['title', 'price', 'period', 'active', 'actions'];
 
     constructor(
       public abosStore : AbosStore
     ) {
     }
-
-  ngOnInit() {
-    this.reloadAbos();
-  }
-
-  reloadAbos() {
-    this.abos$ = this.abosStore.abos$;
-  }
-
   trackById(index: number, item: Abo): any {
     return item.id;
   }
