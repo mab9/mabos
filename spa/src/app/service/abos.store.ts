@@ -19,11 +19,13 @@ export class AbosStore {
     map(abos => abos.filter(abo => abo.active).length)
   );
   abosTotalMonthlyCosts$: Observable<number> = this.abos$.pipe(
+    map(abos => abos.filter(abo => abo.active)),
     map(abos => abos.reduce((acc, abo) => acc + this.normalizePriceToPricePerMonth(abo), 0)),
     map(total => this.roundUpToNearestFiveCents(total))
   );
 
   abosTotalYearlyPrice$: Observable<number> = this.abos$.pipe(
+    map(abos => abos.filter(abo => abo.active)),
     map(abos => abos.reduce((acc, abo) => acc + this.normalizePriceToPricePerYear(abo), 0)),
     map(total => this.roundUpToNearestFiveCents(total))
   );
@@ -151,15 +153,4 @@ export class AbosStore {
     console.error(message,err);
     return throwError(err);
   }
-
-  getTotalCostOfAbos() {
-    return this.subject.getValue().map(t => t.price).reduce((acc, value) => Number(acc) + Number(value), 0);
-  }
-
-  getTotalActiveAbos() {
-    return this.subject.getValue().filter(t => t.active).length;
-
-  }
-
-
 }
