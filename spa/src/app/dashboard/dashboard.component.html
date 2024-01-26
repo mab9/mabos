@@ -1,1 +1,32 @@
-<p>dashboard works!</p>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>My Abos</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item><span>Yearly Costs: {{ abosStore.abosTotalYearlyPrice$ | async | currency }} </span></mat-list-item>
+      <mat-list-item><span>Monthly Costs: {{ abosStore.abosTotalMonthlyCosts$ | async | currency }}  </span></mat-list-item>
+      <mat-list-item><span>Total Abos: {{ abosStore.abosCount$ | async }} </span></mat-list-item>
+      <mat-list-item><span>Total active Abos: {{ abosStore.abosActive$ | async }}  </span></mat-list-item>
+    </mat-list>
+  </mat-card-content>
+
+  <mat-card-actions>
+
+    <ng-container *ngIf="(settingsStore.settings$ | async) as settings">
+        @if (settings.isReminderEmailActivated) {
+          <span (click)="onDisableReminder(settings)">
+            <mat-icon color="warn">notifications_off</mat-icon>
+            <button mat-stroked-button color="warn">Reminders disabled</button>
+          </span>
+        }
+        @if (!settings.isReminderEmailActivated) {
+          <span (click)="onActivateReminder(settings)">
+             <mat-icon color="primary" >notifications_active</mat-icon>
+              <button mat-stroked-button color="primary">Reminders activated</button>
+          </span>
+        }
+    </ng-container>
+  </mat-card-actions>
+</mat-card>

@@ -25,3 +25,9 @@ export let ABOS: any = {
   },
 }
 
+export let SETTINGS : any = {
+  'mab@mab.rocks' : {
+     email : 'mab@mab.rocks',
+     isReminderEmailActivated : true,
+  }
+}

@@ -46,7 +46,7 @@ export const createAbo = (req : Request, res : Response) => {
 
 export const deleteItem = (req : Request, res : Response) => {
   const { id } = req.params; // Extract the id from request parameters
-  console.log("Delete item with id", id);
+  console.log("Delete item with id", );
 
 
   if (ABOS[id]) {

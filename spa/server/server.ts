@@ -1,6 +1,7 @@
 import express from 'express';
 import {Application} from "express";
 import {getAllAbos, getAboById, saveAbo, createAbo, deleteItem} from "./abos.route";
+import {getSettingsByEmail, saveSettingByEmail} from "./settings.route";
 
 const bodyParser = require('body-parser');
 
@@ -11,6 +12,10 @@ app.use(bodyParser.json());
 const cors = require('cors');
 
 app.use(cors({origin: true}));
+
+app.route('/api/settings/:email')
+  .get(getSettingsByEmail)
+  .put(saveSettingByEmail)
 
 app.route('/api/abos')
   .get(getAllAbos)

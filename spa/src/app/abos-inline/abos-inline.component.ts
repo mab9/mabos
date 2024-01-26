@@ -36,14 +36,6 @@ export class AbosInlineComponent {
   ) {
   }
 
-  ngOnInit() {
-    this.reloadAbos();
-  }
-
-  reloadAbos() {
-    this.abos$ = this.abosStore.abos$;
-  }
-
   trackById(index: number, item: Abo): any {
     return item.id;
   }
