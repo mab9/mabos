@@ -81,4 +81,6 @@ export class AbosComponent implements OnInit {
   remove(element : Abo) {
     this.abosStore.removeItem(element.id!).subscribe();
   }
+
+  protected readonly Object = Object;
 }
