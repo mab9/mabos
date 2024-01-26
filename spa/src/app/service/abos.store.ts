@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, catchError, map, Observable, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, map, Observable, shareReplay, tap, throwError} from "rxjs";
 import {Abo} from "../model/abos.model";
 import {saveAbo} from "../../../server/abos.route";
 
@@ -25,7 +25,7 @@ export class AbosStore {
     const currentData = this.subject.value;
     const updatedData = [...currentData, newItem];
     this.subject.next(updatedData);
-    this.saveItem(newItem);
+    this.postItem(newItem);
   }
 
   removeItem(item: Abo) {
@@ -33,11 +33,11 @@ export class AbosStore {
     this.subject.next(updatedData);
   }
 
-  private saveItem(abo: Abo) {
+  private postItem(abo: Abo) {
     this.http.post<{id: number}>('/api/abos', abo)
       .pipe(
         catchError(err => {
-          return this.handleError("Could not save the abos", err);
+          return this.handleError("Could not create the abo", err);
         }),
         // @ts-ignore
         tap(savedItem => {
@@ -52,6 +52,31 @@ export class AbosStore {
           }
         })
       ).subscribe();
+  }
+
+  saveItem(itemId : number, changes : Partial<Abo>) : Observable<any> {
+    // has a ref to the latest emitted value - to the current list.
+    const items = this.subject.getValue();
+    const index = items.findIndex(item => item.id == itemId);
+
+    // create a new object with all new / changed values
+    const newItem : Abo = {
+      ...items[index], // apply current items
+      ...changes // apply all our changes / override all our changes
+    }
+
+    const newItems : Abo[] = items.slice(0) // create complete copy of the array
+    newItems[index] = newItem;
+    this.subject.next(newItems); // reflect changes to subscribers
+
+    // we do not show any loading indicator because changes are reflected instantly.
+    return this.http.put(`/api/abos/${itemId}`, changes)
+      .pipe(
+        catchError(err => {
+          return this.handleError("Could not save abo", err);
+        }),
+        shareReplay()
+      );
   }
 
   private loadAll() {

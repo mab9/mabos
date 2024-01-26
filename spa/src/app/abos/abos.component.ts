@@ -73,6 +73,7 @@ export class AbosComponent implements OnInit {
 
   save(item: Abo) {
     item.isEditing = false;
+    this.abosStore.saveItem(item.id!, item).subscribe();
     // Implement saving logic here, e.g., update the dataSource or send changes to the backend
   }
   getTotalCost() {
