@@ -6,7 +6,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {AsyncPipe, CurrencyPipe, NgIf} from "@angular/common";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatOption, MatSelect, MatSelectModule} from "@angular/material/select";
@@ -20,7 +20,7 @@ import {FormsModule} from "@angular/forms";
 @Component({
   selector: 'app-abos',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe],
   templateUrl: './abos.component.html',
   styleUrl: './abos.component.scss',
   animations: [
@@ -76,4 +76,12 @@ export class AbosComponent implements OnInit {
 
     // Implement saving logic here, e.g., update the dataSource or send changes to the backend
   }
+  getTotalCost() {
+    return this.abosStore.getTotalCostOfAbos();
+  }
+
+  getTotalActiveAbos() {
+      return this.abosStore.getTotalActiveAbos();
+  }
+
 }

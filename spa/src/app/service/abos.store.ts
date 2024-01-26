@@ -53,5 +53,14 @@ export class AbosStore {
     return throwError(err);
   }
 
+  getTotalCostOfAbos() {
+    return this.subject.getValue().map(t => t.price).reduce((acc, value) => Number(acc) + Number(value), 0);
+  }
+
+  getTotalActiveAbos() {
+    return this.subject.getValue().filter(t => t.active).length;
+
+  }
+
 
 }
