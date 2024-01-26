@@ -14,21 +14,21 @@ import {MatChip, MatChipOption} from "@angular/material/chips";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {FormsModule} from "@angular/forms";
 import {Period} from "../model/period.enum";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {it} from "node:test";
 
 
 @Component({
   selector: 'app-abos-inline',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe, MatSlideToggle],
   templateUrl: './abos-inline.component.html',
   styleUrl: './abos-inline.component.scss'
 })
 export class AbosInlineComponent {
 
+  protected readonly Object = Object;
   protected readonly Period = Period;
-
-  // @ts-ignore
-  abos$ : Observable<Abo[]>;
   displayedColumns: string[] = ['title', 'price', 'period', 'active', 'actions'];
 
   constructor(
@@ -52,13 +52,12 @@ export class AbosInlineComponent {
     }
     this.abosStore.createItem(item).subscribe();
   }
-  remove(element : Abo) {
+  onRemove(element : Abo) {
     this.abosStore.removeItem(element.id!).subscribe();
   }
 
-  protected readonly Object = Object;
-
   onModelChange(item: Abo) {
+    console.info("toggled", item.active)
     this.abosStore.saveItem(item.id!, item).subscribe();
   }
 }

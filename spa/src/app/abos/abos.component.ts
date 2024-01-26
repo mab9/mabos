@@ -15,12 +15,15 @@ import {Period} from "../model/period.enum";
 import {MatChip, MatChipOption} from "@angular/material/chips";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {FormsModule} from "@angular/forms";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
 
 
 @Component({
   selector: 'app-abos',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe],
+  imports: [MatTableModule, MatButtonModule, MatIconModule,
+    AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule,
+    MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe, MatSlideToggle],
   templateUrl: './abos.component.html',
   styleUrl: './abos.component.scss',
   animations: [
@@ -69,16 +72,16 @@ export class AbosComponent implements OnInit {
       this.abosStore.createItem(item).subscribe();
   }
 
-  edit(element: Abo) {
+  onEdit(element: Abo) {
     element.isEditing = true;
   }
 
-  save(item: Abo) {
+  onSave(item: Abo) {
     item.isEditing = false;
     this.abosStore.saveItem(item.id!, item).subscribe();
   }
 
-  remove(element : Abo) {
+  onRemove(element : Abo) {
     this.abosStore.removeItem(element.id!).subscribe();
   }
 

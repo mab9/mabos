@@ -1,4 +1,4 @@
-<ng-container *ngIf="(abos$ | async) as abos">
+<ng-container *ngIf="(abosStore.abos$ | async) as abos">
 
   <div class="example-button-container">
     <button mat-fab color="primary"
@@ -59,9 +59,11 @@
     <ng-container matColumnDef="active">
       <th mat-header-cell *matHeaderCellDef> Active </th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox (click)="$event.stopPropagation()" [(ngModel)]="element.active"
-                      (ngModelChange)="onModelChange(element)"
-        ></mat-checkbox>
+        <mat-slide-toggle
+          (change)="onModelChange(element)"
+          [color]="'primary'"
+          [(ngModel)]="element.active">
+        </mat-slide-toggle>
       </td>
       <td mat-footer-cell *matFooterCellDef> {{ abosStore.abosActive$ | async }} </td>
     </ng-container>
@@ -69,7 +71,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon (click)="remove(element)" color="warn">delete</mat-icon>
+        <mat-icon (click)="onRemove(element)" color="warn">delete</mat-icon>
       </td>
       <td mat-footer-cell *matFooterCellDef> - </td>
     </ng-container>
