@@ -23,7 +23,6 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatChip, MatChipOption} from "@angular/material/chips";
-import {debounceTime, Subject} from "rxjs";
 
 @Component({
   selector: 'app-abos-reactive',
@@ -32,9 +31,7 @@ import {debounceTime, Subject} from "rxjs";
   templateUrl: './abos-reactive.component.html',
   styleUrl: './abos-reactive.component.scss'
 })
-export class AbosReactiveComponent implements OnDestroy {
-
-  private changeSubjects = new Map<number, Subject<Abo>>();
+export class AbosReactiveComponent {
 
   protected readonly Object = Object;
   protected readonly Period = Period;
@@ -57,22 +54,7 @@ export class AbosReactiveComponent implements OnDestroy {
   }
 
   onModelChange(item: Abo) {
-    const itemId = item.id!;
-    if (!this.changeSubjects.has(itemId)) {
-      const subject = new Subject<Abo>();
-      subject.pipe(
-        debounceTime(2000)
-      ).subscribe(latestItem => {
-        this.abosStore.saveItem(itemId, latestItem).subscribe();
-      });
-      this.changeSubjects.set(itemId, subject);
-    }
+    this.abosStore.saveItemDebounce(item.id!, item);
 
-    // Push the latest item to the Subject
-    this.changeSubjects.get(itemId)!.next(item);
-  }
-
-  ngOnDestroy() {
-    this.changeSubjects.forEach(subject => subject.unsubscribe());
   }
 }

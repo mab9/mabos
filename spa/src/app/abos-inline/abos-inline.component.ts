@@ -52,7 +52,6 @@ export class AbosInlineComponent {
   }
 
   onModelChange(item: Abo) {
-    console.info("toggled", item.active)
     this.abosStore.saveItem(item.id!, item).subscribe();
   }
 }

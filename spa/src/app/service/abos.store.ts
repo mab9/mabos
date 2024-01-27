@@ -1,6 +1,17 @@
-import {Injectable} from "@angular/core";
+import {Injectable, OnDestroy} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, catchError, debounceTime, map, Observable, shareReplay, tap, throwError} from "rxjs";
+import {
+  BehaviorSubject,
+  catchError,
+  debounceTime,
+  map,
+  Observable,
+  of,
+  shareReplay,
+  Subject,
+  tap,
+  throwError
+} from "rxjs";
 import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
 import {format} from "date-fns";
@@ -9,7 +20,9 @@ import {format} from "date-fns";
   providedIn : "root" // one instance for the whole application
 
 })
-export class AbosStore {
+export class AbosStore implements OnDestroy {
+
+  private changeSubjects = new Map<number, Subject<Abo>>();
 
   private subject = new BehaviorSubject<Abo[]>([])
   abos$ = this.subject.asObservable();
@@ -135,6 +148,45 @@ export class AbosStore {
         }),
         shareReplay()
       );
+  }
+
+  saveItemDebounce(itemId : number, changes : Partial<Abo>) {
+    // has a ref to the latest emitted value - to the current list.
+    const items = this.subject.getValue();
+    const index = items.findIndex(item => item.id == itemId);
+
+    // create a new object with all new / changed values
+    const newItem : Abo = {
+      ...items[index], // apply current items
+      ...changes // apply all our changes / override all our changes
+    }
+
+    const newItems : Abo[] = items.slice(0) // create complete copy of the array
+    newItems[index] = newItem;
+    this.subject.next(newItems); // reflect changes to subscribers
+
+    if (!this.changeSubjects.has(itemId)) {
+      const subject = new Subject<Abo>();
+      subject.pipe(
+        debounceTime(2000)
+      ).subscribe(latestItem => {
+        this.http.put(`/api/abos/${itemId}`, latestItem)
+          .pipe(
+            catchError(err => {
+              return this.handleError("Could not save abo", err);
+            }),
+            shareReplay()
+          ).subscribe();
+      });
+      this.changeSubjects.set(itemId, subject);
+    }
+
+    // Push the latest item to the Subject
+    this.changeSubjects.get(itemId)!.next(newItem);
+  }
+
+  ngOnDestroy() {
+    this.changeSubjects.forEach(subject => subject.unsubscribe());
   }
 
   private deleteItem(itemId: number): Observable<any> {
