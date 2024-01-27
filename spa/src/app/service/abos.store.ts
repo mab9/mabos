@@ -15,9 +15,10 @@ import {
 import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
 import {format} from "date-fns";
+import {it} from "node:test";
 
 @Injectable({
-  providedIn : "root" // one instance for the whole application
+  providedIn: "root" // one instance for the whole application
 
 })
 export class AbosStore implements OnDestroy {
@@ -49,16 +50,16 @@ export class AbosStore implements OnDestroy {
     //private loading: LoadingService,
     //private messages: MessagesService
   ) {
-    this.loadAll();
+    this.loadAll().subscribe();
   }
 
   normalizePriceToPricePerYear(abo: Abo) {
     return 12 * this.normalizePriceToPricePerMonth(abo);
   }
 
-  normalizePriceToPricePerMonth(abo : Abo) {
-      const divider = this.getPriceToMonthDivider(abo);
-      return abo.price / divider;
+  normalizePriceToPricePerMonth(abo: Abo) {
+    const divider = this.getPriceToMonthDivider(abo);
+    return abo.price / divider;
   }
 
   roundUpToNearestFiveCents(amount: number): number {
@@ -68,10 +69,14 @@ export class AbosStore implements OnDestroy {
 
   getPriceToMonthDivider(abo: Abo) {
     switch (abo.period) {
-      case Period.YEAR: return 12;
-      case Period.QUARTER_YEAR: return 3;
-      case Period.HALF_YEAR: return 6;
-      default: return 1;
+      case Period.YEAR:
+        return 12;
+      case Period.QUARTER_YEAR:
+        return 3;
+      case Period.HALF_YEAR:
+        return 6;
+      default:
+        return 1;
     }
   }
 
@@ -80,32 +85,32 @@ export class AbosStore implements OnDestroy {
     const currentData = this.subject.value;
     const updatedData = [...currentData, newItem];
     this.subject.next(updatedData);
-    return this.postItem(newItem);
+    this.postItem(newItem).subscribe();
   }
 
-  private newAbo() : Abo {
+  private newAbo(): Abo {
     const today = new Date();
     const formattedDate = format(today, 'yyyy-MM-dd');
     return {
       id: null,
       title: 'New Abo',
       price: 0,
-      period : Period.MONTH,
+      period: Period.MONTH,
       active: false,
       description: '',
-      isEditing : false,
-      startDate : formattedDate
+      isEditing: false,
+      startDate: formattedDate
     }
   }
 
   removeItem(itemId: number) {
     const newItems = this.subject.getValue().filter(item => item.id !== itemId);
     this.subject.next(newItems);
-    return this.deleteItem(itemId);
+    this.deleteItem(itemId).subscribe();
   }
 
   private postItem(abo: Abo) {
-    return this.http.post<{id: number}>('/api/abos', abo)
+    return this.http.post<{ id: number }>('/api/abos', abo)
       .pipe(
         catchError(err => {
           return this.handleError("Could not create the abo", err);
@@ -116,7 +121,7 @@ export class AbosStore implements OnDestroy {
           const currentData = this.subject.value;
           const itemIndex = currentData.findIndex(item => item === abo);
           if (itemIndex !== -1) {
-            const updatedItem = { ...currentData[itemIndex], id: permanentId };
+            const updatedItem = {...currentData[itemIndex], id: permanentId};
             let updatedData = [...currentData];
             updatedData[itemIndex] = updatedItem;
             this.subject.next(updatedData); // Update the subject with the new data
@@ -125,58 +130,46 @@ export class AbosStore implements OnDestroy {
       )
   }
 
-  saveItem(itemId : number, changes : Partial<Abo>) : Observable<any> {
-    // has a ref to the latest emitted value - to the current list.
-    const items = this.subject.getValue();
-    const index = items.findIndex(item => item.id == itemId);
-
-    // create a new object with all new / changed values
-    const newItem : Abo = {
-      ...items[index], // apply current items
-      ...changes // apply all our changes / override all our changes
-    }
-
-    const newItems : Abo[] = items.slice(0) // create complete copy of the array
-    newItems[index] = newItem;
-    this.subject.next(newItems); // reflect changes to subscribers
-
+  saveItem(itemId: number, changes: Partial<Abo>) {
     // we do not show any loading indicator because changes are reflected instantly.
-    return this.http.put(`/api/abos/${itemId}`, changes)
+    const newItem = this.reflectChanges(itemId, changes);
+    this.putItem(itemId, newItem).subscribe();
+  }
+
+  private putItem(itemId: number, item: Abo) {
+    return this.http.put(`/api/abos/${itemId}`, item)
       .pipe(
-        catchError(err => {
-          return this.handleError("Could not save abo", err);
-        }),
+        catchError(err => this.handleError("Could not save abo", err)),
         shareReplay()
       );
   }
 
-  saveItemDebounce(itemId : number, changes : Partial<Abo>) {
+  reflectChanges(itemId: number, changes: Partial<Abo>) : Abo {
     // has a ref to the latest emitted value - to the current list.
     const items = this.subject.getValue();
     const index = items.findIndex(item => item.id == itemId);
 
     // create a new object with all new / changed values
-    const newItem : Abo = {
+    const newItem: Abo = {
       ...items[index], // apply current items
       ...changes // apply all our changes / override all our changes
     }
 
-    const newItems : Abo[] = items.slice(0) // create complete copy of the array
+    const newItems: Abo[] = items.slice(0) // create complete copy of the array
     newItems[index] = newItem;
     this.subject.next(newItems); // reflect changes to subscribers
+    return newItem;
+  }
 
+
+  saveItemDebounce(itemId: number, changes: Partial<Abo>) {
+    const newItem = this.reflectChanges(itemId, changes);
     if (!this.changeSubjects.has(itemId)) {
       const subject = new Subject<Abo>();
       subject.pipe(
-        debounceTime(2000)
+        debounceTime(1000)
       ).subscribe(latestItem => {
-        this.http.put(`/api/abos/${itemId}`, latestItem)
-          .pipe(
-            catchError(err => {
-              return this.handleError("Could not save abo", err);
-            }),
-            shareReplay()
-          ).subscribe();
+        this.putItem(itemId, latestItem).subscribe();
       });
       this.changeSubjects.set(itemId, subject);
     }
@@ -189,12 +182,10 @@ export class AbosStore implements OnDestroy {
     this.changeSubjects.forEach(subject => subject.unsubscribe());
   }
 
-  private deleteItem(itemId: number): Observable<any> {
+  private deleteItem(itemId: number) {
     return this.http.delete(`/api/abos/${itemId}`)
       .pipe(
-        catchError(err => {
-          return this.handleError("Could not delete abo", err);
-        }),
+        catchError(err => this.handleError("Could not delete abo", err)),
         tap(() => {
           // Optionally perform additional actions on successful deletion
         }),
@@ -204,22 +195,19 @@ export class AbosStore implements OnDestroy {
 
   private loadAll() {
     //const loadedCourses$ = this.http.get<Abo[]>('/api/abos')
-    this.http.get<Abo[]>('/api/abos')
+    return this.http.get<Abo[]>('/api/abos')
       .pipe(
-        // @ts-ignore
-        catchError(err => {
-          return this.handleError("Could not load abos", err);
-        }),
+        catchError(err => this.handleError("Could not load abos", err)),
         /// if no error occurs we receive the abos
         tap(abos => this.subject.next(abos))
-      ).subscribe()
+      )
 
     //this.loading.showLoaderUntilCompleted(loadedCourses$).subscribe();
   }
 
-  private handleError(message : string, err : Error) : Observable<never> {
+  private handleError(message: string, err: Error): Observable<never> {
     // this.messages.showErrors(message);
-    console.error(message,err);
+    console.error(message, err);
     return throwError(err);
   }
 }

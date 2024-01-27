@@ -48,7 +48,7 @@ export class AbosComponent {
   }
 
   onAdd() {
-      this.abosStore.createItem().subscribe();
+      this.abosStore.createItem();
   }
 
   onEdit(element: Abo) {
@@ -57,11 +57,11 @@ export class AbosComponent {
 
   onSave(item: Abo) {
     item.isEditing = false;
-    this.abosStore.saveItem(item.id!, item).subscribe();
+    this.abosStore.saveItem(item.id!, item)
   }
 
   onRemove(element : Abo) {
-    this.abosStore.removeItem(element.id!).subscribe();
+    this.abosStore.removeItem(element.id!);
   }
 
   protected readonly Object = Object;

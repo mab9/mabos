@@ -45,13 +45,13 @@ export class AbosInlineComponent {
   }
 
   onAdd() {
-    this.abosStore.createItem().subscribe();
+    this.abosStore.createItem();
   }
   onRemove(element : Abo) {
-    this.abosStore.removeItem(element.id!).subscribe();
+    this.abosStore.removeItem(element.id!);
   }
 
   onModelChange(item: Abo) {
-    this.abosStore.saveItem(item.id!, item).subscribe();
+    this.abosStore.saveItem(item.id!, item);
   }
 }
