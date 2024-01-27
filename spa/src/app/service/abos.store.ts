@@ -15,7 +15,6 @@ import {
 import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
 import {format} from "date-fns";
-import {it} from "node:test";
 
 @Injectable({
   providedIn: "root" // one instance for the whole application
@@ -144,7 +143,7 @@ export class AbosStore implements OnDestroy {
       );
   }
 
-  reflectChanges(itemId: number, changes: Partial<Abo>) : Abo {
+  private reflectChanges(itemId: number, changes: Partial<Abo>) : Abo {
     // has a ref to the latest emitted value - to the current list.
     const items = this.subject.getValue();
     const index = items.findIndex(item => item.id == itemId);
