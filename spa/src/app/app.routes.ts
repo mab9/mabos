@@ -5,6 +5,7 @@ import {AbosComponent} from "./abos/abos.component";
 import {AbosInlineComponent} from "./abos-inline/abos-inline.component";
 import {DASH} from "@angular/cdk/keycodes";
 import {DashboardComponent} from "./dashboard/dashboard.component";
+import {AbosReactiveComponent} from "./abos-reactive/abos-reactive.component";
 
 export const routes: Routes = [
   { path: '',            component: HomeComponent },
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'dashboard',   component: DashboardComponent },
   { path: 'abos',        component: AbosComponent },
   { path: 'abos-inline', component: AbosInlineComponent },
+  { path: 'abos-reactive', component: AbosReactiveComponent },
   { path: '**', redirectTo: '/'}
 ];
