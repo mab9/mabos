@@ -81,7 +81,7 @@ export class AbosStore {
       active: false,
       description: '',
       isEditing : false,
-      starteDate : formattedDate
+      startDate : formattedDate
     }
   }
 

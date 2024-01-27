@@ -8,5 +8,5 @@ export interface Abo {
   active: boolean;
   description: string;
   isEditing: boolean;
-  starteDate: string;
+  startDate: string;
 }
