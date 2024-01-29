@@ -7,6 +7,14 @@ export interface Abo {
   period : Period;
   active: boolean;
   description: string;
-  isEditing: boolean;
   startDate: string;
+  // autoRenewal : boolean; // auslaufendes abo oder auto verlängerung.
+
+  // meta data
+  isEditing: boolean;
+
+  // // Reminder
+  // expReminder: boolean;
+  // expReminderPeriod: Period;
+  // expReminderPeriodAmounts: number;
 }
