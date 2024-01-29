@@ -1,0 +1,37 @@
+services:
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: mypw
+      POSTGRES_USER: myuser
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/sql:/docker-entrypoint-initdb.d/
+
+  keycloak:
+    # testuser: ?
+    # Export keycloak realm - one command
+    # docker exec -i backent-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabs-bank-dev --file /tmp/mabs-bank-dev.json --users realm_file' && \
+    # docker cp backent-keycloak-1:/tmp/mabs-bank-dev.json ./docker/mabs-bank-dev.json
+
+    image: quay.io/keycloak/keycloak:23.0.0
+    depends_on:
+      - postgres
+    command: ['start-dev', '--import-realm']
+    #command: ['start-dev']
+    ports:
+      - 8180:8080
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/mydb
+      KC_DB_USERNAME: myuser
+      KC_DB_PASSWORD: mypw
+      TZ: Europe/Zurich
+ #   volumes:
+ #     - ./docker/mabs-bank-dev.json:/opt/keycloak/data/import/mabs-bank-dev.json
+
