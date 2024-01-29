@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AsyncPipe, CurrencyPipe, NgIf} from "@angular/common";
 import {
     MatCard,
@@ -33,6 +33,8 @@ import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {KeycloakProfile} from "keycloak-js";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-dashboard',
@@ -78,12 +80,27 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
   displayedColumns: string[] = ['title', 'price', 'period', 'active'];
 
+  public isLoggedIn = false;
+  public userProfile: KeycloakProfile | null = null;
+
   constructor(public abosStore : AbosStore,
-              public settingsStore: SettingsStore) {
+              public settingsStore: SettingsStore,
+              private readonly keycloak: KeycloakService) {
+  }
+
+  public async ngOnInit() {
+    this.isLoggedIn = await this.keycloak.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      this.userProfile = await this.keycloak.loadUserProfile();
+      // this.user.authStatus = 'AUTH';
+      // this.user.name = this.userProfile.firstName || "";
+      //  window.sessionStorage.setItem("userdetails",JSON.stringify(this.user));
+    }
   }
 
 

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Table(name = "USERS") // user is a reserved key word
 public class User {
 
     @Id

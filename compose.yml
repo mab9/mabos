@@ -9,19 +9,19 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./docker/sql:/docker-entrypoint-initdb.d/
+      - ./backent/src/main/resources/sql:/docker-entrypoint-initdb.d/
 
   keycloak:
     # testuser: ?
     # Export keycloak realm - one command
-    # docker exec -i backent-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabs-bank-dev --file /tmp/mabs-bank-dev.json --users realm_file' && \
-    # docker cp backent-keycloak-1:/tmp/mabs-bank-dev.json ./docker/mabs-bank-dev.json
+    # docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file' && \
+    # docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./backent/src/main/resources/keycloak/mabos-realm.json
 
     image: quay.io/keycloak/keycloak:23.0.0
     depends_on:
       - postgres
-    #command: ['start-dev', '--import-realm']
-    command: ['start-dev']
+    command: ['start-dev', '--import-realm']
+    #command: ['start-dev']
     ports:
       - 8180:8080
     environment:
@@ -32,6 +32,6 @@ services:
       KC_DB_USERNAME: myuser
       KC_DB_PASSWORD: mypw
       TZ: Europe/Zurich
- #   volumes:
- #     - ./docker/mabs-bank-dev.json:/opt/keycloak/data/import/mabs-bank-dev.json
+    volumes:
+      - ./backent/src/main/resources/keycloak/mabos-realm.json:/opt/keycloak/data/import/mabos-realm.json
 

@@ -13,6 +13,8 @@ public class Abo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Note: Using int here is fine for serial columns, but consider using a data type like Long for large values.
 
+    private String userEmail;
+    private String title;
     private double price;
     private Period period;
     private String description;

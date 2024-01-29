@@ -6,6 +6,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavContainer, MatSidenavModule} from "@angular/material/sidenav";
 import {MatBadge} from "@angular/material/badge";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-root',
@@ -15,4 +16,16 @@ import {MatBadge} from "@angular/material/badge";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+
+  constructor(private readonly keycloak: KeycloakService) { }
+
+  public login() {
+    console.info("login please")
+    this.keycloak.login();
+  }
+
+  public logout() {
+    let redirectURI: string = "http://localhost:4200/home";
+    this.keycloak.logout(redirectURI);
+  }
 }

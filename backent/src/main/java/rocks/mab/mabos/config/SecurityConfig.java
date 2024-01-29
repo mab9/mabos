@@ -63,7 +63,7 @@ public class SecurityConfig {
                     // http only false, damit angular via javascript das Cookie auslesen kann.
                     csrfConfigurer.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
                     // public APIS welche PUT / POST änderungen zulassen sollen!
-                    csrfConfigurer.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact");
+                    csrfConfigurer.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact", "/home");
                 })
 
                 // Nach Basic auth login, denn erst anschliessend soll das CSRF Cookie an die Response angehängt werden.
@@ -77,11 +77,13 @@ public class SecurityConfig {
                             // The way to read this is "if the request is /abos or some subdirectory, require the USER, ADMIN authority; otherwise, only require authentication"
                             requests.requestMatchers( "/abos/**").hasAnyRole("USER", "ADMIN");
                             requests.requestMatchers( "/user/**").hasAnyRole("USER", "ADMIN");
-                            requests.anyRequest().authenticated();
 
                             // public
                             requests.requestMatchers( "/contact/**").permitAll();
                             requests.requestMatchers( "/swagger-ui/index.html", "/swagger-ui/**", "/api-docs", "/api-docs/**").permitAll();
+
+                            requests.anyRequest().authenticated();
+
                         }
                 )
 

@@ -1,4 +1,0 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-CREATE SCHEMA keycloak;
-GRANT ALL ON SCHEMA keycloak TO myuser;
