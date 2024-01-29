@@ -20,15 +20,15 @@ services:
     image: quay.io/keycloak/keycloak:23.0.0
     depends_on:
       - postgres
-    command: ['start-dev', '--import-realm']
-    #command: ['start-dev']
+    #command: ['start-dev', '--import-realm']
+    command: ['start-dev']
     ports:
       - 8180:8080
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres:5432/mydb
+      KC_DB_URL: jdbc:postgresql://postgres:5432/mydb?currentSchema=keycloak
       KC_DB_USERNAME: myuser
       KC_DB_PASSWORD: mypw
       TZ: Europe/Zurich
