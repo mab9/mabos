@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
 import rocks.mab.mabos.model.User;
@@ -34,6 +35,8 @@ public class KeycloakJwtConverter implements Converter<Jwt, Collection<GrantedAu
 
 
         String email = jwt.getClaims().get("email").toString();
+
+        // should not be done here...
 
         // todo improve this check with token that is set via JWT to avoid DB access.
         Optional<User> userOptional = userRepository.findByEmail(email);

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {Abo} from "../model/abos.model";
-import {AbosStore} from "../service/abos.store";
+import {Abo} from "../../model/abos.model";
+import {AbosStore} from "../../services/abos.store";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -12,7 +12,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatChip, MatChipOption} from "@angular/material/chips";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {FormsModule} from "@angular/forms";
-import {Period} from "../model/period.enum";
+import {Period} from "../../model/period.enum";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {
   MatDatepicker,

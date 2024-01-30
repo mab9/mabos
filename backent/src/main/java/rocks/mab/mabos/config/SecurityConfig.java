@@ -50,7 +50,6 @@ public class SecurityConfig {
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(keycloakJwtConverter);
 
-
         http
                 // No more JSESSIONID - we go stateless
                 .sessionManagement(securityConfigurer -> securityConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

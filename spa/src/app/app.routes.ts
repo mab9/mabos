@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import {HomeComponent} from "./home/home.component";
-import {LoginComponent} from "./login/login.component";
-import {AbosComponent} from "./abos/abos.component";
-import {AbosInlineComponent} from "./abos-inline/abos-inline.component";
+import {HomeComponent} from "./components/home/home.component";
+import {LoginComponent} from "./components/login/login.component";
+import {AbosComponent} from "./components/abos/abos.component";
+import {AbosInlineComponent} from "./components/abos-inline/abos-inline.component";
 import {DASH} from "@angular/cdk/keycodes";
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {AbosReactiveComponent} from "./abos-reactive/abos-reactive.component";
-import {DashyComponent} from "./dashy/dashy.component";
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {AbosReactiveComponent} from "./components/abos-reactive/abos-reactive.component";
+import {DashyComponent} from "./components/dashy/dashy.component";
 
 export const routes: Routes = [
   { path: '',            component: HomeComponent },

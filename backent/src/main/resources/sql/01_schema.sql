@@ -15,15 +15,15 @@ CREATE TABLE users (
 
 CREATE TABLE abo (
                      id BIGSERIAL PRIMARY KEY,
-                     email VARCHAR(100) NOT NULL,
+                     user_email VARCHAR(100) NOT NULL,
                      title VARCHAR(100) NOT NULL,
                      price DOUBLE PRECISION NOT NULL,
                      period VARCHAR(30) NOT NULL,
                      description TEXT,
                      is_active BOOLEAN NOT NULL,
-                     create_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+                     start_date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
                      CONSTRAINT fk_users
-                         FOREIGN KEY(email)
+                         FOREIGN KEY(user_email)
                              REFERENCES users(email)
 );
 

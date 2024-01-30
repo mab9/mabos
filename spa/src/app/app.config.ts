@@ -1,12 +1,13 @@
-import {APP_INITIALIZER, ApplicationConfig} from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {APP_INITIALIZER, ApplicationConfig, importProvidersFrom, Provider} from '@angular/core';
+import {provideRouter} from '@angular/router';
 
-import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import {provideHttpClient, withFetch} from "@angular/common/http";
+import {routes} from './app.routes';
+import {provideClientHydration} from '@angular/platform-browser';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import {HttpClientModule, provideHttpClient, withFetch, withXsrfConfiguration} from "@angular/common/http";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {providerAuthInterceptor} from "./interceptors/auth.interceptor";
 
 // todo replace with properties - in env file?
 export const initializeKeycloak = (keycloak: KeycloakService) => {
@@ -21,8 +22,16 @@ export const initializeKeycloak = (keycloak: KeycloakService) => {
         pkceMethod: 'S256',
         redirectUri: 'http://localhost:4200/dashboard',
       },
+      enableBearerInterceptor: true,
       loadUserProfileAtStartUp: false
     });
+}
+
+export const providerKeycloakInitializer : Provider  = {
+  provide: APP_INITIALIZER,
+  useFactory: initializeKeycloak,
+  multi: true,
+  deps: [KeycloakService],
 }
 
 export const appConfig: ApplicationConfig = {
@@ -30,15 +39,20 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideNativeDateAdapter(),
-    provideHttpClient(withFetch()),
+    KeycloakService,
+    providerKeycloakInitializer,
+    providerAuthInterceptor,
+    provideHttpClient(
+      withFetch(),
+      withXsrfConfiguration(
+      {
+        cookieName: 'XSRF-TOKEN',
+        headerName: 'X-XSRF-TOKEN',
+      },
+
+    )),
     provideClientHydration(),
     provideAnimations(),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService],
-    },
-    KeycloakService
+    importProvidersFrom(HttpClientModule),
   ]
 };

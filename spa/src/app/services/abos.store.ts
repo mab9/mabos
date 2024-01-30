@@ -136,7 +136,7 @@ export class AbosStore implements OnDestroy {
   }
 
   private putItem(itemId: number, item: Abo) {
-    return this.http.put(`/api/abos/${itemId}`, item)
+    return this.http.put(`http://localhost:8080/api/abos/${itemId}`, item)
       .pipe(
         catchError(err => this.handleError("Could not save abo", err)),
         shareReplay()
@@ -182,7 +182,7 @@ export class AbosStore implements OnDestroy {
   }
 
   private deleteItem(itemId: number) {
-    return this.http.delete(`/api/abos/${itemId}`)
+    return this.http.delete(`http://localhost:8080/api/abos/${itemId}`)
       .pipe(
         catchError(err => this.handleError("Could not delete abo", err)),
         tap(() => {
@@ -194,7 +194,7 @@ export class AbosStore implements OnDestroy {
 
   private loadAll() {
     //const loadedCourses$ = this.http.get<Abo[]>('/api/abos')
-    return this.http.get<Abo[]>('/api/abos')
+    return this.http.get<Abo[]>('http://localhost:8080/api/abos')
       .pipe(
         catchError(err => this.handleError("Could not load abos", err)),
         /// if no error occurs we receive the abos
