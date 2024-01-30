@@ -16,7 +16,7 @@ import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
 import {format} from "date-fns";
 import {environment} from "../../environments/environment";
-import {AppConstants} from "../constants/app.constants";
+import {ApiConstants} from "../constants/api.constants";
 
 @Injectable({
   providedIn: "root" // one instance for the whole application
@@ -32,7 +32,7 @@ export class AbosService {
 
   public getAll() {
     //const loadedCourses$ = this.http.get<Abo[]>('/api/abos')
-    return this.http.get<Abo[]>(environment.rooturl + AppConstants.API_ABOS)
+    return this.http.get<Abo[]>(environment.rooturl + ApiConstants.API_ABOS)
       .pipe(
         catchError(err => this.handleError("Could not load abos", err)),
         shareReplay()
@@ -49,7 +49,7 @@ export class AbosService {
   }
 
   public put(item: Abo) {
-    return this.http.put(environment.rooturl + AppConstants.API_ABOS + `/${item.id}`, item)
+    return this.http.put(environment.rooturl + ApiConstants.API_ABOS + `/${item.id}`, item)
       .pipe(
         catchError(err => this.handleError("Could not save abo", err)),
         shareReplay()
@@ -57,7 +57,7 @@ export class AbosService {
   }
 
   public delete(itemId: number) {
-    return this.http.delete(environment.rooturl + AppConstants.API_ABOS + `/${itemId}`)
+    return this.http.delete(environment.rooturl + ApiConstants.API_ABOS + `/${itemId}`)
       .pipe(
         catchError(err => this.handleError("Could not delete abo", err)),
         shareReplay()

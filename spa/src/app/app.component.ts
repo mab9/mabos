@@ -8,6 +8,7 @@ import {MatSidenavContainer, MatSidenavModule} from "@angular/material/sidenav";
 import {MatBadge} from "@angular/material/badge";
 import {KeycloakAngularModule, KeycloakBearerInterceptor, KeycloakService} from "keycloak-angular";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -17,30 +18,30 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavContainer, RouterLink, MatBadge],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: KeycloakBearerInterceptor,
-      multi: true
-    }
-  ]
 })
 export class AppComponent implements OnInit {
 
+  public isLoggedIn = false;
+
   constructor(private readonly keycloak: KeycloakService) { }
 
-  ngOnInit(): void {
-    console.log("app component init")
+  async ngOnInit()  {
+    this.isLoggedIn = this.keycloak.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      console.info("user is logged in, token is getting loaded")
+      const token = await this.keycloak.getToken();
+      sessionStorage.setItem("auth", token);
+    } else {
+      console.info("User is not logged in, no access token available.")
+    }
   }
 
   public login() {
-    console.info("login please")
     this.keycloak.login();
   }
 
   public logout() {
-    console.info("logout please")
-    let redirectURI: string = "http://localhost:4200/home";
-    this.keycloak.logout(redirectURI);
+    this.keycloak.logout(environment.keycloak.logout_redirectUri);
   }
 }

@@ -35,6 +35,9 @@ import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {KeycloakProfile} from "keycloak-js";
 import {KeycloakService} from "keycloak-angular";
+import {User} from "../../model/user.model";
+import {catchError, throwError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-dashboard',
@@ -88,6 +91,7 @@ export class DashboardComponent implements OnInit {
   public userProfile: KeycloakProfile | null = null;
 
   constructor(public abosStore : AbosStore,
+              private http : HttpClient,
               public settingsStore: SettingsStore,
               private readonly keycloak: KeycloakService) {
   }
@@ -118,5 +122,18 @@ export class DashboardComponent implements OnInit {
 
   trackById(index: number, item: Abo): any {
     return item.id;
+  }
+
+  async loadUser () {
+    this.http.get<User>('http://localhost:8080/api/users/me', { observe: 'response',withCredentials: true })
+      .pipe(
+        // @ts-ignore
+        catchError(err => {
+          console.error("errror ")
+          return throwError(err);
+
+        }),
+      ).subscribe(user => console.info("loaded user", user))
+
   }
 }

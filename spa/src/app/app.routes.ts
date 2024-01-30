@@ -1,20 +1,17 @@
-import { Routes } from '@angular/router';
-import {HomeComponent} from "./components/home/home.component";
-import {LoginComponent} from "./components/login/login.component";
+import {Routes} from '@angular/router';
 import {AbosComponent} from "./components/abos/abos.component";
 import {AbosInlineComponent} from "./components/abos-inline/abos-inline.component";
-import {DASH} from "@angular/cdk/keycodes";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {AbosReactiveComponent} from "./components/abos-reactive/abos-reactive.component";
-import {DashyComponent} from "./components/dashy/dashy.component";
+import {LandingComponent} from "./components/landing/landing.component";
+import {AuthGuard} from "./routeguards/auth.guard";
 
 export const routes: Routes = [
-  { path: '',            component: HomeComponent },
-  { path: 'login',       component: LoginComponent },
-  { path: 'dashy',       component: DashyComponent },
-  { path: 'dashboard',   component: DashboardComponent },
-  { path: 'abos',        component: AbosComponent },
-  { path: 'abos-inline', component: AbosInlineComponent },
-  { path: 'abos-reactive', component: AbosReactiveComponent },
-  { path: '**', redirectTo: '/'}
+  { path: '',              redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'landing',       component: LandingComponent },  // not logged in user
+  { path: 'dashboard',     component: DashboardComponent,    canActivate: [AuthGuard] },
+  { path: 'abos',          component: AbosComponent,         canActivate: [AuthGuard] },
+  { path: 'abos-inline',   component: AbosInlineComponent,   canActivate: [AuthGuard] },
+  { path: 'abos-reactive', component: AbosReactiveComponent, canActivate: [AuthGuard] },
+  { path: '**',            redirectTo: '/dashboard'}
 ];
