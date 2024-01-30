@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {Abo} from "../../model/abos.model";
-import {AbosStore} from "../../services/abos.store";
+import {AbosStore} from "../../stores/abos.store";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";

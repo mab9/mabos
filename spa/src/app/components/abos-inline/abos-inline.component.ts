@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Abo} from "../../model/abos.model";
-import {AbosStore} from "../../services/abos.store";
+import {AbosStore} from "../../stores/abos.store";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";

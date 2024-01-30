@@ -15,6 +15,7 @@ import {
 import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
 import {format} from "date-fns";
+import {AbosService} from "../services/abos.service";
 
 @Injectable({
   providedIn: "root" // one instance for the whole application
@@ -45,11 +46,9 @@ export class AbosStore implements OnDestroy {
   );
 
   constructor(
-    private http: HttpClient,
-    //private loading: LoadingService,
-    //private messages: MessagesService
+    private abosService : AbosService,
   ) {
-    this.loadAll().subscribe();
+    this.abosService.getAll().subscribe();
   }
 
   normalizePriceToPricePerYear(abo: Abo) {
@@ -84,7 +83,19 @@ export class AbosStore implements OnDestroy {
     const currentData = this.subject.value;
     const updatedData = [...currentData, newItem];
     this.subject.next(updatedData);
-    this.postItem(newItem).subscribe();
+    this.abosService.post(newItem).pipe(
+      tap(savedItem => {
+        const permanentId = savedItem.id; // Assuming the response contains the new ID
+        const currentData = this.subject.value;
+        const itemIndex = currentData.findIndex(item => item === newItem);
+        if (itemIndex !== -1) {
+          const updatedItem = {...currentData[itemIndex], id: permanentId};
+          let updatedData = [...currentData];
+          updatedData[itemIndex] = updatedItem;
+          this.subject.next(updatedData); // Update the subject with the new data
+        }
+      }
+    )).subscribe();
   }
 
   private newAbo(): Abo {
@@ -105,43 +116,15 @@ export class AbosStore implements OnDestroy {
   removeItem(itemId: number) {
     const newItems = this.subject.getValue().filter(item => item.id !== itemId);
     this.subject.next(newItems);
-    this.deleteItem(itemId).subscribe();
-  }
-
-  private postItem(abo: Abo) {
-    return this.http.post<{ id: number }>('/api/abos', abo)
-      .pipe(
-        catchError(err => {
-          return this.handleError("Could not create the abo", err);
-        }),
-        // @ts-ignore
-        tap(savedItem => {
-          const permanentId = savedItem.id; // Assuming the response contains the new ID
-          const currentData = this.subject.value;
-          const itemIndex = currentData.findIndex(item => item === abo);
-          if (itemIndex !== -1) {
-            const updatedItem = {...currentData[itemIndex], id: permanentId};
-            let updatedData = [...currentData];
-            updatedData[itemIndex] = updatedItem;
-            this.subject.next(updatedData); // Update the subject with the new data
-          }
-        })
-      )
+    this.abosService.delete(itemId).subscribe();
   }
 
   saveItem(itemId: number, changes: Partial<Abo>) {
     // we do not show any loading indicator because changes are reflected instantly.
     const newItem = this.reflectChanges(itemId, changes);
-    this.putItem(itemId, newItem).subscribe();
+    this.abosService.put(itemId, newItem).subscribe();
   }
 
-  private putItem(itemId: number, item: Abo) {
-    return this.http.put(`http://localhost:8080/api/abos/${itemId}`, item)
-      .pipe(
-        catchError(err => this.handleError("Could not save abo", err)),
-        shareReplay()
-      );
-  }
 
   private reflectChanges(itemId: number, changes: Partial<Abo>) : Abo {
     // has a ref to the latest emitted value - to the current list.
@@ -168,7 +151,7 @@ export class AbosStore implements OnDestroy {
       subject.pipe(
         debounceTime(1000)
       ).subscribe(latestItem => {
-        this.putItem(itemId, latestItem).subscribe();
+        this.abosService.put(itemId, latestItem).subscribe();
       });
       this.changeSubjects.set(itemId, subject);
     }
@@ -179,34 +162,5 @@ export class AbosStore implements OnDestroy {
 
   ngOnDestroy() {
     this.changeSubjects.forEach(subject => subject.unsubscribe());
-  }
-
-  private deleteItem(itemId: number) {
-    return this.http.delete(`http://localhost:8080/api/abos/${itemId}`)
-      .pipe(
-        catchError(err => this.handleError("Could not delete abo", err)),
-        tap(() => {
-          // Optionally perform additional actions on successful deletion
-        }),
-        shareReplay()
-      );
-  }
-
-  private loadAll() {
-    //const loadedCourses$ = this.http.get<Abo[]>('/api/abos')
-    return this.http.get<Abo[]>('http://localhost:8080/api/abos')
-      .pipe(
-        catchError(err => this.handleError("Could not load abos", err)),
-        /// if no error occurs we receive the abos
-        tap(abos => this.subject.next(abos))
-      )
-
-    //this.loading.showLoaderUntilCompleted(loadedCourses$).subscribe();
-  }
-
-  private handleError(message: string, err: Error): Observable<never> {
-    // this.messages.showErrors(message);
-    console.error(message, err);
-    return throwError(err);
   }
 }

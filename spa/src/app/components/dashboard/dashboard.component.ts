@@ -10,8 +10,8 @@ import {
 } from "@angular/material/card";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatList, MatListItem} from "@angular/material/list";
-import {AbosStore} from "../../services/abos.store";
-import {SettingsStore} from "../../services/settings.store";
+import {AbosStore} from "../../stores/abos.store";
+import {SettingsStore} from "../../stores/settings.store";
 import {Setting} from "../../model/settings.model";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";

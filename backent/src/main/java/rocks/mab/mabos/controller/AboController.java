@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rocks.mab.mabos.model.Abo;
+import rocks.mab.mabos.model.User;
 import rocks.mab.mabos.repository.AboRepository;
+import rocks.mab.mabos.service.UserService;
 
 import java.util.Collection;
 
@@ -19,9 +21,13 @@ public class AboController {
     @Autowired
     private final AboRepository aboRepository;
 
+    @Autowired
+    private final UserService userService;
+
     @GetMapping// todo replace param with - retrieve user email by context...
-    public Collection<Abo> getUserAbos(@RequestParam String email) {
-        return aboRepository.findByUserEmail(email);
+    public Collection<Abo> getUserAbos() {
+        User user = userService.currentUser();
+        return aboRepository.findByUserEmail(user.getEmail());
     }
 
 }

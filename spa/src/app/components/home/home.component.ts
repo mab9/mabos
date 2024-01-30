@@ -10,7 +10,7 @@ import {
 import {MatList, MatListItem} from "@angular/material/list";
 import {MatIcon} from "@angular/material/icon";
 import {AsyncPipe, CurrencyPipe} from "@angular/common";
-import {AbosStore} from "../../services/abos.store";
+import {AbosStore} from "../../stores/abos.store";
 import {HttpClient} from "@angular/common/http";
 import {catchError, tap, throwError} from "rxjs";
 import {User} from "../../model/user.model";

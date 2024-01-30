@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AbosStore} from "../../services/abos.store";
+import {AbosStore} from "../../stores/abos.store";
 import {Abo} from "../../model/abos.model";
 import {Period} from '../../model/period.enum';
 import {AsyncPipe, CurrencyPipe, NgIf} from "@angular/common";
