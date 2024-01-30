@@ -41,16 +41,15 @@ export class AbosService {
   }
 
   public post(abo: Abo) {
-    return this.http.post<{ id: number }>('/api/abos', abo)
+    return this.http.post<Abo>('/api/abos', abo)
       .pipe(
-        catchError(err => {
-          return this.handleError("Could not create the abo", err);
-        })
+        catchError(err => this.handleError("Could not create the abo", err)),
+        shareReplay()
       )
   }
 
-  public put(itemId: number, item: Abo) {
-    return this.http.put(environment.rooturl + AppConstants.API_ABOS + `/${itemId}`, item)
+  public put(item: Abo) {
+    return this.http.put(environment.rooturl + AppConstants.API_ABOS + `/${item.id}`, item)
       .pipe(
         catchError(err => this.handleError("Could not save abo", err)),
         shareReplay()

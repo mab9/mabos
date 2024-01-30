@@ -122,7 +122,7 @@ export class AbosStore implements OnDestroy {
   saveItem(itemId: number, changes: Partial<Abo>) {
     // we do not show any loading indicator because changes are reflected instantly.
     const newItem = this.reflectChanges(itemId, changes);
-    this.abosService.put(itemId, newItem).subscribe();
+    this.abosService.put(newItem).subscribe();
   }
 
 
@@ -151,7 +151,7 @@ export class AbosStore implements OnDestroy {
       subject.pipe(
         debounceTime(1000)
       ).subscribe(latestItem => {
-        this.abosService.put(itemId, latestItem).subscribe();
+        this.abosService.put(latestItem).subscribe();
       });
       this.changeSubjects.set(itemId, subject);
     }
