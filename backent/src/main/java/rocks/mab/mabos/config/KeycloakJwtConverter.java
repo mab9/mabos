@@ -45,7 +45,7 @@ public class KeycloakJwtConverter implements Converter<Jwt, Collection<GrantedAu
             // init user
             User newUser = new User();
             newUser.setCreateDate(LocalDateTime.now());
-            newUser.setRole("USER");
+            newUser.setRole("USER_ROLE");
             newUser.setEmail(email);
             newUser.setName("name");
             newUser.setSendEmailReminders(true);
