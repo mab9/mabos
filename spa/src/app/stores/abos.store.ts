@@ -11,12 +11,10 @@ import {AbosService} from "../services/abos.service";
 export class AbosStore implements OnDestroy {
 
   private today = new Date();
-
   private changeSubjects = new Map<number, Subject<Abo>>();
-
   private subject = new BehaviorSubject<Abo[]>([])
   abos$ = this.subject.asObservable().pipe(
-    map(abos => abos.map(abo => ({ ...abo, isExpiringThisMonth: this.isExpiringThisMonth(abo) })))
+    map(abos => abos.map(abo => ({ ...abo, isExpiringThisMonth: this.isExpiringThisMonth(abo, this.today) })))
   );
 
 
@@ -49,14 +47,26 @@ export class AbosStore implements OnDestroy {
     this.abosService.getAll().subscribe(items => this.subject.next(items));
   }
 
-  isExpiringThisMonth(abo: Abo) {
+
+  isExpiringThisMonth(abo: Abo, currentDay : Date) {
     if (!abo.active) {
       return false;
     }
-    const date = new Date(abo.startDate);
-    const months = this.getPeriodInMonth(abo);
-    date.setMonth(date.getMonth() + months);
-    return date.getFullYear() === this.today.getFullYear() && date.getMonth() === this.today.getMonth();
+
+    const periodInMonths = this.getPeriodInMonth(abo);
+    let start = new Date(abo.startDate);
+    const end = new Date(start);
+
+    while (start < currentDay) {
+      end.setMonth(start.getMonth() + periodInMonths);
+      if (abo.isAutoRenewal) {
+        start = new Date(end);
+      } else {
+        break;
+      }
+    }
+
+    return end.getMonth() === this.today.getMonth() && end.getFullYear() === this.today.getFullYear();
   }
 
   normalizePriceToPricePerYear(abo: Abo) {
@@ -118,6 +128,7 @@ export class AbosStore implements OnDestroy {
       description: '',
       isEditing: false,
       isExpiringThisMonth: false,
+      isAutoRenewal: false,
       startDate: formattedDate
     }
   }
@@ -173,3 +184,9 @@ export class AbosStore implements OnDestroy {
     this.changeSubjects.forEach(subject => subject.unsubscribe());
   }
 }
+
+
+
+
+
+

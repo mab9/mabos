@@ -1,4 +1,5 @@
 import {Period} from "./period.enum";
+import {format} from "date-fns";
 
 export interface Abo {
   id: number | null;
@@ -14,8 +15,26 @@ export interface Abo {
   isEditing: boolean;
 
   isExpiringThisMonth: boolean;
+  isAutoRenewal: boolean;
+
   // // Reminder
   // expReminder: boolean;
   // expReminderPeriod: Period;
   // expReminderPeriodAmounts: number;
+}
+
+export const createAbo = (today = new Date()): Abo => {
+  const formattedDate = format(today, 'yyyy-MM-dd');
+  return {
+    id: null,
+    title: 'New Abo',
+    price: 0,
+    period: Period.MONTH,
+    active: false,
+    description: '',
+    isEditing: false,
+    isExpiringThisMonth: false,
+    isAutoRenewal: false,
+    startDate: formattedDate
+  }
 }
