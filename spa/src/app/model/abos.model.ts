@@ -1,5 +1,5 @@
 import {Period} from "./period.enum";
-import {format} from "date-fns";
+import {addMonths, format} from "date-fns";
 
 export interface Abo {
   id: number | null;
@@ -23,13 +23,13 @@ export interface Abo {
   // expReminderPeriodAmounts: number;
 }
 
-export const createAbo = (today = new Date()): Abo => {
+export const createAbo = (today = new Date(), period = Period.MONTH): Abo => {
   const formattedDate = format(today, 'yyyy-MM-dd');
   return {
     id: null,
     title: 'New Abo',
     price: 0,
-    period: Period.MONTH,
+    period: period,
     active: false,
     description: '',
     isEditing: false,

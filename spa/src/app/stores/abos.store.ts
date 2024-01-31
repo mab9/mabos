@@ -2,8 +2,9 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {BehaviorSubject, debounceTime, map, Observable, Subject, tap} from "rxjs";
 import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
-import {format} from "date-fns";
+import {addMonths, format} from "date-fns";
 import {AbosService} from "../services/abos.service";
+import {isSameYearAndMonth} from "../util/date.util";
 
 @Injectable({
   providedIn: "root" // one instance for the whole application
@@ -48,25 +49,30 @@ export class AbosStore implements OnDestroy {
   }
 
 
-  isExpiringThisMonth(abo: Abo, currentDay : Date) {
+  // todo replace this stuff to abo object.
+  isExpiringThisMonth(abo: Abo, currentDate : Date) {
     if (!abo.active) {
       return false;
     }
 
     const periodInMonths = this.getPeriodInMonth(abo);
-    let start = new Date(abo.startDate);
-    const end = new Date(start);
+    let startDate = new Date(abo.startDate);
+    let expiringDate = addMonths(startDate, periodInMonths);
 
-    while (start < currentDay) {
-      end.setMonth(start.getMonth() + periodInMonths);
-      if (abo.isAutoRenewal) {
-        start = new Date(end);
-      } else {
-        break;
+    while (expiringDate < currentDate) {
+      if (isSameYearAndMonth(expiringDate, currentDate)) {
+        return true;
       }
+
+      // todo consider an abo that is active, not auto renewal and past the expiring date, should be set to inactive
+      if (!abo.isAutoRenewal) {
+        return false;
+      }
+
+      expiringDate = addMonths(expiringDate, periodInMonths);
     }
 
-    return end.getMonth() === this.today.getMonth() && end.getFullYear() === this.today.getFullYear();
+    return false;
   }
 
   normalizePriceToPricePerYear(abo: Abo) {
