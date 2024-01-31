@@ -1,17 +1,5 @@
 import {Injectable, OnDestroy} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {
-  BehaviorSubject,
-  catchError,
-  debounceTime,
-  map,
-  Observable,
-  of,
-  shareReplay,
-  Subject,
-  tap,
-  throwError
-} from "rxjs";
+import {BehaviorSubject, debounceTime, map, Observable, Subject, tap} from "rxjs";
 import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
 import {format} from "date-fns";
@@ -48,7 +36,7 @@ export class AbosStore implements OnDestroy {
   constructor(
     private abosService : AbosService,
   ) {
-    this.abosService.getAll().subscribe();
+    this.abosService.getAll().subscribe(items => this.subject.next(items));
   }
 
   normalizePriceToPricePerYear(abo: Abo) {

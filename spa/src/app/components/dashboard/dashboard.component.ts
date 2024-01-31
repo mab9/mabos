@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AsyncPipe, CurrencyPipe, NgIf} from "@angular/common";
 import {
-    MatCard,
-    MatCardActions,
-    MatCardContent,
-    MatCardHeader,
-    MatCardSubtitle,
-    MatCardTitle
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle
 } from "@angular/material/card";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatList, MatListItem} from "@angular/material/list";
@@ -22,7 +22,13 @@ import {
   MatFooterCell,
   MatFooterRow,
   MatFooterRowDef,
-  MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable, MatTableModule
+  MatHeaderCell,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable,
+  MatTableModule
 } from "@angular/material/table";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatChip, MatChipOption} from "@angular/material/chips";
@@ -33,11 +39,6 @@ import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {KeycloakProfile} from "keycloak-js";
-import {KeycloakService} from "keycloak-angular";
-import {User} from "../../model/user.model";
-import {catchError, throwError} from "rxjs";
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-dashboard',
@@ -83,36 +84,17 @@ import {HttpClient} from "@angular/common/http";
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
   displayedColumns: string[] = ['title', 'price', 'period', 'active'];
-
-  public isLoggedIn = false;
-  public userProfile: KeycloakProfile | null = null;
-
   constructor(public abosStore : AbosStore,
-              private http : HttpClient,
               public settingsStore: SettingsStore,
-              private readonly keycloak: KeycloakService) {
+  ) {
   }
-
-  public async ngOnInit() {
-    this.isLoggedIn = await this.keycloak.isLoggedIn();
-
-    if (this.isLoggedIn) {
-      this.userProfile = await this.keycloak.loadUserProfile();
-      // this.user.authStatus = 'AUTH';
-      // this.user.name = this.userProfile.firstName || "";
-      //  window.sessionStorage.setItem("userdetails",JSON.stringify(this.user));
-    }
-  }
-
 
   onDisableReminder(item : Setting) {
     item.isReminderEmailActivated = false;
     this.settingsStore.saveItem('mab@mab.rocks', item);
-
-
   }
 
   onActivateReminder(item: Setting) {
@@ -124,16 +106,5 @@ export class DashboardComponent implements OnInit {
     return item.id;
   }
 
-  async loadUser () {
-    this.http.get<User>('http://localhost:8080/api/users/me', { observe: 'response',withCredentials: true })
-      .pipe(
-        // @ts-ignore
-        catchError(err => {
-          console.error("errror ")
-          return throwError(err);
 
-        }),
-      ).subscribe(user => console.info("loaded user", user))
-
-  }
 }

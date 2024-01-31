@@ -9,24 +9,32 @@ import {
 } from '@angular/common/http';
 
 import {Observable} from 'rxjs';
+import {environment} from "../../environments/environment";
+import {KeycloakService} from "keycloak-angular";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
+  constructor(private keycloak : KeycloakService) {
+  }
   intercept(req: HttpRequest<any>, next: HttpHandler,):
     Observable<HttpEvent<any>> {
-    console.info("auth interceptor")
 
     let httpHeaders = new HttpHeaders();
-    let AUTH_TOKEN = sessionStorage.getItem('auth');
-    if (AUTH_TOKEN) {
-      httpHeaders = new HttpHeaders().append('Authorization', 'bearer ' + AUTH_TOKEN);
+    if (this.keycloak.isLoggedIn()) {
+      const token = sessionStorage.getItem("AUTH_ACCESS_TOKEN")
+      httpHeaders = new HttpHeaders().append('Authorization', 'bearer ' + token);
     }
 
-    const newRequest = req.clone({
-      headers: httpHeaders
-    });
+    if (req.url.startsWith(environment.backendUrl)) {
+      req = req.clone({
+        headers: httpHeaders,
+        withCredentials: true,
+        //observe: 'response'
+      });
+    }
 
-    return next.handle(newRequest);
+    return next.handle(req);
   }
 }
 

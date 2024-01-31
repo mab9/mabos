@@ -3,12 +3,15 @@
     <mat-toolbar-row>
       <span>Mabos</span>
 
-      <button [routerLink]="'/dashboard'"     mat-icon-button><mat-icon>dashboard</mat-icon></button>
-      <button [routerLink]="'/abos'"          mat-icon-button><mat-icon>category</mat-icon></button>
-      <button [routerLink]="'/abos-inline'"   mat-icon-button><mat-icon>egg_alt</mat-icon></button>
-      <button [routerLink]="'/abos-reactive'" mat-icon-button><mat-icon>egg</mat-icon></button>
-      <button (click)="login()"               mat-icon-button><mat-icon >login</mat-icon></button>
-      <button (click)="logout()"              mat-icon-button><mat-icon >logout</mat-icon></button>
+      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/dashboard'"     mat-icon-button><mat-icon>dashboard</mat-icon></button>
+      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos'"          mat-icon-button><mat-icon>category</mat-icon></button>
+      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos-inline'"   mat-icon-button><mat-icon>egg_alt</mat-icon></button>
+      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos-reactive'" mat-icon-button><mat-icon>egg</mat-icon></button>
+
+
+      <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()"               mat-icon-button><mat-icon >login</mat-icon></button>
+      <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()"              mat-icon-button><mat-icon >logout</mat-icon></button>
+      <button *ngIf="authStore.isLoggedOut$  | async" (click)="authStore.loadUser()"              mat-icon-button><mat-icon >load</mat-icon></button>
 
 
       <span class="example-spacer"></span>

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  rooturl : 'http://localhost:8080',
+  backendUrl : 'http://localhost:8080',
   keycloak : {
     config_url: 'http://localhost:8180/',
     config_realm: 'mabos-realm',

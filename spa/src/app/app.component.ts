@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavContainer, MatSidenavModule} from "@angular/material/sidenav";
 import {MatBadge} from "@angular/material/badge";
-import {KeycloakAngularModule, KeycloakBearerInterceptor, KeycloakService} from "keycloak-angular";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {environment} from "../environments/environment";
+import {KeycloakService} from "keycloak-angular";
+import {AuthStore} from "./stores/auth.store";
 
 @Component({
   selector: 'app-root',
@@ -21,27 +20,27 @@ import {environment} from "../environments/environment";
 })
 export class AppComponent implements OnInit {
 
-  public isLoggedIn = false;
+  constructor(
+    public authStore: AuthStore,
+    private readonly keycloak: KeycloakService
+  ) {
+  }
 
-  constructor(private readonly keycloak: KeycloakService) { }
-
-  async ngOnInit()  {
-    this.isLoggedIn = this.keycloak.isLoggedIn();
-
-    if (this.isLoggedIn) {
-      console.info("user is logged in, token is getting loaded")
+  // this mess is only needed until keycloak is self handling auth header appending
+  public async ngOnInit() {
+    if (this.keycloak.isLoggedIn()) {
       const token = await this.keycloak.getToken();
-      sessionStorage.setItem("auth", token);
-    } else {
-      console.info("User is not logged in, no access token available.")
+      console.info("töken was loaded", token)
+      sessionStorage.setItem("AUTH_ACCESS_TOKEN", token);
+      this.authStore.loadUser();
     }
   }
 
   public login() {
-    this.keycloak.login();
+    this.authStore.login();
   }
 
   public logout() {
-    this.keycloak.logout(environment.keycloak.logout_redirectUri);
+    this.authStore.logout();
   }
 }
