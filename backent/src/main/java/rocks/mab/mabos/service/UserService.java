@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+import rocks.mab.mabos.model.Abo;
 import rocks.mab.mabos.model.User;
 import rocks.mab.mabos.repository.UserRepository;
 
@@ -29,5 +30,14 @@ public class UserService {
         String email = jwt.getClaims().get("email").toString();
         Optional<User> userOptional = userRepository.findByEmail(email);
         return userOptional.orElse(null);
+    }
+
+    public User update(User item) {
+        User user = currentUser();
+        if (user.getEmail().equals(item.getEmail())) {
+            user.setSendEmailReminders(item.isSendEmailReminders());
+            userRepository.save(user);
+        }
+        return user;
     }
 }

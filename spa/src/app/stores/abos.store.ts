@@ -7,14 +7,19 @@ import {AbosService} from "../services/abos.service";
 
 @Injectable({
   providedIn: "root" // one instance for the whole application
-
 })
 export class AbosStore implements OnDestroy {
+
+  private today = new Date();
 
   private changeSubjects = new Map<number, Subject<Abo>>();
 
   private subject = new BehaviorSubject<Abo[]>([])
-  abos$ = this.subject.asObservable();
+  abos$ = this.subject.asObservable().pipe(
+    map(abos => abos.map(abo => ({ ...abo, isExpiringThisMonth: this.isExpiringThisMonth(abo) })))
+  );
+
+
   abosCount$: Observable<number> = this.abos$.pipe(
     map(abos => abos.length)
   );
@@ -33,10 +38,25 @@ export class AbosStore implements OnDestroy {
     map(total => this.roundUpToNearestFiveCents(total))
   );
 
+  abosTotalExpiringThisMonth$ : Observable<number> = this.abos$.pipe(
+    map(abos => abos.filter(abo => abo.isExpiringThisMonth).length)
+  );
+
   constructor(
     private abosService : AbosService,
   ) {
+    // inital load
     this.abosService.getAll().subscribe(items => this.subject.next(items));
+  }
+
+  isExpiringThisMonth(abo: Abo) {
+    if (!abo.active) {
+      return false;
+    }
+    const date = new Date(abo.startDate);
+    const months = this.getPeriodInMonth(abo);
+    date.setMonth(date.getMonth() + months);
+    return date.getFullYear() === this.today.getFullYear() && date.getMonth() === this.today.getMonth();
   }
 
   normalizePriceToPricePerYear(abo: Abo) {
@@ -44,7 +64,7 @@ export class AbosStore implements OnDestroy {
   }
 
   normalizePriceToPricePerMonth(abo: Abo) {
-    const divider = this.getPriceToMonthDivider(abo);
+    const divider = this.getPeriodInMonth(abo);
     return abo.price / divider;
   }
 
@@ -53,7 +73,7 @@ export class AbosStore implements OnDestroy {
     return Math.ceil(amount * multiplier) / multiplier;
   }
 
-  getPriceToMonthDivider(abo: Abo) {
+  getPeriodInMonth(abo: Abo) {
     switch (abo.period) {
       case Period.YEAR:
         return 12;
@@ -97,6 +117,7 @@ export class AbosStore implements OnDestroy {
       active: false,
       description: '',
       isEditing: false,
+      isExpiringThisMonth: false,
       startDate: formattedDate
     }
   }

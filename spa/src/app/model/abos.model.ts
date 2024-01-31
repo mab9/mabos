@@ -13,6 +13,7 @@ export interface Abo {
   // meta data
   isEditing: boolean;
 
+  isExpiringThisMonth: boolean;
   // // Reminder
   // expReminder: boolean;
   // expReminderPeriod: Period;

@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       const token = await this.keycloak.getToken();
       console.info("töken was loaded", token)
       sessionStorage.setItem("AUTH_ACCESS_TOKEN", token);
-      this.authStore.loadUser();
+      this.authStore.loadMe();
     }
   }
 

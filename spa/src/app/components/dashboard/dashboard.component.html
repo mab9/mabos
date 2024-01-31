@@ -9,22 +9,23 @@
       <mat-list-item><span>Monthly Costs: {{ abosStore.abosTotalMonthlyCosts$ | async | currency }}  </span></mat-list-item>
       <mat-list-item><span>Total Abos: {{ abosStore.abosCount$ | async }} </span></mat-list-item>
       <mat-list-item><span>Total active Abos: {{ abosStore.abosActive$ | async }}  </span></mat-list-item>
+      <mat-list-item><span>Abos expiring this month: {{ abosStore.abosTotalExpiringThisMonth$ | async }}  </span></mat-list-item>
     </mat-list>
   </mat-card-content>
 
   <mat-card-actions>
 
-    <ng-container *ngIf="(settingsStore.settings$ | async) as settings">
-        @if (settings.isReminderEmailActivated) {
-          <span (click)="onDisableReminder(settings)">
-            <mat-icon color="warn">notifications_off</mat-icon>
-            <button mat-stroked-button color="warn">Reminders disabled</button>
+    <ng-container *ngIf="(authStore.user$ | async) as item">
+        @if (item.sendEmailReminders) {
+          <span (click)="onDisableReminder(item)">
+            <mat-icon color="primary">notifications_active</mat-icon>
+            <button mat-stroked-button color="primary">Disable Reminders</button>
           </span>
         }
-        @if (!settings.isReminderEmailActivated) {
-          <span (click)="onActivateReminder(settings)">
-             <mat-icon color="primary" >notifications_active</mat-icon>
-              <button mat-stroked-button color="primary">Reminders activated</button>
+        @if (!item.sendEmailReminders) {
+          <span (click)="onActivateReminder(item)">
+             <mat-icon color="warn" >notifications_off</mat-icon>
+              <button mat-stroked-button color="warn">Activate Reminders</button>
           </span>
         }
     </ng-container>
@@ -79,6 +80,7 @@
       </td>
       <td mat-footer-cell *matFooterCellDef> {{ abosStore.abosActive$ | async }} </td>
     </ng-container>
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row        *matRowDef="let row; columns: displayedColumns;"></tr>

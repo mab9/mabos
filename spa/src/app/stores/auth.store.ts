@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, catchError, Observable, throwError} from "rxjs";
+import {BehaviorSubject, catchError, Observable, shareReplay, throwError} from "rxjs";
 import {map} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
 import {KeycloakService} from "keycloak-angular";
 import {environment} from "../../environments/environment";
 import {User} from "../model/user.model";
+import {AuthService} from "../services/auth.service";
 
 const AUTH_ACCESS_TOKEN = "AUTH_ACCESS_TOKEN"
 
@@ -20,7 +21,7 @@ export class AuthStore {
   isLoggedIn$ : Observable<boolean>;
   isLoggedOut$: Observable<boolean>;
 
-  constructor(private http: HttpClient,
+  constructor(private authService : AuthService,
               private readonly keycloak: KeycloakService) {
 
       this.isLoggedIn$ = this.user$.pipe(map(user => !!user));
@@ -36,19 +37,15 @@ export class AuthStore {
     this.keycloak.logout(environment.keycloak.logout_redirectUri);
   }
 
-  loadUser () {
-    console.info("testy")
-    this.http.get<User>('http://localhost:8080/api/users/me', { observe: 'response',withCredentials: true })
-      .pipe(
-        // @ts-ignore
-        catchError(err => {
-          console.error("errror ")
-          return throwError(err);
+  loadMe () {
+    this.authService.getMe()
+      .subscribe(user => this.subject.next(user));
+  }
 
-        }),
-      ).subscribe(user => {
-        this.subject.next(user.body!);
-    })
+  update(item : User) {
+    this.subject.next(item); // reflect changes to subscribers
 
+    // we do not show any loading indicator because changes are reflected instantly.
+    this.authService.put(item).subscribe();
   }
 }

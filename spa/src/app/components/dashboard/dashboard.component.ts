@@ -11,8 +11,6 @@ import {
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatList, MatListItem} from "@angular/material/list";
 import {AbosStore} from "../../stores/abos.store";
-import {SettingsStore} from "../../stores/settings.store";
-import {Setting} from "../../model/settings.model";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {
@@ -39,6 +37,8 @@ import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {AuthStore} from "../../stores/auth.store";
+import {User} from "../../model/user.model";
 
 @Component({
   selector: 'app-dashboard',
@@ -88,18 +88,18 @@ export class DashboardComponent {
 
   displayedColumns: string[] = ['title', 'price', 'period', 'active'];
   constructor(public abosStore : AbosStore,
-              public settingsStore: SettingsStore,
+              public authStore: AuthStore,
   ) {
   }
 
-  onDisableReminder(item : Setting) {
-    item.isReminderEmailActivated = false;
-    this.settingsStore.saveItem('mab@mab.rocks', item);
+  onDisableReminder(item : User) {
+    item.sendEmailReminders = false;
+    this.authStore.update(item);
   }
 
-  onActivateReminder(item: Setting) {
-    item.isReminderEmailActivated = true;
-    this.settingsStore.saveItem('mab@mab.rocks', item);
+  onActivateReminder(item: User) {
+    item.sendEmailReminders = true;
+    this.authStore.update(item);
   }
 
   trackById(index: number, item: Abo): any {

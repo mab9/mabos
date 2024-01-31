@@ -11,7 +11,7 @@
 
       <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()"               mat-icon-button><mat-icon >login</mat-icon></button>
       <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()"              mat-icon-button><mat-icon >logout</mat-icon></button>
-      <button *ngIf="authStore.isLoggedOut$  | async" (click)="authStore.loadUser()"              mat-icon-button><mat-icon >load</mat-icon></button>
+      <button *ngIf="authStore.isLoggedOut$  | async" (click)="authStore.loadMe()" mat-icon-button><mat-icon >load</mat-icon></button>
 
 
       <span class="example-spacer"></span>
