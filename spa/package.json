@@ -8,7 +8,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:mabos": "node dist/mabos/server/server.mjs"
+    "serve:ssr:mabos": "node dist/mabos/server/server.mjs",
+    "profile": "npm run build --stats-json && npx webpack-bundle-analyzer ./dist/mabos/stats.json",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -34,11 +36,19 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.7",
+    "@angular-eslint/builder": "17.2.1",
+    "@angular-eslint/eslint-plugin": "17.2.1",
+    "@angular-eslint/eslint-plugin-template": "17.2.1",
+    "@angular-eslint/schematics": "17.2.1",
+    "@angular-eslint/template-parser": "17.2.1",
     "@angular/cli": "^17.0.7",
     "@angular/compiler-cli": "^17.0.0",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
+    "@typescript-eslint/eslint-plugin": "6.19.0",
+    "@typescript-eslint/parser": "6.19.0",
+    "eslint": "^8.56.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -46,6 +56,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ts-node": "^10.9.2",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "webpack-bundle-analyzer": "^4.10.1"
   }
 }

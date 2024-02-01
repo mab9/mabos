@@ -40,7 +40,7 @@ export class AbosInlineComponent {
   ) {
   }
 
-  trackById(index: number, item: Abo): any {
+  trackById(index: number, item: Abo): number | null {
     return item.id;
   }
 

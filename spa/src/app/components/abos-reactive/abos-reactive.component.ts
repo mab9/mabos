@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AbosStore} from "../../stores/abos.store";
 import {Abo} from "../../model/abos.model";
 import {Period} from '../../model/period.enum';
@@ -42,7 +42,7 @@ export class AbosReactiveComponent {
   ) {
   }
 
-  trackById(index: number, item: Abo): any {
+  trackById(index: number, item: Abo): number | null {
     return item.id;
   }
 

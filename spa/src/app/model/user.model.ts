@@ -1,4 +1,3 @@
-import {Period} from "./period.enum";
 
 export interface User {
   id: number | null;

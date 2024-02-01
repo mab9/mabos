@@ -61,9 +61,9 @@ describe('AboStore', () => {
   });
 
   it('should detect if an abo is expiring considering active inactive attribute', () => {
-    let currentDate = new Date("2023-12-10")
-    let aboStartDate = new Date("2023-11-12");
-    let abo = createAbo(aboStartDate);
+    const currentDate = new Date("2023-12-10")
+    const aboStartDate = new Date("2023-11-12");
+    const abo = createAbo(aboStartDate);
 
     abo.active = true;
     expect(aboStore.isExpiringThisMonth(abo, currentDate)).toBeTrue();

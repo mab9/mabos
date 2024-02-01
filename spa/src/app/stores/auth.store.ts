@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, catchError, Observable, shareReplay, throwError} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {map} from "rxjs/operators";
-import {HttpClient} from "@angular/common/http";
 import {KeycloakService} from "keycloak-angular";
 import {environment} from "../../environments/environment";
 import {User} from "../model/user.model";

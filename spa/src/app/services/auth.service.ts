@@ -1,9 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Abo} from "../model/abos.model";
 import {environment} from "../../environments/environment";
 import {ApiConstants} from "../constants/api.constants";
-import {catchError, Observable, shareReplay, throwError} from "rxjs";
+import {catchError, shareReplay} from "rxjs";
 import {SharedService} from "./shared.service";
 import {User} from "../model/user.model";
 

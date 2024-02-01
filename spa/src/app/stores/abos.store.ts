@@ -116,7 +116,7 @@ export class AbosStore implements OnDestroy {
           const itemIndex = currentData.findIndex(item => item === newItem);
           if (itemIndex !== -1) {
             const updatedItem = {...currentData[itemIndex], id: permanentId};
-            let updatedData = [...currentData];
+            const updatedData = [...currentData];
             updatedData[itemIndex] = updatedItem;
             this.subject.next(updatedData); // Update the subject with the new data
           }

@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {Component} from '@angular/core';
 import {Abo} from "../../model/abos.model";
 import {AbosStore} from "../../stores/abos.store";
 import {MatIconModule} from "@angular/material/icon";
@@ -11,12 +10,10 @@ import {MatCheckbox} from "@angular/material/checkbox";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatOption, MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
-import {Period} from "../../model/period.enum";
 import {MatChip, MatChipOption} from "@angular/material/chips";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {format} from "date-fns";
 
 
 @Component({
@@ -43,7 +40,7 @@ export class AbosComponent {
       public abosStore : AbosStore
     ) {
     }
-  trackById(index: number, item: Abo): any {
+  trackById(index: number, item: Abo): number | null {
     return item.id;
   }
 
