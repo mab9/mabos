@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {BehaviorSubject, debounceTime, map, Observable, Subject, tap} from "rxjs";
 import {Abo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
-import {addMonths, format} from "date-fns";
+import {addMonths, format, subDays} from "date-fns";
 import {AbosService} from "../services/abos.service";
 import {isSameYearAndMonth} from "../util/date.util";
 
@@ -15,7 +15,7 @@ export class AbosStore implements OnDestroy {
   private changeSubjects = new Map<number, Subject<Abo>>();
   private subject = new BehaviorSubject<Abo[]>([])
   abos$ = this.subject.asObservable().pipe(
-    map(abos => abos.map(abo => ({ ...abo, isExpiringThisMonth: this.isExpiringThisMonth(abo, this.today) })))
+    map(abos => abos.map(abo => ({...abo, isExpiringThisMonth: this.isExpiringThisMonth(abo, this.today)})))
   );
 
 
@@ -37,42 +37,44 @@ export class AbosStore implements OnDestroy {
     map(total => this.roundUpToNearestFiveCents(total))
   );
 
-  abosTotalExpiringThisMonth$ : Observable<number> = this.abos$.pipe(
+  abosTotalExpiringThisMonth$: Observable<number> = this.abos$.pipe(
     map(abos => abos.filter(abo => abo.isExpiringThisMonth).length)
   );
 
   constructor(
-    private abosService : AbosService,
+    private abosService: AbosService,
   ) {
     // inital load
     this.abosService.getAll().subscribe(items => this.subject.next(items));
   }
 
-
+// "2023-07-16", "2024-07-01",
   // todo replace this stuff to abo object.
-  isExpiringThisMonth(abo: Abo, currentDate : Date) {
+  isExpiringThisMonth(abo: Abo, currentDate: Date) {
     if (!abo.active) {
       return false;
     }
 
-    const periodInMonths = this.getPeriodInMonth(abo);
-    let startDate = new Date(abo.startDate);
-    let expiringDate = addMonths(startDate, periodInMonths);
+    const aboPeriodInMonths = this.getPeriodInMonth(abo);
+    const aboStartDate = new Date(abo.startDate);
+    let expiringDate = addMonths(aboStartDate, aboPeriodInMonths); // exp plus 1 tag. denn es läuft ja am tag davor ab!
+    expiringDate = subDays(expiringDate, 1); // exp plus 1 tag. denn es läuft ja am tag davor ab!
 
-    while (expiringDate < currentDate) {
-      if (isSameYearAndMonth(expiringDate, currentDate)) {
+    while (true) {
+      if (expiringDate >= currentDate) {
+        return isSameYearAndMonth(expiringDate, currentDate);
+      }
+
+      if (isSameYearAndMonth(expiringDate, currentDate) && aboPeriodInMonths > 1) {
         return true;
       }
 
-      // todo consider an abo that is active, not auto renewal and past the expiring date, should be set to inactive
       if (!abo.isAutoRenewal) {
         return false;
       }
 
-      expiringDate = addMonths(expiringDate, periodInMonths);
+      expiringDate = addMonths(expiringDate, aboPeriodInMonths);
     }
-
-    return false;
   }
 
   normalizePriceToPricePerYear(abo: Abo) {
@@ -109,17 +111,17 @@ export class AbosStore implements OnDestroy {
     this.subject.next(updatedData);
     this.abosService.post(newItem).pipe(
       tap(savedItem => {
-        const permanentId = savedItem.id; // Assuming the response contains the new ID
-        const currentData = this.subject.value;
-        const itemIndex = currentData.findIndex(item => item === newItem);
-        if (itemIndex !== -1) {
-          const updatedItem = {...currentData[itemIndex], id: permanentId};
-          let updatedData = [...currentData];
-          updatedData[itemIndex] = updatedItem;
-          this.subject.next(updatedData); // Update the subject with the new data
+          const permanentId = savedItem.id; // Assuming the response contains the new ID
+          const currentData = this.subject.value;
+          const itemIndex = currentData.findIndex(item => item === newItem);
+          if (itemIndex !== -1) {
+            const updatedItem = {...currentData[itemIndex], id: permanentId};
+            let updatedData = [...currentData];
+            updatedData[itemIndex] = updatedItem;
+            this.subject.next(updatedData); // Update the subject with the new data
+          }
         }
-      }
-    )).subscribe();
+      )).subscribe();
   }
 
   private newAbo(): Abo {
@@ -152,7 +154,7 @@ export class AbosStore implements OnDestroy {
   }
 
 
-  private reflectChanges(itemId: number, changes: Partial<Abo>) : Abo {
+  private reflectChanges(itemId: number, changes: Partial<Abo>): Abo {
     // has a ref to the latest emitted value - to the current list.
     const items = this.subject.getValue();
     const index = items.findIndex(item => item.id == itemId);

@@ -10,6 +10,13 @@ describe('DateUtil', () => {
   });
 
   it("ensure date calculation correctness ", () => {
+    let startDate = new Date("2023-02-28");
+    let checkDate = new Date("2023-02-01")
+
+    expect(isSameYearAndMonth(startDate, checkDate)).toBeTrue();
+  })
+
+  it("ensure date calculation correctness ", () => {
     // boundaries
     let startDate = new Date("2023-12-13");
     let checkDate = new Date("2024-01-13")
