@@ -10,10 +10,19 @@ describe('DateUtil', () => {
   });
 
   it("ensure date calculation correctness ", () => {
-    let startDate = new Date("2023-02-28");
-    let checkDate = new Date("2023-02-01")
+    const startDate = new Date("2023-02-28");
+    const checkDate = new Date("2023-02-01")
 
     expect(isSameYearAndMonth(startDate, checkDate)).toBeTrue();
+  })
+
+  it("ensure date calculation correctness ", () => {
+    const startDate = new Date("2023-12-28");
+    const checkDate = new Date("2024-01-28")
+
+    const toBeChecked = addMonths(startDate, 1);
+
+    expect(isSameDay(toBeChecked, checkDate)).toBeTrue();
   })
 
   it("ensure date calculation correctness ", () => {
