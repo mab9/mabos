@@ -10,5 +10,6 @@ RUN npm run build
 FROM nginx:alpine
 # folder app is related to workdir in stage 1.
 COPY --from=build /app/dist/mabos/browser /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 4200
 

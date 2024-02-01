@@ -99,6 +99,20 @@
                         </exclude>
                     </excludes>
                 </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-image-no-fork</goal>
+                        </goals>
+                        <configuration>
+                            <createdDate>now</createdDate>
+                            <image>
+                                <name>mabru/mabos-backent </name>
+                            </image>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

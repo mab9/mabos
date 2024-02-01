@@ -1,0 +1,57 @@
+services:
+
+  # docker build -t mabru/mabos-spa .
+  spa:
+    image: mabru/mabos-spa:latest
+    pull_policy: never
+    restart: always
+    ports:
+      - 4200:80
+
+  backent:
+    image: mabru/mabos-backent:latest
+    pull_policy: never
+    restart: always
+    depends_on:
+      - postgres
+      - keycloak
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/mydb"
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:8180/realms/mabos-realm/protocol/openid-connect/certs"
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: mypw
+      POSTGRES_USER: myuser
+    ports:
+      - 5432:5432
+    volumes:
+      - ./backent/src/main/resources/sql:/docker-entrypoint-initdb.d/
+
+  keycloak:
+    # testuser: ?
+    # Export keycloak realm - one command
+    # docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file' && \
+    # docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./backent/src/main/resources/keycloak/mabos-realm.json
+
+    image: quay.io/keycloak/keycloak:23.0.0
+    depends_on:
+      - postgres
+    command: ['start-dev', '--import-realm']
+    #command: ['start-dev']
+    ports:
+      - 8180:8080
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/mydb?currentSchema=keycloak
+      KC_DB_USERNAME: myuser
+      KC_DB_PASSWORD: mypw
+      TZ: Europe/Zurich
+    volumes:
+      - ./backent/src/main/resources/keycloak/mabos-realm.json:/opt/keycloak/data/import/mabos-realm.json
