@@ -5,18 +5,18 @@ services:
     environment:
       POSTGRES_DB: mydb
       POSTGRES_PASSWORD: mypw
-      POSTGRES_USER: myuser
+      POSTGRES_USER: mabos-user
     ports:
       - 5432:5432
     volumes:
       # init db
-      - ./db:/docker-entrypoint-initdb.d/
+      - ./deployment/db:/docker-entrypoint-initdb.d/
 
   keycloak:
     # testuser: ?
     # Export keycloak realm - one command
     # docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file' && \
-    # docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./backent/src/main/resources/keycloak/mabos-realm.json
+    # docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./deployment/mabos-realm.json
 
     image: quay.io/keycloak/keycloak:23.0.0
     depends_on:
@@ -34,5 +34,5 @@ services:
       KC_DB_PASSWORD: mypw
       TZ: Europe/Zurich
     volumes:
-      - ./backent/src/main/resources/keycloak/mabos-realm.json:/opt/keycloak/data/import/mabos-realm.json
+      - ./deployment/mabos-realm.json:/opt/keycloak/data/import/mabos-realm.json
 

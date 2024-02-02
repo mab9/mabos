@@ -30,8 +30,8 @@ The init scripts are located in the folder db at project root.
 2. provide env file with parametrized secrets: .secrets.prod.env
 3. ensure, that DB was setup correctly.
 
-   docker compose --env-file .secrets.local.env -f compose-prod.yml up -d # if you want to test prod compose on local env
-   docker compose --env-file .secrets.prod.env -f compose-prod.yml up -d
+    docker compose --env-file ./deployment/.secrets.local.env -f compose-prod.yml up -d # if you want to test prod compose on local env
+    docker compose --env-file ./deployment/.secrets.prod.env -f compose-prod.yml up -d
 
 Side note
 
@@ -43,12 +43,14 @@ Side note
 # Some docker commands
 
 build images
-
+    
+    cd deployment
     docker build -t mabru/mabos-backent .
+    cd deployment
     docker build -t mabru/mabos-spa .
 
 # Some keycloak commands
 
 Export keycloak realm - one command
     docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file'
-    docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./backent/src/main/resources/keycloak/mabos-realm.json
+    docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./deployment/mabos-realm.json
