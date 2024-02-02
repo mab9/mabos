@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: mydb
       POSTGRES_PASSWORD: mypw
-      POSTGRES_USER: mabos-user
+      POSTGRES_USER: mabos-db-admin
     ports:
       - 5432:5432
     volumes:
@@ -30,8 +30,8 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres:5432/mydb?currentSchema=keycloak
-      KC_DB_USERNAME: myuser
       KC_DB_PASSWORD: mypw
+      KC_DB_USERNAME: mabos-db-admin
       TZ: Europe/Zurich
     volumes:
       - ./deployment/mabos-realm.json:/opt/keycloak/data/import/mabos-realm.json
