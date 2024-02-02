@@ -10,3 +10,11 @@ run spa: npm run start.
 
 
 see package.json scripts.
+
+
+
+
+
+docker compose -f compose-prod.yml up -d
+docker compose -f compose-prod.yml logs
+docker compose -f compose-prod.yml down -v

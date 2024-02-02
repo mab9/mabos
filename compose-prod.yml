@@ -1,6 +1,12 @@
 services:
 
+  # to connect from a container to anohter container inside the same network:
+  # - use the service name -> spa, backent, postgres or keycloak
+  # - use the containers port, not the exposed port on the host system (8080 for keycloak)
+
+  # docker build -t mabru/mabos-backent .
   # docker build -t mabru/mabos-spa .
+
   spa:
     image: mabru/mabos-spa:latest
     pull_policy: never
@@ -19,7 +25,7 @@ services:
       - 8080:8080
     environment:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/mydb"
-      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:8180/realms/mabos-realm/protocol/openid-connect/certs"
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:8080/realms/mabos-realm/protocol/openid-connect/certs"
 
   postgres:
     image: postgres:latest
