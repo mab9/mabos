@@ -1,11 +1,22 @@
 services:
 
+  # GENERAL
+  ####################################
   # to connect from a container to anohter container inside the same network:
   # - use the service name -> spa, backent, postgres or keycloak
   # - use the containers port, not the exposed port on the host system (8080 for keycloak)
 
+  # DOCKER
+  ####################################
   # docker build -t mabru/mabos-backent .
   # docker build -t mabru/mabos-spa .
+
+  # KEYCLOAK
+  ####################################
+  # Export keycloak realm - one command
+  # docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file' && \
+  # docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./backent/src/main/resources/keycloak/mabos-realm.json
+
 
   spa:
     image: mabru/mabos-spa:latest
@@ -40,9 +51,6 @@ services:
 
   keycloak:
     # testuser: ?
-    # Export keycloak realm - one command
-    # docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file' && \
-    # docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./backent/src/main/resources/keycloak/mabos-realm.json
 
     image: quay.io/keycloak/keycloak:23.0.0
     depends_on:
