@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: mydb
+      POSTGRES_DB: mabos-db
       POSTGRES_PASSWORD: mypw
       POSTGRES_USER: mabos-db-admin
     ports:
@@ -29,7 +29,7 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres:5432/mydb?currentSchema=keycloak
+      KC_DB_URL: jdbc:postgresql://postgres:5432/mabos-db?currentSchema=keycloak
       KC_DB_PASSWORD: mypw
       KC_DB_USERNAME: mabos-db-admin
       TZ: Europe/Zurich
