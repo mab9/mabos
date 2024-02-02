@@ -27,11 +27,11 @@ The init scripts are located in the folder db at project root.
 ## For server development
 
 1. start postgres, keycloak, backent and frontend with docker compose
-2. provide env file with parametrized secrets: .secrets.prod.env
+2. provide env file with parametrized secrets: .secrets.server.env
 3. ensure, that DB was setup correctly.
 
-    docker compose --env-file ./deployment/.secrets.local.env -f compose-prod.yml up -d # if you want to test prod compose on local env
-    docker compose --env-file ./deployment/.secrets.prod.env -f compose-prod.yml up -d
+    docker compose --env-file ./deployment/.secrets.local.env -f compose-server.yml up -d # if you want to test server compose on local env
+    docker compose --env-file ./deployment/.secrets.server.env -f compose-server.yml up -d
 
 Side note
 
