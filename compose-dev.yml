@@ -9,7 +9,8 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./backent/src/main/resources/sql:/docker-entrypoint-initdb.d/
+      # init db
+      - ./db:/docker-entrypoint-initdb.d/
 
   keycloak:
     # testuser: ?

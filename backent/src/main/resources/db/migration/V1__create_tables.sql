@@ -1,8 +1,3 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-CREATE SCHEMA keycloak;
-GRANT ALL ON SCHEMA keycloak TO "mabos-user";
-
 -- user is a reserved keyword
 CREATE TABLE users (
                       user_id SERIAL PRIMARY KEY,
