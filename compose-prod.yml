@@ -1,5 +1,6 @@
 services:
 
+
   # GENERAL
   ####################################
   # to connect from a container to anohter container inside the same network:
@@ -16,6 +17,7 @@ services:
   # Export keycloak realm - one command
   # docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file' && \
   # docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./backent/src/main/resources/keycloak/mabos-realm.json
+
 
 
   spa:
@@ -35,23 +37,23 @@ services:
     ports:
       - 8080:8080
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/mydb"
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:8080/realms/mabos-realm/protocol/openid-connect/certs"
 
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: mydb
-      POSTGRES_PASSWORD: mypw
-      POSTGRES_USER: myuser
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
     ports:
       - 5432:5432
     volumes:
       - ./backent/src/main/resources/sql:/docker-entrypoint-initdb.d/
 
   keycloak:
-    # testuser: ?
-
     image: quay.io/keycloak/keycloak:23.0.0
     depends_on:
       - postgres
@@ -60,12 +62,12 @@ services:
     ports:
       - 8180:8080
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres:5432/mydb?currentSchema=keycloak
-      KC_DB_USERNAME: myuser
-      KC_DB_PASSWORD: mypw
+      KC_DB_URL: ${KC_DB_URL}
+      KC_DB_USERNAME: ${KC_DB_USERNAME}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
       TZ: Europe/Zurich
     volumes:
       - ./backent/src/main/resources/keycloak/mabos-realm.json:/opt/keycloak/data/import/mabos-realm.json

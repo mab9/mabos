@@ -18,3 +18,11 @@ see package.json scripts.
 docker compose -f compose-prod.yml up -d
 docker compose -f compose-prod.yml logs
 docker compose -f compose-prod.yml down -v
+
+
+
+# wenn das compose-prod verwendet wird, braucht es zwingend ein secret file.
+# die sql scripts müssen iergendwie noch ausgeführt werden!
+
+docker compose --env-file .secrets.local.env -f compose-prod.yml up
+docker compose --env-file .secrets.prod.env -f compose-prod.yml up -d
