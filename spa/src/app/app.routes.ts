@@ -4,7 +4,7 @@ import {AbosInlineComponent} from "./components/abos-inline/abos-inline.componen
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {AbosReactiveComponent} from "./components/abos-reactive/abos-reactive.component";
 import {LandingComponent} from "./components/landing/landing.component";
-import {AuthGuard} from "./routeguards/auth.guard";
+import {AuthGuard} from "./guards/auth.guard";
 
 export const routes: Routes = [
   { path: '',              redirectTo: '/dashboard', pathMatch: 'full' },

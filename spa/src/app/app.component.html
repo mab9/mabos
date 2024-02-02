@@ -8,15 +8,13 @@
       <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos-inline'"   mat-icon-button><mat-icon>egg_alt</mat-icon></button>
       <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos-reactive'" mat-icon-button><mat-icon>egg</mat-icon></button>
 
-
-      <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()"               mat-icon-button><mat-icon >login</mat-icon></button>
-      <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()"              mat-icon-button><mat-icon >logout</mat-icon></button>
-      <button *ngIf="authStore.isLoggedOut$  | async" (click)="authStore.loadMe()" mat-icon-button><mat-icon >load</mat-icon></button>
-
-
       <span class="example-spacer"></span>
       <button mat-icon-button><mat-icon matBadge="2" matBadgeColor="warn">favorite</mat-icon></button>
       <button mat-icon-button><mat-icon>share</mat-icon></button>
+
+      <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()"               mat-icon-button><mat-icon >login</mat-icon></button>
+      <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()"              mat-icon-button><mat-icon >logout</mat-icon></button>
+
     </mat-toolbar-row>
   </mat-toolbar>
 </main>
