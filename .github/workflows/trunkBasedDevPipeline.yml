@@ -72,6 +72,6 @@ jobs:
         # no project will be inside the same folder.
         script: |
           cd ${{ secrets.DEPLOY_WORK_DIR }} &&
-          docker compose pull &&
-          docker compose up -d &&
+          docker compose --env-file ./deployment/.secrets.server.env pull &&
+          docker compose --env-file ./deployment/.secrets.server.env up -d &&
           exit
