@@ -1,37 +1,69 @@
+# mabos
+
+<!--- These are examples. See https://shields.io for others or to customize this set of shields. You might want to include dependencies, project status and licence info here --->
+![GitHub repo size](https://img.shields.io/github/repo-size/mab9/mabos)
+![GitHub contributors](https://img.shields.io/github/contributors/mab9/mabos)
+![GitHub stars](https://img.shields.io/github/stars/mab9/mabos?style=social)
+![GitHub forks](https://img.shields.io/github/forks/mab9/mabos?style=social)
+<!--![Twitter Follow](https://img.shields.io/twitter/follow/mab9?style=social)-->
+
+mabos is a tool that allows developers to reduce their repetitive tasks.
+
+The tool offers core functions and the possibility to integrate and use self written plugins to improve the dev workflow.
+It aims to make it easier to work on different devices by providing the same functions.
+
+![mabos-overview](./spa/src/assets/mabos-overview.png "mabos-overview")
+
+## Local development
+
+Linux and macOS:
+```
+git clone https://github.com/mab9/mabos.git
+cd mabos
+```
+
+Start browsing
+```
+1. docker compose -f compose-local.yml up -d
+2. cd spa && npm run start
+3. cd backent && ../mvnw spring-boot:run -Dspring-boot.run.profiles=local
+```
+
+### SPA Notes - Frontend
+
+- see package.json scripts.
+- icons 4 angular material: https://fonts.google.com/icons
+
+### Some docker commands
+
+build images
+
+    cd deployment
+    docker build -t mabru/mabos-backent .
+    cd deployment
+    docker build -t mabru/mabos-spa .
+
+### Some keycloak commands
+
+Export keycloak realm - can be imported on keycloak startup
+
+      docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file'
+      docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./deployment/mabos-realm.json
 
 
-
-
-# SPA
-run ng server for dev: npm run server
-run spa: npm run start.
-
-see package.json scripts.
-icons 4 angular material: https://fonts.google.com/icons
-
-
-# Deployment
+## Server development
 
 Keycloak is using the Postgres DB in an own schema named keycloak.
 Make sure, that the initial DB scripts are executed to be able to start keycloak.
 The init scripts are located in the folder db at project root.
 
-## For local development
-
-1. start postgres and keycloak with docker compose
-2. start backent and frontend locally
-
-    docker compose -f compose-local.yml up -d
-
-
-## For server development
 
 1. start postgres, keycloak, backent and frontend with docker compose
 2. provide env file with parametrized secrets: .secrets.server.env
 3. ensure, that DB was setup correctly.
 
-    docker compose --env-file ./deployment/.secrets.local.env -f compose-server.yml up -d # if you want to test server compose on local env
-    docker compose --env-file ./deployment/.secrets.server.env -f compose-server.yml up -d
+   docker compose --env-file ./deployment/.secrets.local.env -f compose-server.yml up -d # if you want to test server compose on local env
+   docker compose --env-file ./deployment/.secrets.server.env -f compose-server.yml up -d
 
 Side note
 
@@ -40,17 +72,59 @@ Side note
     - use the containers port, not the exposed port on the host system (8080 for keycloak)
 
 
-# Some docker commands
 
-build images
-    
-    cd deployment
-    docker build -t mabru/mabos-backent .
-    cd deployment
-    docker build -t mabru/mabos-spa .
 
-# Some keycloak commands
 
-Export keycloak realm - one command
-    docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file'
-    docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./deployment/mabos-realm.json
+
+
+## Contributing to mabos
+<!--- If your README is long or you have some specific process or steps you want contributors to follow, consider creating a separate CONTRIBUTING.md file--->
+To contribute to mabos, follow these steps:
+
+1. Fork this repository.
+2. Create a branch: `git checkout -b <branch_name>`.
+3. Make your changes and commit them: `git commit -m '<commit_message>'`
+4. Push to the original branch: `git push origin mabos/<location>`
+5. Create the pull request.
+
+Test your code well, changes to main branche are deployed instantly.
+
+Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+## My next ideas
+
+- Style frontend 
+- Add a PWA
+- Write frontend with plain vanilla JS
+- Write frontend with bootstrap
+- Add extra features to improve ABO tracking - observability.
+- Add logging and monitor features
+- Provide kubernetes resources for k8s deployment
+
+## Contributors
+
+Thanks to the following people who have contributed to this project:
+
+* [@mab9](https://github.com/mab9) 📖
+
+<!-- You might want to consider using something like the [All Contributors](https://github.com/all-contributors/all-contributors) specification and its [emoji key](https://allcontributors.org/docs/en/emoji-key). -->
+
+## Contact
+
+If you want to contact me you can reach me at **marcantoine.bruelhart@gmail.com.**
+
+## License
+<!--- If you're not sure which open license to use see https://choosealicense.com/--->
+
+This project uses the following license: [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/).
+
+
+
+
+
+
+
+
+
+
+
