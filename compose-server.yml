@@ -2,14 +2,14 @@ services:
 
   spa:
     image: mabru/mabos-spa:latest
-    pull_policy: never
+    pull_policy: always
     restart: always
     ports:
       - 4200:80
 
   backent:
     image: mabru/mabos-backent:latest
-    pull_policy: never
+    pull_policy: always
     restart: always
     depends_on:
       - postgres
