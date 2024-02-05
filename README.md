@@ -7,26 +7,24 @@
 ![GitHub forks](https://img.shields.io/github/forks/mab9/mabos?style=social)
 <!--![Twitter Follow](https://img.shields.io/twitter/follow/mab9?style=social)-->
 
-mabos is a tool that allows developers to reduce their repetitive tasks.
-
-The tool offers core functions and the possibility to integrate and use self written plugins to improve the dev workflow.
-It aims to make it easier to work on different devices by providing the same functions.
+mabos is a tool to track abo expenses and expirations. To that it servers as a test project to try some architectural concepts.
 
 ![mabos-overview](./spa/src/assets/mabos-overview.png "mabos-overview")
 
 ## Local development
 
-Linux and macOS:
-```
-git clone https://github.com/mab9/mabos.git
-cd mabos
-```
+Requirements:
+- Java 21
+- docker with compose
+- Node for Angular 17
 
-Start browsing
+Start project - Linux and macOS:
 ```
-1. docker compose -f compose-local.yml up -d
-2. cd spa && npm run start
-3. cd backent && ../mvnw spring-boot:run -Dspring-boot.run.profiles=local
+0. git clone https://github.com/mab9/mabos.git
+1. cd mabos
+2. docker compose -f compose-local.yml up -d
+3. cd spa && npm run start
+4. cd backent && ../mvnw spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
 ### SPA Notes - Frontend
@@ -34,13 +32,14 @@ Start browsing
 - see package.json scripts.
 - icons 4 angular material: https://fonts.google.com/icons
 
+
 ### Some docker commands
 
 build images
 
-    cd deployment
+    cd backent
     docker build -t mabru/mabos-backent .
-    cd deployment
+    cd spa
     docker build -t mabru/mabos-spa .
 
 ### Some keycloak commands
@@ -51,7 +50,7 @@ Export keycloak realm - can be imported on keycloak startup
       docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./deployment/mabos-realm.json
 
 
-## Server development
+## Server deployment
 
 Keycloak is using the Postgres DB in an own schema named keycloak.
 Make sure, that the initial DB scripts are executed to be able to start keycloak.
@@ -65,7 +64,7 @@ The init scripts are located in the folder db at project root.
    docker compose --env-file ./deployment/.secrets.local.env -f compose-server.yml up -d # if you want to test server compose on local env
    docker compose --env-file ./deployment/.secrets.server.env -f compose-server.yml up -d
 
-Side note
+Side notes
 
     To connect from a container to another container inside the same network:
     - use the service name -> spa, backent, postgres or keycloak
