@@ -25,13 +25,8 @@ export class AppComponent implements OnInit {
     private readonly keycloak: KeycloakService
   ) {
   }
-
-  // this mess is only needed until keycloak is self handling auth header appending
   public async ngOnInit() {
     if (this.keycloak.isLoggedIn()) {
-      const token = await this.keycloak.getToken();
-      console.info("töken was loaded", token)
-      sessionStorage.setItem("AUTH_ACCESS_TOKEN", token);
       this.authStore.loadMe();
     }
   }

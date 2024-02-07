@@ -6,8 +6,6 @@ import {environment} from "../../environments/environment";
 import {User} from "../model/user.model";
 import {AuthService} from "../services/auth.service";
 
-const AUTH_ACCESS_TOKEN = "AUTH_ACCESS_TOKEN"
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +30,6 @@ export class AuthStore {
   }
 
   logout() {
-    sessionStorage.removeItem(AUTH_ACCESS_TOKEN);
     this.keycloak.logout(environment.keycloak.logout_redirectUri);
   }
 

@@ -11,8 +11,6 @@ export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot):
   | boolean
   | UrlTree => {
 
-  console.info("auth guard with routes", route)
-
   const keycloakService = inject(KeycloakService);
   const router = inject(Router);
 

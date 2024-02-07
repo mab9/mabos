@@ -1,6 +1,7 @@
-import {KeycloakService} from "keycloak-angular";
+import {KeycloakBearerInterceptor, KeycloakService} from "keycloak-angular";
 import {APP_INITIALIZER, Provider} from "@angular/core";
 import {environment} from "../../environments/environment";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 const initializeKeycloak = (keycloak: KeycloakService) => {
   return () => {
@@ -15,7 +16,8 @@ const initializeKeycloak = (keycloak: KeycloakService) => {
         redirectUri: environment.keycloak.initOptions_redirectUri,
       },
       enableBearerInterceptor: true,
-      loadUserProfileAtStartUp: true
+      loadUserProfileAtStartUp: true,
+      bearerPrefix: 'Bearer',
     });
   };
 }
@@ -26,3 +28,11 @@ export const providerKeycloakInitializer : Provider  = {
   multi: true,
   deps: [KeycloakService],
 }
+
+
+
+export const providerKeycloakBearerInterceptor: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: KeycloakBearerInterceptor,
+  multi: true
+};
