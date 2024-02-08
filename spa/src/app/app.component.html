@@ -5,7 +5,7 @@
 
       <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/dashboard'"     mat-icon-button><mat-icon>dashboard</mat-icon></button>
       <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos'"          mat-icon-button><mat-icon>category</mat-icon></button>
-      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos-inline'"   mat-icon-button><mat-icon>egg_alt</mat-icon></button>
+      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos-fancy'"    mat-icon-button><mat-icon>egg_alt</mat-icon></button>
       <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos-reactive'" mat-icon-button><mat-icon>egg</mat-icon></button>
       <div *ngIf="(aboStore.abosTotalExpiringThisMonth$  | async) as totalExpiring" [matBadge]="totalExpiring" matBadgeColor="warn" class="demo-section">abos expiring this months</div>
 
