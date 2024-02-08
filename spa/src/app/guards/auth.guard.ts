@@ -17,6 +17,7 @@ export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot):
   if (keycloakService.isLoggedIn()) {
     return true;
   } else {
-    return router.parseUrl(RouteConstants.ROUTE_LANDING);
+    //return router.parseUrl(RouteConstants.ROUTE_LANDING);
+    return router.parseUrl(RouteConstants.ROUTE_ABOS_REACTIVE);
   }
 };

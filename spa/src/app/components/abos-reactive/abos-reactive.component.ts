@@ -23,11 +23,20 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatChip, MatChipOption} from "@angular/material/chips";
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle
+} from "@angular/material/card";
+import {AbosCardComponent} from "../abos-card/abos-card.component";
 
 @Component({
   selector: 'app-abos-reactive',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe, MatSlideToggle, MatDatepickerToggle, MatDatepicker, MatDatepickerActions, MatDatepickerInput, MatDatepickerApply, MatDatepickerCancel],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe, MatSlideToggle, MatDatepickerToggle, MatDatepicker, MatDatepickerActions, MatDatepickerInput, MatDatepickerApply, MatDatepickerCancel, MatCard, MatCardActions, MatCardHeader, MatCardSubtitle, MatCardTitle, MatCardContent, AbosCardComponent],
   templateUrl: './abos-reactive.component.html',
   styleUrl: './abos-reactive.component.scss'
 })
@@ -36,6 +45,8 @@ export class AbosReactiveComponent {
   protected readonly Object = Object;
   protected readonly Period = Period;
   displayedColumns: string[] = ['title', 'price', 'period','starteDate', 'active', 'actions'];
+
+  public currentSelectedAbo : Abo | undefined;
 
   constructor(
     public abosStore : AbosStore
@@ -55,5 +66,10 @@ export class AbosReactiveComponent {
 
   onModelChange(item: Abo) {
     this.abosStore.saveItemDebounce(item.id!, item);
+  }
+
+  onEdit(element: Abo) {
+    console.info("on edit")
+    this.currentSelectedAbo = element;
   }
 }
