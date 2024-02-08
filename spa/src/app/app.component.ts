@@ -9,6 +9,7 @@ import {MatBadge} from "@angular/material/badge";
 import {KeycloakService} from "keycloak-angular";
 import {AuthStore} from "./stores/auth.store";
 import {MessagesService} from "./services/messages.service";
+import {AbosStore} from "./stores/abos.store";
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ export class AppComponent implements OnInit {
   constructor(
     public authStore: AuthStore,
     private readonly keycloak: KeycloakService,
-    private messageService : MessagesService
+    private messageService : MessagesService,
+    public aboStore : AbosStore,
   ) {
   }
   public async ngOnInit() {
