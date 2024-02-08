@@ -8,6 +8,7 @@ import {MatSidenavContainer, MatSidenavModule} from "@angular/material/sidenav";
 import {MatBadge} from "@angular/material/badge";
 import {KeycloakService} from "keycloak-angular";
 import {AuthStore} from "./stores/auth.store";
+import {MessagesService} from "./services/messages.service";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     public authStore: AuthStore,
-    private readonly keycloak: KeycloakService
+    private readonly keycloak: KeycloakService,
+    private messageService : MessagesService
   ) {
   }
   public async ngOnInit() {
@@ -37,5 +39,9 @@ export class AppComponent implements OnInit {
 
   public logout() {
     this.authStore.logout();
+  }
+
+  raiseMessage() {
+    this.messageService.showMessages("This function is not implemented at the moment");
   }
 }

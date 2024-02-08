@@ -12,7 +12,7 @@
       <ng-container *ngIf="(authStore.user$  | async) as user">
          {{ user.email }}
       </ng-container>
-      <button mat-icon-button><mat-icon>share</mat-icon></button>
+      <button mat-icon-button (click)="raiseMessage()"><mat-icon>share</mat-icon></button>
 
       <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()"               mat-icon-button><mat-icon >login</mat-icon></button>
       <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()"              mat-icon-button><mat-icon >logout</mat-icon></button>
