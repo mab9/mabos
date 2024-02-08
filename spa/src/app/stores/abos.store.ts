@@ -122,6 +122,7 @@ export class AbosStore implements OnDestroy {
           }
         }
       )).subscribe();
+    return newItem;
   }
 
   private newAbo(): Abo {
