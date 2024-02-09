@@ -30,6 +30,7 @@ import {MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {Period} from "../../model/period.enum";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {PeriodPipe} from "../../pipes/period.pipe";
 
 @Component({
   selector: 'app-abos-main-detail',
@@ -77,7 +78,8 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
     MatDatepickerInput,
     MatDatepickerToggle,
     MatSuffix,
-    FormsModule
+    FormsModule,
+    PeriodPipe
   ],
   templateUrl: './abos-main-detail.component.html',
   styleUrl: './abos-main-detail.component.scss'
