@@ -18,9 +18,9 @@ export interface Abo {
   isAutoRenewal: boolean;
 
   // // Reminder
-  // expReminder: boolean;
-  // expReminderPeriod: Period;
-  // expReminderPeriodAmounts: number;
+  expReminder: boolean;
+  expReminderPeriod: Period;
+  expReminderPeriodAmounts: number;
 }
 
 export const createAbo = (today = new Date(), period = Period.MONTH): Abo => {
@@ -35,6 +35,10 @@ export const createAbo = (today = new Date(), period = Period.MONTH): Abo => {
     isEditing: false,
     isExpiringThisMonth: false,
     isAutoRenewal: false,
-    startDate: formattedDate
+    startDate: formattedDate,
+
+    expReminder: true,
+    expReminderPeriod: Period.WEEK,
+    expReminderPeriodAmounts: 1,
   }
 }

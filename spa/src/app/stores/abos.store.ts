@@ -1,8 +1,8 @@
 import {Injectable, OnDestroy} from "@angular/core";
 import {BehaviorSubject, debounceTime, map, Observable, Subject, tap} from "rxjs";
-import {Abo} from "../model/abos.model";
+import {Abo, createAbo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
-import {addMonths, format, subDays} from "date-fns";
+import {addMonths, subDays} from "date-fns";
 import {AbosService} from "../services/abos.service";
 import {isSameYearAndMonth} from "../util/date.util";
 
@@ -105,7 +105,7 @@ export class AbosStore implements OnDestroy {
   }
 
   createItem() {
-    const newItem = this.newAbo();
+    const newItem = createAbo(new Date(), Period.MONTH);
     const currentData = this.subject.value;
     const updatedData = [...currentData, newItem];
     this.subject.next(updatedData);
@@ -123,23 +123,6 @@ export class AbosStore implements OnDestroy {
         }
       )).subscribe();
     return newItem;
-  }
-
-  private newAbo(): Abo {
-    const today = new Date();
-    const formattedDate = format(today, 'yyyy-MM-dd');
-    return {
-      id: null,
-      title: 'New Abo',
-      price: 0,
-      period: Period.MONTH,
-      active: false,
-      description: '',
-      isEditing: false,
-      isExpiringThisMonth: false,
-      isAutoRenewal: false,
-      startDate: formattedDate
-    }
   }
 
   removeItem(itemId: number) {

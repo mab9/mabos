@@ -25,9 +25,11 @@ import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {MatButton, MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
-import {MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
+import {MatFormField, MatHint, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatOption, MatSelect} from "@angular/material/select";
+import {Period} from "../../model/period.enum";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 
 @Component({
   selector: 'app-abos-main-detail',
@@ -70,7 +72,11 @@ import {MatOption, MatSelect} from "@angular/material/select";
     MatOption,
     JsonPipe,
     MatCardActions,
-    MatButton
+    MatButton,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatSuffix
   ],
   templateUrl: './abos-main-detail.component.html',
   styleUrl: './abos-main-detail.component.scss'
@@ -78,7 +84,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 export class AbosMainDetailComponent {
 
   selectedItemFg: FormGroup;
-  displayedColumns: string[] = ['title', 'price', 'period', 'active'];
+  displayedColumns: string[] = ['title', 'price', 'period', 'active', 'remove'];
 
   constructor(
     public abosStore: AbosStore,
@@ -93,6 +99,9 @@ export class AbosMainDetailComponent {
       description: '',
       isAutoRenewal: '',
       startDate: '',
+      expReminder: '',
+      expReminderPeriod: '',
+      expReminderPeriodAmounts: '',
     });
   }
 
@@ -100,10 +109,26 @@ export class AbosMainDetailComponent {
     return item.id;
   }
 
+  getValueCtrl (field : string) {
+    return this.selectedItemFg.get(field);
+  }
 
   onSelectItem(abo: Abo) {
-    console.info("set value", abo)
+
+    // todo  update ID of abo, when abo was created
+    // raise snackbar on network error
+
     this.selectedItemFg = this.newAbo(abo);
+
+    this.selectedItemFg.get('active')?.valueChanges.subscribe((value : boolean) => {
+      if (value) {
+        this.getValueCtrl('expReminderPeriod')?.enable()
+        this.getValueCtrl('expReminderPeriodAmounts')?.enable()
+      } else {
+        this.getValueCtrl('expReminderPeriod')?.disable()
+        this.getValueCtrl('expReminderPeriodAmounts')?.disable()
+      }
+    })
     this.selectedItemFg.valueChanges.subscribe((value : Abo) => {
       console.info("values have changed, time to persist", value)
       this.abosStore.saveItem(value.id!, value)
@@ -117,6 +142,7 @@ export class AbosMainDetailComponent {
 
   onRemove(element: Abo) {
     this.abosStore.removeItem(element.id!);
+    // todo set next selected item if one was selected.
   }
 
   onModelChange(item: Abo) {
@@ -134,8 +160,14 @@ export class AbosMainDetailComponent {
       description: abo.description,
       isAutoRenewal: abo.isAutoRenewal,
       startDate: abo.startDate,
+
+      expReminder: abo.expReminder,
+      expReminderPeriod: abo.expReminderPeriod,
+      expReminderPeriodAmounts: abo.expReminderPeriodAmounts,
     })
   }
 
 
+  protected readonly Period = Period;
+  protected readonly Object = Object;
 }

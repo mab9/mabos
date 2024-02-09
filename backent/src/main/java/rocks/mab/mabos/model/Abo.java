@@ -3,7 +3,6 @@ package rocks.mab.mabos.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 
 @Data
@@ -17,9 +16,20 @@ public class Abo {
     private String userEmail;
     private String title;
     private double price;
+
     @Enumerated(value = EnumType.STRING)
     private Period period;
     private String description;
     private boolean isActive;
     private LocalDate startDate;
+
+
+    // // Reminder
+    private boolean isExpReminderActive;
+
+    @Enumerated(value = EnumType.STRING)
+    private Period expReminderPeriod;
+    private int expReminderPeriodAmounts;
 }
+
+
