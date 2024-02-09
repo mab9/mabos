@@ -16,10 +16,8 @@ export class SharedService {
   }
 
   public handleError(message: string, err: Error): Observable<never> {
-    // this.messages.showErrors(message);
     console.error(message, err);
     this.messages.showMessages(message)
-
     return throwError(err);
   }
 }

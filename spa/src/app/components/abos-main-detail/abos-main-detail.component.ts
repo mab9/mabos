@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AbosStore} from "../../stores/abos.store";
 import {Abo} from "../../model/abos.model";
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AsyncPipe, CurrencyPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {
   MatCell,
@@ -76,33 +76,21 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
     MatDatepicker,
     MatDatepickerInput,
     MatDatepickerToggle,
-    MatSuffix
+    MatSuffix,
+    FormsModule
   ],
   templateUrl: './abos-main-detail.component.html',
   styleUrl: './abos-main-detail.component.scss'
 })
 export class AbosMainDetailComponent {
 
-  selectedItemFg: FormGroup;
+  selectedItemFg: FormGroup | null = null;
   displayedColumns: string[] = ['title', 'price', 'period', 'active', 'remove'];
 
   constructor(
     public abosStore: AbosStore,
     private fb: FormBuilder,
   ) {
-    this.selectedItemFg = this.fb.group({
-      id: '',
-      title: '',
-      price: '',
-      period: '',
-      active: '',
-      description: '',
-      isAutoRenewal: '',
-      startDate: '',
-      expReminder: '',
-      expReminderPeriod: '',
-      expReminderPeriodAmounts: '',
-    });
   }
 
   trackById(index: number, item: Abo): number | null {
@@ -110,29 +98,19 @@ export class AbosMainDetailComponent {
   }
 
   getValueCtrl (field : string) {
-    return this.selectedItemFg.get(field);
+    return this.selectedItemFg?.get(field);
   }
 
   onSelectItem(abo: Abo) {
-
     // todo  update ID of abo, when abo was created
-    // raise snackbar on network error
-
+    console.info("update selected item", abo)
     this.selectedItemFg = this.newAbo(abo);
+  }
 
-    this.selectedItemFg.get('active')?.valueChanges.subscribe((value : boolean) => {
-      if (value) {
-        this.getValueCtrl('expReminderPeriod')?.enable()
-        this.getValueCtrl('expReminderPeriodAmounts')?.enable()
-      } else {
-        this.getValueCtrl('expReminderPeriod')?.disable()
-        this.getValueCtrl('expReminderPeriodAmounts')?.disable()
-      }
-    })
-    this.selectedItemFg.valueChanges.subscribe((value : Abo) => {
-      console.info("values have changed, time to persist", value)
-      this.abosStore.saveItem(value.id!, value)
-    })
+  // this is very ugly and only used temp. until I figured out the better master detail data sync handling with angular.
+  onChangeItem(item : Abo) {
+    this.abosStore.saveItemDebounce(item.id!, item);
+    this.onSelectItem(item);
   }
 
   onAdd() {
@@ -142,16 +120,11 @@ export class AbosMainDetailComponent {
 
   onRemove(element: Abo) {
     this.abosStore.removeItem(element.id!);
-    // todo set next selected item if one was selected.
+    this.selectedItemFg = null;
   }
-
-  onModelChange(item: Abo) {
-    this.abosStore.saveItemDebounce(item.id!, item);
-  }
-
 
   private newAbo(abo: Abo): FormGroup {
-    return this.fb.group({
+    const formGroup =  this.fb.group({
       id: abo.id ? abo.id : '',
       title: [abo.title, Validators.required],
       price: abo.price,
@@ -165,6 +138,33 @@ export class AbosMainDetailComponent {
       expReminderPeriod: abo.expReminderPeriod,
       expReminderPeriodAmounts: abo.expReminderPeriodAmounts,
     })
+    return this.onChangeValueUpdateBehaveiour(formGroup);
+
+  }
+
+  private onChangeValueUpdateBehaveiour(formGroup : FormGroup) {
+    formGroup.get('expReminder')?.valueChanges.subscribe((value : boolean) => {
+      this.updateExpReminderActiveness(value, formGroup);
+    })
+
+    this.updateExpReminderActiveness(formGroup.get('expReminder')?.value, formGroup);
+    formGroup.valueChanges.subscribe((item : Abo) => {
+      console.info("values have changed, time to persist", item)
+      this.abosStore.saveItemDebounce(item.id!, item);
+    })
+
+    // init connected fields.
+    return formGroup;
+  }
+
+  private updateExpReminderActiveness(isActive : boolean, formGroup : FormGroup) {
+    if (isActive) {
+      formGroup.get('expReminderPeriod')?.enable()
+      formGroup.get('expReminderPeriodAmounts')?.enable()
+    } else {
+      formGroup.get('expReminderPeriod')?.disable()
+      formGroup.get('expReminderPeriodAmounts')?.disable()
+    }
   }
 
 

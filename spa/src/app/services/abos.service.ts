@@ -15,7 +15,6 @@ export class AbosService {
     private http: HttpClient,
     private sharedService : SharedService,
     //private loading: LoadingService,
-    //private messages: MessagesService
   ) {
   }
 
