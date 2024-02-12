@@ -15,7 +15,6 @@ export class AbosStore implements OnDestroy {
   private changeSubjects = new Map<number, Subject<Abo>>();
   private subject = new BehaviorSubject<Abo[]>([])
   abos$ = this.subject.asObservable().pipe(
-    map(abos => abos.map(abo => ({...abo, isActive: this.isActive(abo, this.today)}))),
     map(abos => abos.map(abo => ({...abo, isExpiringThisMonth: this.isExpiringThisMonth(abo, this.today)}))),
   );
 
@@ -47,19 +46,6 @@ export class AbosStore implements OnDestroy {
   ) {
     // inital load
     this.abosService.getAll().subscribe(items => this.subject.next(items));
-  }
-
-  isActive(abo: Abo, currentDate: Date) {
-    if (!abo.active) {
-      return false;
-    }
-    if (abo.isAutoRenewal) {
-      return true;
-    }
-    const aboPeriodInMonths = this.getPeriodInMonth(abo);
-    const aboStartDate = new Date(abo.startDate);
-    const expiringDate = addMonths(aboStartDate, aboPeriodInMonths);
-    return expiringDate >= currentDate;
   }
 
 // "2023-07-16", "2024-07-01",
