@@ -55,6 +55,12 @@ import {MatBadge} from "@angular/material/badge";
   styleUrl: './dashboard-main.component.scss'
 })
 export class DashboardMainComponent {
+
+  /*
+    The selected Item should be handled at one place. Since this is the consolidation of
+    code into components and refactoring within no time, the ugly solution is fine for now.
+   */
+
   displayedColumns: string[] = ['title', 'price', 'period', 'active', 'remove'];
 
   constructor(
