@@ -18,6 +18,7 @@ import {PeriodPipe} from "../../pipes/period.pipe";
 import {AbosStore} from "../../stores/abos.store";
 import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
 import {Abo} from "../../model/abos.model";
+import {MatBadge} from "@angular/material/badge";
 
 @Component({
   selector: 'app-dashboard-main',
@@ -47,7 +48,8 @@ import {Abo} from "../../model/abos.model";
     PeriodPipe,
     FormsModule,
     MatFooterCellDef,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    MatBadge
   ],
   templateUrl: './dashboard-main.component.html',
   styleUrl: './dashboard-main.component.scss'
@@ -98,6 +100,7 @@ export class DashboardMainComponent {
       description: abo.description,
       isAutoRenewal: abo.isAutoRenewal,
       startDate: abo.startDate,
+      isExpiringThisMonth : abo.isExpiringThisMonth,
 
       expReminder: abo.expReminder,
       expReminderPeriod: abo.expReminderPeriod,

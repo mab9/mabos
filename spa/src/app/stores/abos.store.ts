@@ -53,7 +53,7 @@ export class AbosStore implements OnDestroy {
 
 // "2023-07-16", "2024-07-01",
   // todo replace this stuff to abo object.
-  isExpiringThisMonth(abo: Abo, currentDate: Date) {
+  private isExpiringThisMonth(abo: Abo, currentDate: Date) {
     if (!abo.active) {
       return false;
     }

@@ -12,6 +12,7 @@ import {NgIf} from "@angular/common";
 import {PeriodPipe} from "../../pipes/period.pipe";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AbosStore} from "../../stores/abos.store";
+import {MatChip, MatChipOption} from "@angular/material/chips";
 
 @Component({
   selector: 'app-dashboard-detail',
@@ -35,7 +36,9 @@ import {AbosStore} from "../../stores/abos.store";
     MatSuffix,
     NgIf,
     PeriodPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatChip,
+    MatChipOption
   ],
   templateUrl: './dashboard-detail.component.html',
   styleUrl: './dashboard-detail.component.scss'

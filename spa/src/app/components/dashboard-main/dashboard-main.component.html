@@ -18,7 +18,7 @@
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Title</th>
       <td mat-cell *matCellDef="let element" (click)="onSelectItem(element)">
-        <div>{{ element.title }}</div>
+        <div>{{ element.title }}  <span *ngIf="element.isExpiringThisMonth" class="mat-small" style="color: orangered"><b>is expiring</b></span> </div>
       </td>
       <td mat-footer-cell *matFooterCellDef> Total yearly costs active Abos</td>
 

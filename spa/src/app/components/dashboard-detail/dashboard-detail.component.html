@@ -4,7 +4,7 @@
 
     <mat-card id="test">
       <mat-card-header>
-        <mat-card-title>{{ getValueCtrl('title')?.value }}</mat-card-title>
+        <mat-card-title>{{ getValueCtrl('title')?.value }}  <mat-chip *ngIf="getValueCtrl('isExpiringThisMonth')?.value" highlighted="true" color="warn">is expiring</mat-chip> </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <br>
