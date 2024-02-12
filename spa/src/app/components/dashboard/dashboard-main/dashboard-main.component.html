@@ -29,7 +29,7 @@
       <td mat-cell *matCellDef="let element" (click)="onSelectItem(element)">
         <div>{{ element.price }}</div>
       </td>
-      <td mat-footer-cell *matFooterCellDef> {{ abosStore.abosTotalYearlyPrice$ | async | currency }}</td>
+      <td mat-footer-cell *matFooterCellDef> {{ abosStore.abosTotalYearlyPrice$ | async | currency : 'CHF ' }}</td>
     </ng-container>
 
     <ng-container matColumnDef="period">
