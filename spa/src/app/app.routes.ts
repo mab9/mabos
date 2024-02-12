@@ -9,8 +9,8 @@ import {AbosMainDetailComponent} from "./components/abos-main-detail/abos-main-d
 export const routes: Routes = [
   { path: '',              redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'landing',       component: LandingComponent },  // not logged in user
-//  { path: 'dashboard',     component: DashboardComponent,    canActivate: [AuthGuard] },
-  { path: 'dashboard',              redirectTo: '/abos-fancy', pathMatch: 'full' },
+  { path: 'dashboard',     component: DashboardComponent,    canActivate: [AuthGuard] },
+  //{ path: 'dashboard',              redirectTo: '/abos-fancy', pathMatch: 'full' },
   { path: 'abos',          component: AbosComponent,         canActivate: [AuthGuard] },
   { path: 'abos-fancy',    component: AbosMainDetailComponent,   canActivate: [AuthGuard] },
   { path: 'abos-reactive', component: AbosReactiveComponent, canActivate: [AuthGuard] },
