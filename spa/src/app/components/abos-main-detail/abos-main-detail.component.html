@@ -1,5 +1,3 @@
-<p>abos-main-detail works!</p>
-
 <ng-container *ngIf="(abosStore.abos$ | async) as abos">
 
   <div>
@@ -71,7 +69,7 @@
 
 <ng-container *ngIf="selectedItemFg">
 
-  <form [formGroup]="selectedItemFg ">
+  <form [formGroup]="selectedItemFg " class="mat-elevation-z8">
 
     <mat-card id="test">
       <mat-card-header>
@@ -151,7 +149,7 @@
             <mat-label>Expiring Reminder Period</mat-label>
             <mat-select formControlName="expReminderPeriod" placeholder="Week">
               @for (item of Object.keys(Period); track item) {
-                <mat-option [value]="item">{{ item }}</mat-option>
+                <mat-option [value]="item">{{ item | period }}</mat-option>
               }
             </mat-select>
           </mat-form-field>

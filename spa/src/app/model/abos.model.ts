@@ -9,13 +9,11 @@ export interface Abo {
   active: boolean;
   description: string;
   startDate: string;
-  // autoRenewal : boolean; // auslaufendes abo oder auto verlängerung.
+  isAutoRenewal: boolean;
 
   // meta data
   isEditing: boolean;
-
   isExpiringThisMonth: boolean;
-  isAutoRenewal: boolean;
 
   // // Reminder
   expReminder: boolean;

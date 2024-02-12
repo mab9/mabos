@@ -21,10 +21,11 @@ public class Abo {
     private Period period;
     private String description;
     private boolean isActive;
+    private boolean isAutoRenewal;
     private LocalDate startDate;
 
 
-    // // Reminder
+    // // Reminders
     private boolean isExpReminderActive;
 
     @Enumerated(value = EnumType.STRING)
