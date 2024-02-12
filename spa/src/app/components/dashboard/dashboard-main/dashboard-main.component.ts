@@ -14,10 +14,10 @@ import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
-import {PeriodPipe} from "../../pipes/period.pipe";
-import {AbosStore} from "../../stores/abos.store";
+import {PeriodPipe} from "../../../pipes/period.pipe";
+import {AbosStore} from "../../../stores/abos.store";
 import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
-import {Abo} from "../../model/abos.model";
+import {Abo} from "../../../model/abos.model";
 import {MatBadge} from "@angular/material/badge";
 
 @Component({

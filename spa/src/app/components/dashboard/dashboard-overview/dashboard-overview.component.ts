@@ -4,9 +4,9 @@ import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {MatList, MatListItem} from "@angular/material/list";
-import {AbosStore} from "../../stores/abos.store";
-import {AuthStore} from "../../stores/auth.store";
-import {User} from "../../model/user.model";
+import {AbosStore} from "../../../stores/abos.store";
+import {AuthStore} from "../../../stores/auth.store";
+import {User} from "../../../model/user.model";
 
 @Component({
   selector: 'app-dashboard-overview',

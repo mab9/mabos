@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
 import {AbosComponent} from "./components/abos/abos.component";
-import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {DashboardComponent} from "./components/dashboard/dashboard/dashboard.component";
 import {AbosReactiveComponent} from "./components/abos-reactive/abos-reactive.component";
 import {LandingComponent} from "./components/landing/landing.component";
 import {AuthGuard} from "./guards/auth.guard";

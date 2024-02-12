@@ -10,7 +10,7 @@ import {
 } from "@angular/material/card";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatList, MatListItem} from "@angular/material/list";
-import {AbosStore} from "../../stores/abos.store";
+import {AbosStore} from "../../../stores/abos.store";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {
@@ -31,14 +31,14 @@ import {
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatChip, MatChipOption} from "@angular/material/chips";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
-import {Abo} from "../../model/abos.model";
+import {Abo} from "../../../model/abos.model";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput, MatInputModule} from "@angular/material/input";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {AuthStore} from "../../stores/auth.store";
-import {User} from "../../model/user.model";
+import {AuthStore} from "../../../stores/auth.store";
+import {User} from "../../../model/user.model";
 import {DashboardOverviewComponent} from "../dashboard-overview/dashboard-overview.component";
 import {DashboardMainComponent} from "../dashboard-main/dashboard-main.component";
 import {DashboardDetailComponent} from "../dashboard-detail/dashboard-detail.component";

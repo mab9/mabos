@@ -31,8 +31,8 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {Period} from "../../model/period.enum";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {PeriodPipe} from "../../pipes/period.pipe";
-import {DashboardDetailComponent} from "../dashboard-detail/dashboard-detail.component";
-import {DashboardMainComponent} from "../dashboard-main/dashboard-main.component";
+import {DashboardDetailComponent} from "../dashboard/dashboard-detail/dashboard-detail.component";
+import {DashboardMainComponent} from "../dashboard/dashboard-main/dashboard-main.component";
 
 @Component({
   selector: 'app-abos-main-detail',

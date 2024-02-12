@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Period} from "../../model/period.enum";
+import {Period} from "../../../model/period.enum";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatFormField, MatHint, MatLabel, MatSuffix} from "@angular/material/form-field";
@@ -9,9 +9,9 @@ import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {NgIf} from "@angular/common";
-import {PeriodPipe} from "../../pipes/period.pipe";
+import {PeriodPipe} from "../../../pipes/period.pipe";
 import {ReactiveFormsModule} from "@angular/forms";
-import {AbosStore} from "../../stores/abos.store";
+import {AbosStore} from "../../../stores/abos.store";
 import {MatChip, MatChipOption} from "@angular/material/chips";
 
 @Component({
