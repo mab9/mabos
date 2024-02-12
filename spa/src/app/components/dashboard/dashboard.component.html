@@ -1,37 +1,5 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>My Abos</mat-card-title>
-  </mat-card-header>
 
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item><span>Yearly Costs: {{ abosStore.abosTotalYearlyPrice$ | async | currency }} </span></mat-list-item>
-      <mat-list-item><span>Monthly Costs: {{ abosStore.abosTotalMonthlyCosts$ | async | currency }}  </span></mat-list-item>
-      <mat-list-item><span>Total Abos: {{ abosStore.abosCount$ | async }} </span></mat-list-item>
-      <mat-list-item><span>Total active Abos: {{ abosStore.abosActive$ | async }}  </span></mat-list-item>
-      <mat-list-item><span>Abos expiring this month: {{ abosStore.abosTotalExpiringThisMonth$ | async }}  </span></mat-list-item>
-    </mat-list>
-  </mat-card-content>
-
-  <mat-card-actions>
-
-    <ng-container *ngIf="(authStore.user$ | async) as item">
-        @if (item.sendEmailReminders) {
-          <span (click)="onDisableReminder(item)">
-            <mat-icon color="primary">notifications_active</mat-icon>
-            <button mat-stroked-button color="primary">Disable Reminders</button>
-          </span>
-        }
-        @if (!item.sendEmailReminders) {
-          <span (click)="onActivateReminder(item)">
-             <mat-icon color="warn" >notifications_off</mat-icon>
-              <button mat-stroked-button color="warn">Activate Reminders</button>
-          </span>
-        }
-    </ng-container>
-  </mat-card-actions>
-</mat-card>
-
+<app-dashboard-overview></app-dashboard-overview>
 <br>
 
 <ng-container *ngIf="(abosStore.abos$ | async) as abos">

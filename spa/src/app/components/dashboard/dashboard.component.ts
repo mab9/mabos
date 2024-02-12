@@ -39,6 +39,7 @@ import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {AuthStore} from "../../stores/auth.store";
 import {User} from "../../model/user.model";
+import {DashboardOverviewComponent} from "../dashboard-overview/dashboard-overview.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -78,7 +79,7 @@ import {User} from "../../model/user.model";
     MatInput,
     MatOption,
     MatSelect,
-    MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe, MatSlideToggle,
+    MatTableModule, MatButtonModule, MatIconModule, AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule, MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe, MatSlideToggle, DashboardOverviewComponent,
 
   ],
   templateUrl: './dashboard.component.html',

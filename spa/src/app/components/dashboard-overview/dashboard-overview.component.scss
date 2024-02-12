@@ -1,0 +1,10 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Adjust alignment as needed */
+}
+
+.card {
+  width: calc(50% - 8px); /* Adjust width as needed (minus margin) */
+  margin-bottom: 8px; /* Adjust margin between cards */
+}
