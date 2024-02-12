@@ -5,11 +5,14 @@ import {Period} from "../model/period.enum";
 import {addMonths, subDays} from "date-fns";
 import {AbosService} from "../services/abos.service";
 import {isSameYearAndMonth} from "../util/date.util";
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: "root" // one instance for the whole application
 })
 export class AbosStore implements OnDestroy {
+
+  public selectedItemFg: FormGroup | null = null;
 
   private today = new Date();
   private changeSubjects = new Map<number, Subject<Abo>>();
@@ -104,6 +107,10 @@ export class AbosStore implements OnDestroy {
     }
   }
 
+  setSelectedFg(selection : FormGroup) {
+    this.selectedItemFg = selection;
+  }
+
   createItem() {
     const newItem = createAbo(new Date(), Period.MONTH);
     const currentData = this.subject.value;
@@ -126,6 +133,7 @@ export class AbosStore implements OnDestroy {
   }
 
   removeItem(itemId: number) {
+    this.selectedItemFg = null;
     const newItems = this.subject.getValue().filter(item => item.id !== itemId);
     this.subject.next(newItems);
     this.abosService.delete(itemId).subscribe();
