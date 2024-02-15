@@ -4,7 +4,7 @@ import {
     setValueOf,
 } from "../../madjs/base/presentationModel/presentationModel.js";
 
-export { Person, ALL_PERSON_ATTRIBUTE_NAMES}
+export { Abo, ALL_PERSON_ATTRIBUTE_NAMES}
 
 /**
  * @typedef Person
@@ -21,15 +21,15 @@ export { Person, ALL_PERSON_ATTRIBUTE_NAMES}
 
 const ALL_PERSON_ATTRIBUTE_NAMES = ['id', 'img', 'firstname', 'lastname', 'email', 'joined', 'isAdmin', 'isSpacer', 'isApprover'];
 
-const Person = () => {      // facade
-    const person = presentationModelFromAttributeNames(ALL_PERSON_ATTRIBUTE_NAMES);
+const Abo = () => {      // facade
+    const abo = presentationModelFromAttributeNames(ALL_PERSON_ATTRIBUTE_NAMES);
 
     // set empty job attribute to be able to use the converter and validator functions
-    setValueOf(person.email)("");
+    setValueOf(abo.email)("");
     //person.email.setConverter(input => input.toUpperCase());
-    person.email.setValidator(input => input.indexOf("@") >= 0);
-    person.joined.getObs(EDITABLE).setValue(false);
-    return person;
+    abo.email.setValidator(input => input.indexOf("@") >= 0);
+    abo.joined.getObs(EDITABLE).setValue(false);
+    return abo;
 }
 
 // joined attribute true, wenn user eingeladen wurde und sich angemledet hat.

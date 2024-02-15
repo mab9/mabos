@@ -69,7 +69,7 @@ const formProjector = (detailController, rootElement, model, attributeNames) => 
     const modelDetails = personModelDetails(model); // init model
 
     const detailElement = dom(`
-        <FORM style="width: 35%; margin-bottom: 20px; font-size: larger;">
+        <FORM style="width: 10%; margin-bottom: 20px; font-size: larger;">
             <DIV class="${detailClassName}">
             </DIV>
         </FORM>

@@ -1,6 +1,5 @@
 .card {
-    min-width:  40em;
-    max-width:  40em;
+    max-width:  100%;
     margin:     1em auto 4em auto;
     padding:    2em;
     box-shadow: 0 4px  8px 0 rgba(0, 0, 0, 0.2),
@@ -46,4 +45,22 @@ input.invalid {
 }
 .selected {
     box-shadow: 0 0 0.2em gold;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 992px) {
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    margin:     5px 0 0 0;
+    padding:    2px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+
 }

@@ -3,7 +3,7 @@
 @import "src/madjs/assets/css/main-nav.css";
 @import "src/madjs/assets/css/side-nav.css";
 @import "src/madjs/assets/css/main-content.css";
-@import "src/views/person/instantUpdateProjector.css";
+@import "src/views/home/instantUpdateProjector.css";
 
 :root {
   /* Colors */
@@ -54,7 +54,6 @@ body {
   height:     100%;
   width:      100%;
 }
-
 
 /* Media Queries */
 @media screen and (max-width: 1200px) {

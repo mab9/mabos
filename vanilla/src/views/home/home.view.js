@@ -1,10 +1,10 @@
 import {appendFirst} from "../../madjs/assets/util/appends.js";
 import {dom} from "../../madjs/assets/util/dom.js";
 import {formProjector, listItemProjector, pageCss} from "./instantUpdateProjector.js";
-import {ALL_PERSON_ATTRIBUTE_NAMES, Person} from "./person.model.js";
+import {ALL_PERSON_ATTRIBUTE_NAMES, Abo} from "./abo.model.js";
 import {setValueOf} from "../../madjs/base/presentationModel/presentationModel.js";
 
-export {PersonView};
+export {HomeView};
 
 // page-style change, only executed once
 const style = document.createElement("STYLE");
@@ -14,13 +14,13 @@ document.head.appendChild(style);
 
 /**
  * @param rootElement
- * @param  personController {PersonController}
+ * @param  mainController {HomeController}
  * @constructor
  */
-const PersonView = (rootElement, personController) => {
+const HomeView = (rootElement, mainController) => {
 
-    const listController = personController.getListController();
-    const selectionController = personController.getSelectionCtrl();
+    const listController = mainController.getListController();
+    const selectionController = mainController.getSelectionCtrl();
 
     const render = () => {
         const person = dom(`
@@ -44,18 +44,6 @@ const PersonView = (rootElement, personController) => {
         const plus = person.querySelector("#plus");
         const email = person.querySelector("#email");  // todo impl multiple emails "e1;e2;..."
 
-        plus.disabled = true;
-        plus.onclick = _ => {
-            const model = Person();
-            setValueOf(model.email)(email.value);
-            listController.addModel(model);
-            plus.disabled = true;
-            email.value = "";
-        }
-
-        const isEmailValid = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-        email.oninput = () => isEmailValid(email.value) ? plus.disabled = false : plus.disabled = true;
-
         MasterView(listController, selectionController, masterContainer);
         DetailView(selectionController, detailContainer);
 
@@ -64,13 +52,13 @@ const PersonView = (rootElement, personController) => {
     };
 
     render();
-    personController.initPersons();
+    mainController.initPersons();
 };
 
 const MasterView = (listController, selectionController, rootElement) => {
 
     const render = person => listItemProjector(listController, selectionController, rootElement,
-        person, ['firstname', 'lastname', 'email']);
+        person, ['firstname', 'lastname']);
 
     // binding
     listController.onModelAdd(render);

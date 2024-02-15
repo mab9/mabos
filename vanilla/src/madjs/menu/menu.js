@@ -1,7 +1,6 @@
 import {Observable} from "../base/observable/observable.js";
-import {HomeController, HomeView} from "../../views/home/home.js";
-import {PersonController} from "../../views/person/person.controller.js"
-import {PersonView} from "../../views/person/person.view.js"
+import {HomeController} from "../../views/home/home.controller.js";
+import {HomeView} from "../../views/home/home.view.js";
 import {AuthController} from "../../auth/auth.prod.js";
 import {config} from "../../../config.js";
 import {MeController, MeView} from "../../views/me/me.js";
@@ -9,8 +8,6 @@ import {MeController, MeView} from "../../views/me/me.js";
 // use of imports to avoid import removal on "ctrl alt o" shortcut
 const homeView = HomeView;
 const homeController = HomeController;
-const personView = PersonView;
-const personController = PersonController;
 const meController = MeController;
 const meView = MeView;
 
@@ -41,24 +38,14 @@ const Menu = (rootElement) => {
                               "visible": true
                             },
                             {
-                              "id":      "1",
-                              "title":   "menu.main.entry.persons",
-                              "ctrl" :   "PersonController",
-                              "view" :   "PersonView",
-                              "roles":   ["${roles.ADMIN}"],
-                              "rights":  [],
-                              "subs":    [],
-                              "visible": true
-                            },
-                            {
-                              "id":      "5" ,
+                              "id":      "1" ,
                               "title":   "menu.main.entry.me",
                               "ctrl" :   "MeController",
                               "view" :   "MeView",
                               "roles":   [],
                               "rights":  [],
                               "subs":    [],
-                              "visible": false
+                              "visible": true
                             }
                            ]}`);
 
