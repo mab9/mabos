@@ -1,6 +1,7 @@
 import {LayoutController, LayoutView} from "./src/layout/layout.js";
 import {dom} from "./src/assets/util/dom.js";
-import {LandingView} from "./src/landing/landing.view.js";
+import {LandingView} from "./src/views/landing/landing.view.js";
+import {appendReplacing} from "./src/assets/util/appends.js";
 
 export {start} ;
 
@@ -10,14 +11,13 @@ const start = (appRootId, authenticated) => {
     const layoutController = LayoutController();
 
     // todo: think about resetting the model world on a possible re-render
-    const root = document.getElementById(CONTENT_WRAPPER)
-    const mabos = dom(`<div id="${appRootId}">`);
+    const rootElement = document.getElementById(CONTENT_WRAPPER)
+    const containerElement = dom(`<div id="${appRootId}">`);
 
     if (authenticated) {
-        LayoutView(mabos, layoutController);
-        root.replaceWith(mabos); // why replace???
+        LayoutView(containerElement, layoutController);
+        appendReplacing(rootElement)(containerElement)
     } else {
-        console.info("root", root)
-        LandingView(root);
+        LandingView(rootElement);
     }
 }

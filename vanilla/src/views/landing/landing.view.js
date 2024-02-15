@@ -1,6 +1,6 @@
-import {dom} from "../assets/util/dom.js";
-import {appendReplacing} from "../assets/util/appends.js";
-import {AuthController} from "../auth/auth.prod.js";
+import {dom} from "../../assets/util/dom.js";
+import {appendReplacing} from "../../assets/util/appends.js";
+import {AuthController} from "../../auth/auth.prod.js";
 
 export {LandingView};
 
