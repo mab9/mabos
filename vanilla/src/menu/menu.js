@@ -32,7 +32,7 @@ const Menu = (rootElement) => {
     let entries = JSON.parse(`{ "data" : [
                             {
                               "id":      "0",
-                              "title":   "menu.main.entry.vakansie",
+                              "title":   "menu.main.entry.mabos",
                               "ctrl" :   "HomeController",
                               "view" :   "HomeView",
                               "roles":   [],

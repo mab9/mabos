@@ -23,7 +23,7 @@ const modalProjector = (rootElement, authCtrl, showModalAttr, showModalBtn, menu
                    <p>email</p>
                  </div>
                  <div class="${masterClassName}-modal-body">
-                   <p>Manage your Vakansie Account</p>
+                   <p>Manage your Mabos Account</p>
                    <p>Sign out</p>
                  </div>
                  <div class="${masterClassName}-modal-footer">

@@ -14,7 +14,7 @@ const LandingView = (rootElement) => {
             <DIV id="mainnav-section"></DIV>
             <DIV id="content-section">
                 <DIV id="main-content" class="main-content">
-                    <h1> Welcome to Vakansie </h1>
+                    <h1> Welcome to Mabos </h1>
                     <a class="signin">signin</a>
                     <a class="signup">signup</a>
                     <a class="join">join group</a>

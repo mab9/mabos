@@ -17,16 +17,16 @@ const absoluteImgPath = "src/assets/img/avatars/svg"
 
 /** @type Person[] */
 const persons = [
-    {id:uuidUser0, img:absoluteImgPath + "/018-gentleman.svg", firstname: "Leon", lastname: "Vance", email: "leon.vance@vakansie.ch", joined: true, isAdmin: true, isSpacer: true, isApprover: true},
-    {id:uuidUser1, img:absoluteImgPath + "/001-devil.svg", firstname: "Leroy Jethro", lastname: "Gibbs", email: "jethro.gibbs@vakansie.ch", joined: true, isAdmin: true, isSpacer: true, isApprover: true},
-    {id:uuidUser2, img:absoluteImgPath + "/010-student.svg", firstname: "Ziva", lastname: "David", email: "ziva.david@vakansie.ch", joined: true, isAdmin: false, isSpacer: false, isApprover: false},
-    {id:uuidUser3, img:absoluteImgPath + "/016-boy.svg", firstname: "Anthony", lastname: "Dinozzo", email: "anthony.dinozzo@vakansie.ch", joined: false, isAdmin: false, isSpacer: false, isApprover: false},
-    {id:uuidUser4, img:absoluteImgPath + "/024-viking.svg", firstname: "Timothy", lastname: "McGee", email: "timothy.mcgee@vakansie.ch", joined: true, isAdmin: false, isSpacer: false, isApprover: false},
-    {id:uuidUser5, img:absoluteImgPath + "/015-woman.svg", firstname: "Abby", lastname: "Sciuto", email: "abby.sciuto@vakansie.ch", joined: false, isAdmin: false, isSpacer: false, isApprover: false},
-    {id:uuidUser6, img:absoluteImgPath + "/024-viking.svg", firstname: "Ducky", lastname: "Mallard", email: "ducky.mallard@vakansie.ch", joined: true, isAdmin: false, isSpacer: false, isApprover: false},
-    {id:uuidUser7, img:absoluteImgPath + "/024-viking.svg", firstname: "Ellie", lastname: "Bishop", email: "ellie.bishop@vakansie.ch", joined: true, isAdmin: false, isSpacer: false, isApprover: false},
-    {id:uuidUser8, img:absoluteImgPath + "/019-graduated.svg", firstname: "Jimmy", lastname: "Palmer", email: "jimmy.palmer@vakansie.ch", joined: false, isAdmin: false, isSpacer: false, isApprover: false},
-    {id:uuidUser9, img:absoluteImgPath + "/024-viking.svg", firstname: "Caitlin", lastname: "Todd", email: "caitlin.todd@vakansie.ch", joined: false, isAdmin: false, isSpacer: false, isApprover: false},
+    {id:uuidUser0, img:absoluteImgPath + "/018-gentleman.svg", firstname: "Leon", lastname: "Vance", email: "leon.vance@mabos.ch", joined: true, isAdmin: true, isSpacer: true, isApprover: true},
+    {id:uuidUser1, img:absoluteImgPath + "/001-devil.svg", firstname: "Leroy Jethro", lastname: "Gibbs", email: "jethro.gibbs@mabos.ch", joined: true, isAdmin: true, isSpacer: true, isApprover: true},
+    {id:uuidUser2, img:absoluteImgPath + "/010-student.svg", firstname: "Ziva", lastname: "David", email: "ziva.david@mabos.ch", joined: true, isAdmin: false, isSpacer: false, isApprover: false},
+    {id:uuidUser3, img:absoluteImgPath + "/016-boy.svg", firstname: "Anthony", lastname: "Dinozzo", email: "anthony.dinozzo@mabos.ch", joined: false, isAdmin: false, isSpacer: false, isApprover: false},
+    {id:uuidUser4, img:absoluteImgPath + "/024-viking.svg", firstname: "Timothy", lastname: "McGee", email: "timothy.mcgee@mabos.ch", joined: true, isAdmin: false, isSpacer: false, isApprover: false},
+    {id:uuidUser5, img:absoluteImgPath + "/015-woman.svg", firstname: "Abby", lastname: "Sciuto", email: "abby.sciuto@mabos.ch", joined: false, isAdmin: false, isSpacer: false, isApprover: false},
+    {id:uuidUser6, img:absoluteImgPath + "/024-viking.svg", firstname: "Ducky", lastname: "Mallard", email: "ducky.mallard@mabos.ch", joined: true, isAdmin: false, isSpacer: false, isApprover: false},
+    {id:uuidUser7, img:absoluteImgPath + "/024-viking.svg", firstname: "Ellie", lastname: "Bishop", email: "ellie.bishop@mabos.ch", joined: true, isAdmin: false, isSpacer: false, isApprover: false},
+    {id:uuidUser8, img:absoluteImgPath + "/019-graduated.svg", firstname: "Jimmy", lastname: "Palmer", email: "jimmy.palmer@mabos.ch", joined: false, isAdmin: false, isSpacer: false, isApprover: false},
+    {id:uuidUser9, img:absoluteImgPath + "/024-viking.svg", firstname: "Caitlin", lastname: "Todd", email: "caitlin.todd@mabos.ch", joined: false, isAdmin: false, isSpacer: false, isApprover: false},
 ];
 
 /**

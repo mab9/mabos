@@ -1,8 +1,8 @@
 {
-  "realm": "vakansie",
+  "realm": "mabos",
   "auth-server-url": "http://localhost:8080/auth/",
   "ssl-required": "external",
-  "resource": "vakansie",
+  "resource": "mabos",
   "public-client": true,
   "confidential-port": 0
 }

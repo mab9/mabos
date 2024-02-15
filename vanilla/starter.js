@@ -11,11 +11,11 @@ const start = (appRootId, authenticated) => {
 
     // todo: think about resetting the model world on a possible re-render
     const root = document.getElementById(CONTENT_WRAPPER)
-    const vakansie = dom(`<div id="${appRootId}">`);
+    const mabos = dom(`<div id="${appRootId}">`);
 
     if (authenticated) {
-        LayoutView(vakansie, layoutController);
-        root.replaceWith(vakansie); // why replace???
+        LayoutView(mabos, layoutController);
+        root.replaceWith(mabos); // why replace???
     } else {
         console.info("root", root)
         LandingView(root);

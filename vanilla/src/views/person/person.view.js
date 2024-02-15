@@ -28,7 +28,7 @@ const PersonView = (rootElement, personController) => {
                 <h1 data-i18n="view.person.card.master.title"></h1>
                 <div class="holder">
                     <button id="plus" autofocus> invite </button>
-                    <input  id="email" type="text" placeholder="mab@vakansie.ch" autofocus>
+                    <input  id="email" type="text" placeholder="mab9@mab.rock" autofocus>
                     <div    id="masterContainer"></div>
                 </div>
             </div>
