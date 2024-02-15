@@ -27,7 +27,7 @@
 
 /* Add an active class to highlight the current page */
 .mainnav a.home {
-  background-color: #4CAF50;
+  background-color: var(--primary-color);
   color: white;
 }
 

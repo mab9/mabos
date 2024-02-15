@@ -13,7 +13,7 @@ const uuidUser7 = UUID();
 const uuidUser8 = UUID();
 const uuidUser9 = UUID();
 
-const absoluteImgPath = "src/assets/img/avatars/svg"
+const absoluteImgPath = "src/madjs/assets/img/avatars/svg"
 
 /** @type Person[] */
 const persons = [
