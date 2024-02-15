@@ -1,4 +1,4 @@
-import {translationService} from "./service/translation.service.js";
+import {translationService} from "./madjs/service/translation.service.js";
 import {start} from "../starter.js";
 import {AuthController} from "./auth/auth.prod.js";
 

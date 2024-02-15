@@ -1,6 +1,6 @@
-import {appendFirst} from "../../assets/util/appends.js";
-import {dom} from "../../assets/util/dom.js";
-import {formItemProjector, inputProjector} from "../../projector/form.projector.js";
+import {appendFirst} from "../../madjs/assets/util/appends.js";
+import {dom} from "../../madjs/assets/util/dom.js";
+import {formItemProjector, inputProjector} from "../../madjs/projector/form.projector.js";
 
 export { listItemProjector, formProjector, pageCss }
 

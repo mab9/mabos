@@ -1,8 +1,8 @@
-import {ListController, SelectionController} from "../../base/controller/controller.js";
+import {ListController, SelectionController} from "../../madjs/base/controller/controller.js";
 import {ALL_PERSON_ATTRIBUTE_NAMES, Person} from "./person.model.js";
 import {personService} from "./person.service.local.js";
-import {id} from "../../assets/church/church.js";
-import {VALUE} from "../../base/presentationModel/presentationModel.js";
+import {id} from "../../madjs/assets/church/church.js";
+import {VALUE} from "../../madjs/base/presentationModel/presentationModel.js";
 
 export { PersonController }
 

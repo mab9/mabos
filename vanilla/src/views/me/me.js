@@ -1,4 +1,4 @@
-import {dom} from "../../assets/util/dom.js";
+import {dom} from "../../madjs/assets/util/dom.js";
 
 export {MeController, MeView};
 

@@ -1,8 +1,8 @@
-@import "src/assets/fonts/FontAwesome/css/fontawesome.min.css";
-@import "src/assets/fonts/FontAwesome/css/solid.min.css";
-@import "src/assets/css/main-nav.css";
-@import "src/assets/css/side-nav.css";
-@import "src/assets/css/main-content.css";
+@import "src/madjs/assets/fonts/FontAwesome/css/fontawesome.min.css";
+@import "src/madjs/assets/fonts/FontAwesome/css/solid.min.css";
+@import "src/madjs/assets/css/main-nav.css";
+@import "src/madjs/assets/css/side-nav.css";
+@import "src/madjs/assets/css/main-content.css";
 @import "src/views/person/instantUpdateProjector.css";
 
 :root {

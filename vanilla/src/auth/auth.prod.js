@@ -1,5 +1,5 @@
 import "../../keycloak.js"
-import {maybe} from "../assets/util/maybe.js";
+import {maybe} from "../madjs/assets/util/maybe.js";
 import {authLocalController} from "./auth.local.js"
 import {config} from "../../config.js";
 

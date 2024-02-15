@@ -1,5 +1,5 @@
 import "../../keycloak.js"
-import {Attribute, setValueOf} from "../base/presentationModel/presentationModel.js";
+import {Attribute, setValueOf} from "../madjs/base/presentationModel/presentationModel.js";
 
 export {authLocalController}
 

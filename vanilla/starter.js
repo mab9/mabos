@@ -1,7 +1,7 @@
-import {LayoutController, LayoutView} from "./src/layout/layout.js";
-import {dom} from "./src/assets/util/dom.js";
+import {LayoutController, LayoutView} from "./src/madjs/layout/layout.js";
+import {dom} from "./src/madjs/assets/util/dom.js";
 import {LandingView} from "./src/views/landing/landing.view.js";
-import {appendReplacing} from "./src/assets/util/appends.js";
+import {appendReplacing} from "./src/madjs/assets/util/appends.js";
 
 export {start} ;
 

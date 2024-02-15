@@ -1,5 +1,5 @@
 import {vakansieService} from "./local.service.js"
-import {Suite} from "../test/test.js";
+import {Suite} from "../madjs/test/test.js";
 
 const localServiceSuite = Suite("localService");
 

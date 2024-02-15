@@ -1,4 +1,4 @@
-import {UUID} from "../../assets/util/uuid.js";
+import {UUID} from "../../madjs/assets/util/uuid.js";
 
 export { personService, uuidUser0, uuidUser1,uuidUser2, uuidUser3, uuidUser4, uuidUser5,uuidUser6, uuidUser7, uuidUser8, uuidUser9 }
 

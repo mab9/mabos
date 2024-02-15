@@ -1,8 +1,8 @@
-import {appendFirst} from "../../assets/util/appends.js";
-import {dom} from "../../assets/util/dom.js";
+import {appendFirst} from "../../madjs/assets/util/appends.js";
+import {dom} from "../../madjs/assets/util/dom.js";
 import {formProjector, listItemProjector, pageCss} from "./instantUpdateProjector.js";
 import {ALL_PERSON_ATTRIBUTE_NAMES, Person} from "./person.model.js";
-import {setValueOf} from "../../base/presentationModel/presentationModel.js";
+import {setValueOf} from "../../madjs/base/presentationModel/presentationModel.js";
 
 export {PersonView};
 

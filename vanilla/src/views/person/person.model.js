@@ -2,7 +2,7 @@ import {
     EDITABLE,
     presentationModelFromAttributeNames,
     setValueOf,
-} from "../../base/presentationModel/presentationModel.js";
+} from "../../madjs/base/presentationModel/presentationModel.js";
 
 export { Person, ALL_PERSON_ATTRIBUTE_NAMES}
 
@@ -16,7 +16,7 @@ export { Person, ALL_PERSON_ATTRIBUTE_NAMES}
  * @property {string}  email     - might be empty.
  * @property {boolean} joined   - might be empty.
  * @property {array}  roles      - might be empty.
- * @example  {id:0, img:"../../assets/img/avatars/018-gentleman.svg", firstname: "Marc-Antoine", lastname: "Bruelhart"}
+ * @example  {id:0, img:"../assets/img/avatars/018-gentleman.svg", firstname: "Marc-Antoine", lastname: "Bruelhart"}
  */
 
 const ALL_PERSON_ATTRIBUTE_NAMES = ['id', 'img', 'firstname', 'lastname', 'email', 'joined', 'isAdmin', 'isSpacer', 'isApprover'];
