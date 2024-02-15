@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="DE">
+<head>
+    <title> All Tests from Module</title>
+</head>
+<body>
+
+<h1>All Tests loaded asynchronously from all tests module.</h1>
+
+<p>Module tests do not work from file in most browsers (but it works with Chrome in debugging mode).</p>
+<p>They must be loaded via http or the browser SOP check and caching must be disabled :-(.</p>
+<p>Consider <b>npx http-server -c-1 </b> web server with no caching.</p>
+
+
+<pre id="out"></pre>
+
+<hr/>
+
+<p id="grossTotal"></p>
+
+<!--no inline function to please FF-->
+<script src="./src/test/asyncStarter.js" type="module"></script>
+
+<script>
+    // Since the bundle is loaded before this code, we can refer to the "total" in the global namespace
+    document.writeln(total);
+</script>
+tests
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+    "test.dom.title": "Donatello",
+    "view.planning.title": "Planungsansicht",
+    "view.planning.title.details": "Ferien Vergütung",
+    "view.person.card.master.title": "Personen Übersicht",
+    "view.person.card.details.title": "Personen Details",
+
+    "view.person.detail.label.id": "Id",
+    "view.person.detail.label.img":  "Bild",
+    "view.person.detail.label.firstname": "Vorname",
+    "view.person.detail.label.lastname":  "Nachname",
+    "view.person.detail.label.email": "E-Mail",
+    "view.person.detail.label.joined": "Ist beigetreten",
+    "view.person.detail.label.roles.admin": "Ist Admin",
+    "view.person.detail.label.roles.spacer": "Ist Spacer",
+    "view.person.detail.label.roles.approver": "Ist Approver",
+
+    "view.group.detail.label.name": "Name",
+    "view.group.detail.label.isProject": "Projekt",
+    "view.group.detail.label.userIds": "Anzahl User",
+    "view.group.detail.label.ownerId": "Eigner",
+    "menu.main.entry.vakansie": "Vakansie",
+    "menu.main.entry.persons": "Personen",
+    "menu.main.entry.planning": "Planung",
+    "menu.main.entry.approval": "Freigaben",
+    "menu.main.entry.group": "Gruppen",
+    "planning.view.calendar.header.month": "Monat",
+
+
+    "view.approval.label.employeesLeft" : "Verbleibende Mitarbeiter zählen",
+    "view.approval.label.approve.btn" : "Freigeben",
+    "view.approval.label.fromDate" : "Von",
+    "view.approval.label.toDate" : "Bis",
+
+    "month.jan":  "Januar",
+    "month.feb":  "Februar",
+    "month.mar":  "März",
+    "month.apr":  "April",
+    "month.mai":  "Mai",
+    "month.jul":  "Juni",
+    "month.jun":  "Juli",
+    "month.aug":  "August",
+    "month.sep":  "September",
+    "month.oct":  "Oktober",
+    "month.nov":  "November",
+    "month.dez":  "Dezember"
+}

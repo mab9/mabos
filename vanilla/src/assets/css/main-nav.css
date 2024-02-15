@@ -1,0 +1,114 @@
+:root {
+  --top-nav-transition: all 500ms ease-in;
+}
+
+/* Add a black background color to the top navigation */
+.mainnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.mainnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.mainnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add an active class to highlight the current page */
+.mainnav a.home {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Hide the link that should open and close the mainnav on small screens */
+.mainnav .hamburger {
+  display: none;
+}
+
+.mainnav-user {
+  float: right !important;
+}
+
+.mainnav-avatar {
+  float: right !important;
+}
+
+.mainnav-language {
+  float: right !important;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* Remove / overwrite parent padding */
+  margin: -14px -13px;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the mainnav (.hamburger) */
+  .mainnav a:not(:first-child) {
+    display: none;
+  }
+
+  .mainnav a.hamburger {
+    float: right;
+    display: block;
+  }
+
+  /* The "responsive" class is added to the mainnav with JavaScript when the user clicks on the hamburger. This class makes the mainnav look good on small screens (display the links vertically instead of horizontally) */
+  .mainnav.responsive {
+    position: relative;
+  }
+
+  .mainnav.responsive a.hamburger {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .mainnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  .mainnav-avatar, .mainnav-user {
+    float: left !important;
+  }
+
+  .avatar {
+    /* Remove / overwrite parent padding */
+    margin: -14px 0;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}

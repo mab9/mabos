@@ -1,0 +1,73 @@
+@import "src/assets/fonts/FontAwesome/css/fontawesome.min.css";
+@import "src/assets/fonts/FontAwesome/css/solid.min.css";
+@import "src/assets/css/main-nav.css";
+@import "src/assets/css/side-nav.css";
+@import "src/assets/css/main-content.css";
+@import "src/views/person/instantUpdateProjector.css";
+
+:root {
+  /* Colors */
+  --primary-color:                    #FDE70E;
+  --primary-color-variant:            #FEF387;
+  --primary-font-color:               #000000;
+  --secondary-font-color:             #767573;
+  --light-font-color:                 #FFFFFF;
+  --background-color:                 #FFFFFF;
+  --surface-color:                    #FFFFFF;
+  --secondary-surface-color:          #EFEFEF;
+  --error-color:                      #B00020;
+  --success-color:                    #2E7D32;
+
+  /* Buttons */
+  --button-background-color:          #000000;
+  --button-font-color:                #FFFFFF;
+  --button-hover-background-color:    var(--primary-color-variant);
+  --button-selected-background-color: var(--primary-color);
+  --button-hover-font-color:          #000000;
+  --button-padding:                   0 30px;
+  --button-disabled-background-color: #767573;
+  --icon-button-font-color:           var(--primary-font-color);
+}
+
+html {
+  height:      100%;
+  width:       100%;
+  padding:     0;
+  margin:      0;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  color:       var(--primary-font-color)
+}
+
+body {
+  background-color: var(--background-color);
+  /*min-height:       calc(100% - var(--main-nav-height));*/
+  width:            100%;
+  padding:          0;
+  margin:           0;
+}
+
+
+/* Content */
+#content {
+/*  margin-top: var(--main-nav-height);*/
+  height:     100%;
+  width:      100%;
+}
+
+
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 992px) {
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 576px) {
+  .button {
+    font-size: 0.8em;
+  }
+}
