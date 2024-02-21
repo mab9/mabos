@@ -4,7 +4,7 @@ const iam = 'https://iam.mab.rocks'
 
 export const environment = {
   production: true,
-  backendUrl : host + ':8443',
+  backendUrl : host, // url +  /api !
   keycloak : {
     config_url:  iam + '/',
     config_realm: 'mabos-realm',
