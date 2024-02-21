@@ -1,5 +1,6 @@
 package rocks.mab.mabos.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -22,12 +23,15 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    @Value("${cors.allowed.origin}")
+    private String corsAllowedOrigin;
+
 
     // todo improve config with app properties
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedOrigins(List.of(corsAllowedOrigin));
         config.setAllowedMethods(List.of("*"));
         config.setAllowedHeaders(List.of("*"));
         // custom header unlike CSRF - inform browser to allow the following header
