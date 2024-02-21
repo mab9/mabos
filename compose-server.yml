@@ -23,6 +23,7 @@ services:
     #ports:
     #  - 8080:8080
     environment:
+      CORS_ALLOWED_ORIGIN: https://abos.mab.rocks
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
@@ -59,6 +60,8 @@ services:
       KC_DB_URL: ${KC_DB_URL}
       KC_DB_PASSWORD: ${KC_DB_PASSWORD}
       KC_DB_USERNAME: ${KC_DB_USERNAME}
+      KC_HOSTNAME: iam.mab.rocks
+      KC_PROXY: edge
       TZ: Europe/Zurich
     volumes:
       - ./deployment/mabos-realm.json:/opt/keycloak/data/import/mabos-realm.json
