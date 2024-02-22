@@ -74,9 +74,6 @@ Side notes
 
 
 
-
-
-
 ## Contributing to mabos
 <!--- If your README is long or you have some specific process or steps you want contributors to follow, consider creating a separate CONTRIBUTING.md file--->
 To contribute to mabos, follow these steps:

@@ -64,6 +64,6 @@ services:
       KC_PROXY: edge
       TZ: Europe/Zurich
     volumes:
-      - ./deployment/mabos-realm.json:/opt/keycloak/data/import/mabos-realm.json
+      - ./deployment/realm-mabos-server.json:/opt/keycloak/data/import/realm-mabos-server.json
     networks:
       - app-mabos

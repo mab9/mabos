@@ -21,8 +21,8 @@ services:
   keycloak:
     # testuser: ?
     # Export keycloak realm - one command
-    # docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file' && \
-    # docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./deployment/mabos-realm.json
+    # docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/realm.json --users realm_file' && \
+    # docker cp mabos-keycloak-1:/tmp/realm.json ./deployment/realm.json
 
     image: quay.io/keycloak/keycloak:23.0.0
     depends_on:
@@ -40,5 +40,5 @@ services:
       KC_DB_USERNAME: mabos-db-admin
       TZ: Europe/Zurich
     volumes:
-      - ./deployment/mabos-realm.json:/opt/keycloak/data/import/mabos-realm.json
+      - ./deployment/realm-mabos-local.json:/opt/keycloak/data/import/realm-mabos-local.json
 
