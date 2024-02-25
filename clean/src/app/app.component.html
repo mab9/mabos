@@ -1,3 +1,5 @@
+
+
 <main class="main">
   <mat-toolbar color="primary">
 
@@ -5,17 +7,39 @@
       <img src="./assets/mabos-logo-1.png" alt="Mabos Logo" class="logo">
       <span class="custom-margin-right">Mabos</span>
 
-      <div *ngIf="(aboStore.abosTotalExpiringThisMonth$  | async) as totalExpiring" [matBadge]="totalExpiring" matBadgeColor="warn" class="">soon expiring</div>
+      <ng-container *ngIf="!breakpointObserver.isMatched([Breakpoints.XSmall, Breakpoints.Small])">
 
-      <span class="example-spacer"></span>
+        <div *ngIf="(aboStore.abosTotalExpiringThisMonth$  | async) as totalExpiring" [matBadge]="totalExpiring"
+             matBadgeColor="warn" class="">soon expiring</div>
+        <span class="example-spacer"></span>
 
-      <ng-container *ngIf="(authStore.user$  | async) as user">
-         {{ user.email }}
+        <ng-container *ngIf="(authStore.user$  | async) as user">
+          {{ user.email }}
+        </ng-container>
+
+        <button mat-icon-button (click)="raiseMessage()"><mat-icon>share</mat-icon></button>
+
       </ng-container>
-      <button mat-icon-button (click)="raiseMessage()"><mat-icon>share</mat-icon></button>
 
-      <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()"               mat-icon-button><mat-icon >login</mat-icon></button>
-      <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()"              mat-icon-button><mat-icon >logout</mat-icon></button>
+
+      <ng-container *ngIf="breakpointObserver.isMatched([Breakpoints.XSmall, Breakpoints.Small])">
+        <span class="example-spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <div *ngIf="(authStore.user$  | async) as user" mat-menu-item>
+             <span> {{ user.email }} </span>
+          </div>
+
+          <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()" mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+
+      </ng-container>
+
 
     </mat-toolbar-row>
   </mat-toolbar>
