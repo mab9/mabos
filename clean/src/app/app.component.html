@@ -1,6 +1,4 @@
-
-
-<main class="main">
+<header>
   <mat-toolbar color="primary">
 
     <mat-toolbar-row>
@@ -29,9 +27,9 @@
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
           </button>
-          <mat-menu  #menu="matMenu" xPosition="after">
+          <mat-menu  #menu="matMenu" xPosition="before">
             <div *ngIf="(authStore.user$  | async) as user" mat-menu-item>
-               <span> {{ user.email }} </span>
+              <span> {{ user.email }} </span>
             </div>
 
             <button  (click)="logout()" mat-menu-item>
@@ -47,8 +45,9 @@
 
     </mat-toolbar-row>
   </mat-toolbar>
-</main>
 
-<div class="content-wrapper">
-  <router-outlet></router-outlet>
-</div>
+</header>
+
+<main class="content">
+    <router-outlet></router-outlet>
+</main>
