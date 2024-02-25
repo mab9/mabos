@@ -7,6 +7,7 @@
 
       <ng-container *ngIf="!breakpointObserver.isMatched([Breakpoints.XSmall, Breakpoints.Small])">
 
+        <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos'"          mat-icon-button><mat-icon>category</mat-icon></button>
         <div *ngIf="(aboStore.abosTotalExpiringThisMonth$  | async) as totalExpiring" [matBadge]="totalExpiring"
              matBadgeColor="warn" class="">soon expiring</div>
         <span class="example-spacer"></span>
@@ -32,10 +33,8 @@
               <span> {{ user.email }} </span>
             </div>
 
-            <button  (click)="logout()" mat-menu-item>
-              <mat-icon>logout</mat-icon>
-              <span>Logout</span>
-            </button>
+            <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos'" mat-menu-item><mat-icon>category</mat-icon><span>Abos</span></button>
+            <button  (click)="logout()"                                           mat-menu-item><mat-icon>logout</mat-icon><span>Logout</span></button>
           </mat-menu>
         </ng-container>
 

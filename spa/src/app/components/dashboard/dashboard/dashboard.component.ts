@@ -39,6 +39,7 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {DashboardOverviewComponent} from "../dashboard-overview/dashboard-overview.component";
 import {DashboardMainComponent} from "../dashboard-main/dashboard-main.component";
 import {DashboardDetailComponent} from "../dashboard-detail/dashboard-detail.component";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-dashboard',
@@ -86,8 +87,9 @@ import {DashboardDetailComponent} from "../dashboard-detail/dashboard-detail.com
 })
 export class DashboardComponent {
 
+  protected readonly Breakpoints = Breakpoints;
   constructor(public abosStore : AbosStore,
+              public breakpointObserver: BreakpointObserver,
   ) {
   }
-
 }

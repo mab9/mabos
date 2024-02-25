@@ -23,7 +23,7 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
     AsyncPipe, NgIf, MatCheckbox, MatFormField, MatSelectModule, MatFormFieldModule, MatInputModule,
     MatSelect, MatOption, MatChipOption, MatChip, MatSort, MatSortHeader, FormsModule, CurrencyPipe, MatSlideToggle],
   templateUrl: './abos.component.html',
-  styleUrl: './abos.component.scss',
+  styleUrl: './abos-list.component.scss',
   animations: [
     trigger('detailExpand', [
       state('collapsed,void', style({height: '0px', minHeight: '0'})),
