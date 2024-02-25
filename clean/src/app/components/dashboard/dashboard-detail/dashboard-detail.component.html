@@ -1,0 +1,101 @@
+<ng-container *ngIf="abosStore.selectedItemFg">
+
+  <form [formGroup]="abosStore.selectedItemFg " class="mat-elevation-z8">
+
+    <mat-card id="test">
+      <mat-card-header>
+        <mat-card-title>{{ getValueCtrl('title')?.value }}  <mat-chip *ngIf="getValueCtrl('isExpiringThisMonth')?.value" highlighted="true" color="warn">is expiring</mat-chip> </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <br>
+        <div class="example-container">
+
+
+          <!-- TITLE -->
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Spotify Premium" formControlName="title">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+
+
+          <!-- ACTIVE -->
+          <mat-slide-toggle [color]="'primary'" style="width: 220px;" formControlName="active">is active</mat-slide-toggle>
+
+          <!-- IS EXP. THIS MONTH -->
+          <!-- IS AUTO RENEWAL -->
+          <mat-slide-toggle [color]="'primary'" style="width: 220px;" formControlName="isAutoRenewal">is auto renewal</mat-slide-toggle>
+
+
+        </div>
+        <div class="example-container">
+
+          <!-- PRICE -->
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input type="number" matInput placeholder="22.50" formControlName="price">
+          </mat-form-field>
+
+          <!-- PERIOD -->
+          <mat-form-field appearance="outline">
+            <mat-label>Period</mat-label>
+            <mat-select formControlName="period" placeholder="Week">
+              @for (item of Object.keys(Period); track item) {
+                <mat-option [value]="item">{{ item | period}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <!-- START DATE -->
+          <mat-form-field appearance="outline">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="11.24.2023" formControlName="startDate">
+            <mat-hint>dd.mm.yyyy</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+        </div>
+
+        <div class="example-container">
+
+          <!-- DESCRIPTION -->
+          <mat-form-field appearance="outline" style="width: 680px;">
+            <mat-label>Description</mat-label>
+            <mat-label>Textarea</mat-label>
+            <textarea matInput placeholder="for my dog" formControlName="description"></textarea>
+          </mat-form-field>
+
+        </div>
+
+        <div class="example-container">
+
+          <!-- EXP. REMINDER  -->
+          <mat-slide-toggle [color]="'primary'" style="max-width: 220px" formControlName="expReminder">is reminder active</mat-slide-toggle>
+        </div>
+
+        <div class="example-container" style="margin-top: 20px">
+          <!-- EXP. REMINDER PERIOD -->
+          <mat-form-field appearance="outline">
+            <mat-label>Expiring Reminder Period</mat-label>
+            <mat-select formControlName="expReminderPeriod" placeholder="Week">
+              @for (item of Object.keys(Period); track item) {
+                <mat-option [value]="item">{{ item | period }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <!-- EXP. REMINDER PERIOD AMOUNTS -->
+          <mat-form-field appearance="outline" >
+            <mat-label>Expiring Reminder Amounts</mat-label>
+            <input type="number" matInput placeholder="1" formControlName="expReminderPeriodAmounts">
+          </mat-form-field>
+
+        </div>
+        <!-- <pre>{{ selectedItemFg.value | json }}</pre> -->
+
+      </mat-card-content>
+    </mat-card>
+  </form>
+
+</ng-container>

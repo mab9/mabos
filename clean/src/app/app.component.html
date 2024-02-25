@@ -1,0 +1,26 @@
+<main class="main">
+  <mat-toolbar color="primary">
+
+    <mat-toolbar-row>
+      <img src="./assets/mabos-logo-1.png" alt="Mabos Logo" class="logo">
+      <span class="custom-margin-right">Mabos</span>
+
+      <div *ngIf="(aboStore.abosTotalExpiringThisMonth$  | async) as totalExpiring" [matBadge]="totalExpiring" matBadgeColor="warn" class="">soon expiring</div>
+
+      <span class="example-spacer"></span>
+
+      <ng-container *ngIf="(authStore.user$  | async) as user">
+         {{ user.email }}
+      </ng-container>
+      <button mat-icon-button (click)="raiseMessage()"><mat-icon>share</mat-icon></button>
+
+      <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()"               mat-icon-button><mat-icon >login</mat-icon></button>
+      <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()"              mat-icon-button><mat-icon >logout</mat-icon></button>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+</main>
+
+<div class="content-wrapper">
+  <router-outlet></router-outlet>
+</div>
