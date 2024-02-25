@@ -9,7 +9,7 @@
 
 mabos is a tool to track abo expenses and expirations. To that it servers as a test project to try some architectural concepts.
 
-![mabos-overview](./spa/src/assets/mabos-overview.png "mabos-overview")
+![mabos-overview](spa-v1/src/assets/mabos-overview.png "mabos-overview")
 
 ## Local development
 

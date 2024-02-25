@@ -1,30 +1,53 @@
-<main class="main">
+<header>
   <mat-toolbar color="primary">
+
     <mat-toolbar-row>
       <img src="./assets/mabos-logo-1.png" alt="Mabos Logo" class="logo">
-      <span>Mabos</span>
+      <span class="custom-margin-right">Mabos</span>
 
-      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/dashboard'"     mat-icon-button><mat-icon>dashboard</mat-icon></button>
-      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos'"          mat-icon-button><mat-icon>category</mat-icon></button>
-      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos-reactive'" mat-icon-button><mat-icon>egg</mat-icon></button>
-      <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos-fancy'"    mat-icon-button><mat-icon>egg_alt</mat-icon></button>
-      <div *ngIf="(aboStore.abosTotalExpiringThisMonth$  | async) as totalExpiring" [matBadge]="totalExpiring" matBadgeColor="warn" class="demo-section">abos expiring this months</div>
+      <ng-container *ngIf="!breakpointObserver.isMatched([Breakpoints.XSmall, Breakpoints.Small])">
 
-      <span class="example-spacer"></span>
+        <div *ngIf="(aboStore.abosTotalExpiringThisMonth$  | async) as totalExpiring" [matBadge]="totalExpiring"
+             matBadgeColor="warn" class="">soon expiring</div>
+        <span class="example-spacer"></span>
 
+        <ng-container *ngIf="(authStore.user$  | async) as user">
+          {{ user.email }}
+        </ng-container>
 
-      <ng-container *ngIf="(authStore.user$  | async) as user">
-         {{ user.email }}
+        <button mat-icon-button (click)="raiseMessage()"><mat-icon>share</mat-icon></button>
+
       </ng-container>
-      <button mat-icon-button (click)="raiseMessage()"><mat-icon>share</mat-icon></button>
 
-      <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()"               mat-icon-button><mat-icon >login</mat-icon></button>
-      <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()"              mat-icon-button><mat-icon >logout</mat-icon></button>
+
+      <ng-container *ngIf="breakpointObserver.isMatched([Breakpoints.XSmall, Breakpoints.Small])">
+        <span class="example-spacer"></span>
+
+        <ng-container *ngIf="authStore.isLoggedIn$  | async">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu  #menu="matMenu" xPosition="before">
+            <div *ngIf="(authStore.user$  | async) as user" mat-menu-item>
+              <span> {{ user.email }} </span>
+            </div>
+
+            <button  (click)="logout()" mat-menu-item>
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </ng-container>
+
+        <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()" mat-icon-button><mat-icon >login</mat-icon></button>
+      </ng-container>
+
 
     </mat-toolbar-row>
   </mat-toolbar>
-</main>
 
-<div class="content-wrapper">
-  <router-outlet></router-outlet>
-</div>
+</header>
+
+<main class="content">
+    <router-outlet></router-outlet>
+</main>

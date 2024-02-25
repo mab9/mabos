@@ -19,7 +19,6 @@ import {AbosStore} from "../../../stores/abos.store";
 import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
 import {Abo} from "../../../model/abos.model";
 import {MatBadge} from "@angular/material/badge";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-dashboard-main',
@@ -61,21 +60,13 @@ export class DashboardMainComponent {
     The selected Item should be handled at one place. Since this is the consolidation of
     code into components and refactoring within no time, the ugly solution is fine for now.
    */
+
   displayedColumns: string[] = ['title', 'price', 'period', 'active', 'remove'];
 
   constructor(
     public abosStore: AbosStore,
-    protected breakpointObserver: BreakpointObserver,
     private fb: FormBuilder,
   ) {
-
-    breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small]).subscribe(obsi => {
-        if (obsi.matches) {
-          this.displayedColumns = ['title', 'active',];
-        } else {
-          this.displayedColumns = ['title', 'price', 'period', 'active', 'remove'];
-        }
-    })
   }
 
   trackById(index: number, item: Abo): number | null {
@@ -150,5 +141,4 @@ export class DashboardMainComponent {
   }
 
 
-  protected readonly Breakpoints = Breakpoints;
 }

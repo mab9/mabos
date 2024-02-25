@@ -1,40 +1,43 @@
 .logo {
   height: 35px;
   width: 35px;
-  margin-right: 8px;
+  margin-right: 0.75rem;
 }
 
 .example-spacer {
   flex: 1 1 auto;
 }
 
+.custom-margin-right {
+  margin-right: 0.75rem;
+}
+
 
 /* Basic styling for content */
-.content-wrapper {
+.content {
   margin: 20px auto;
-  padding: 20px;
+  padding: 1.5rem;
+  max-width: 100%; /* Use full width on smaller screens */
   box-sizing: border-box; /* Ensures padding does not affect the set width */
+  overflow-x: scroll;
 }
 
 /* Responsive design adjustments */
 @media (max-width: 768px) { /* For tablets and below */
-  .content-wrapper {
+  .content {
     margin: 10px auto;
-    padding: 15px;
-    width: 100%; /* Use full width on smaller screens */
+    padding: 1rem;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) { /* For landscape tablets and small desktops */
-  .content-wrapper {
-    margin: 20px auto;
+  .content {
     width: 80%; /* Slightly narrower width for medium screens */
   }
 }
 
 @media (min-width: 1025px) { /* For desktops */
-  .content-wrapper {
-    margin: 20px auto; /* Centered with automatic margins */
+  .content {
     width: 60%; /* Optimal reading width for large screens */
   }
 }
