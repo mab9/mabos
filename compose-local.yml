@@ -1,11 +1,5 @@
 services:
 
-  pwa:
-    image: mabru/mabos-pwa:latest
-    restart: always
-    ports:
-      - 4200:80
-
   postgres:
     image: postgres:latest
     environment:
