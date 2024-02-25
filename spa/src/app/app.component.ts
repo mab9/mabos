@@ -23,7 +23,6 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-
   constructor(
     public authStore: AuthStore,
     private readonly keycloak: KeycloakService,

@@ -1,3 +1,9 @@
+.sticky-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
 .logo {
   height: 35px;
   width: 35px;
@@ -15,7 +21,7 @@
 
 /* Basic styling for content */
 .content {
-  margin: 20px auto;
+  margin: 56px auto 20px; // top (left, right, bottom)
   padding: 1.5rem;
   max-width: 100%; /* Use full width on smaller screens */
   box-sizing: border-box; /* Ensures padding does not affect the set width */
@@ -25,7 +31,7 @@
 /* Responsive design adjustments */
 @media (max-width: 768px) { /* For tablets and below */
   .content {
-    margin: 10px auto;
+    margin-bottom: 10px;
     padding: 1rem;
   }
 }
