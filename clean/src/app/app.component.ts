@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {AsyncPipe, CommonModule, NgIf} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule, MatIconButton} from "@angular/material/button";
+import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatSidenavContainer, MatSidenavModule} from "@angular/material/sidenav";
 import {MatBadge} from "@angular/material/badge";
 import {KeycloakService} from "keycloak-angular";
@@ -18,7 +18,7 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
   standalone: true,
   imports: [CommonModule, MatButtonModule,
     MatSidenavModule, RouterOutlet,
-    MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavContainer, RouterLink, MatBadge, MatMenu, MatMenuItem, MatMenuTrigger],
+    MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavContainer, RouterLink, MatBadge, MatMenu, MatMenuItem, MatMenuTrigger, AsyncPipe, MatIcon, MatIconButton, NgIf, AsyncPipe, MatIcon, MatIconButton, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

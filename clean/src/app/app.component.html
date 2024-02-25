@@ -24,20 +24,24 @@
 
       <ng-container *ngIf="breakpointObserver.isMatched([Breakpoints.XSmall, Breakpoints.Small])">
         <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" xPosition="before">
-          <div *ngIf="(authStore.user$  | async) as user" mat-menu-item>
-             <span> {{ user.email }} </span>
-          </div>
 
-          <button *ngIf="authStore.isLoggedIn$  | async" (click)="logout()" mat-menu-item>
-            <mat-icon>logout</mat-icon>
-            <span>Logout</span>
+        <ng-container *ngIf="authStore.isLoggedIn$  | async">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
           </button>
-        </mat-menu>
+          <mat-menu  #menu="matMenu" xPosition="after">
+            <div *ngIf="(authStore.user$  | async) as user" mat-menu-item>
+               <span> {{ user.email }} </span>
+            </div>
 
+            <button  (click)="logout()" mat-menu-item>
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </ng-container>
+
+        <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()" mat-icon-button><mat-icon >login</mat-icon></button>
       </ng-container>
 
 
