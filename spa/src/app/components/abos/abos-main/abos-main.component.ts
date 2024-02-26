@@ -72,7 +72,6 @@ export class AbosMainComponent {
 
     this.updateExpReminderActiveness(formGroup.get('expReminder')?.value, formGroup);
     formGroup.valueChanges.subscribe((item : Abo) => {
-      console.info("values have changed, time to persist", item)
       this.abosStore.saveItemDebounce(item.id!, item);
     })
 

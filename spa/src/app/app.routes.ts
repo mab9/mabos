@@ -6,10 +6,10 @@ import {AbosMainComponent} from "./components/abos/abos-main/abos-main.component
 
 
 export const routes: Routes = [
-  { path: '',              redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '',              redirectTo: '/abos', pathMatch: 'full' },
   { path: 'landing',       component: LandingComponent },  // not logged in user
-  { path: 'dashboard',     component: DashboardComponent,    canActivate: [AuthGuard] },
+  //{ path: 'dashboard',     component: DashboardComponent,    canActivate: [AuthGuard] },
+  { path: 'dashboard',     redirectTo: '/abos', pathMatch: 'full' },
   { path: 'abos',          component: AbosMainComponent,    canActivate: [AuthGuard] },
-  //{ path: 'dashboard',              redirectTo: '/abos-fancy', pathMatch: 'full' },
-  { path: '**',            redirectTo: '/dashboard'}
+  { path: '**',            redirectTo: '/abos'}
 ];

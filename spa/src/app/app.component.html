@@ -12,14 +12,14 @@
       <span class="example-spacer"></span>
 
       <button *ngIf="authStore.isLoggedIn$ | async" [matMenuTriggerFor]="menu" mat-icon-button aria-label="icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
+        <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <div *ngIf="authStore.user$ | async as user" mat-menu-item>
           <span>{{ user.email }}</span>
         </div>
         <button *ngIf="authStore.isLoggedIn$ | async" [routerLink]="'/abos'" mat-menu-item>
-          <mat-icon>category</mat-icon><span>Abos</span>
+          <mat-icon>category</mat-icon><span>Mobile Test</span>
         </button>
         <button (click)="logout()" mat-menu-item>
           <mat-icon>logout</mat-icon><span>Logout</span>

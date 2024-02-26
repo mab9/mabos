@@ -42,8 +42,15 @@
   }
 }
 
-@media (min-width: 1025px) { /* For desktops */
+@media (min-width: 1025px) and (max-width: 1399px) { /* For desktops */
+  .content {
+    width: 80%; /* Optimal reading width for large screens */
+  }
+}
+
+@media (min-width: 1400px) { /* For large desktops */
   .content {
     width: 60%; /* Optimal reading width for large screens */
   }
 }
+

@@ -6,6 +6,7 @@ import {addMonths, subDays} from "date-fns";
 import {AbosService} from "../services/abos.service";
 import {isSameYearAndMonth} from "../util/date.util";
 import {FormGroup} from "@angular/forms";
+import {AuthStore} from "./auth.store";
 
 @Injectable({
   providedIn: "root" // one instance for the whole application
@@ -47,10 +48,16 @@ export class AbosStoreV2 implements OnDestroy {
   );
 
   constructor(
+    private authStore: AuthStore,
     private abosService: AbosService,
   ) {
-    // inital load
-    this.abosService.getAll().subscribe(items => this.subject.next(items));
+    // initial load
+    this.authStore.isLoggedIn$.subscribe(isLoggeIn => {
+        if (isLoggeIn) {
+          // memory leak on destroy ;-)
+          this.abosService.getAll().subscribe(items => this.subject.next(items));
+        }
+    })
   }
 
 // "2023-07-16", "2024-07-01",

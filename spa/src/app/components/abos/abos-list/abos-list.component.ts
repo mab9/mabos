@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {AsyncPipe, CurrencyPipe, NgIf} from "@angular/common";
@@ -99,8 +99,11 @@ export class AbosListComponent {
 
   updateFilter(): void {
     this.filteredAbos$ = this.abosStore.abos$.pipe(
-      map(abos => abos.filter((abo: Abo) => this.filterAbo(abo, this.searchKey)))
-    );
+      map(abos => abos
+        .filter((abo: Abo) => this.filterAbo(abo, this.searchKey))
+        .sort((a, b) => a.title.localeCompare(b.title)))
+
+  );
   }
 
   trackById(index: number, item: Abo): number | null {
@@ -156,7 +159,6 @@ export class AbosListComponent {
 
     this.updateExpReminderActiveness(formGroup.get('expReminder')?.value, formGroup);
     formGroup.valueChanges.subscribe((item : Abo) => {
-      console.info("values have changed, time to persist", item)
       this.abosStore.saveItemDebounce(item.id!, item);
     })
 

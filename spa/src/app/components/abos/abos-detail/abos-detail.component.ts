@@ -13,6 +13,8 @@ import {PeriodPipe} from "../../../pipes/period.pipe";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AbosStoreV2} from "../../../stores/abosV2.store";
 import {MatChip, MatChipOption} from "@angular/material/chips";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-abos-detail',
@@ -38,7 +40,8 @@ import {MatChip, MatChipOption} from "@angular/material/chips";
     PeriodPipe,
     ReactiveFormsModule,
     MatChip,
-    MatChipOption
+    MatChipOption,
+    MatButton
   ],
   templateUrl: './abos-detail.component.html',
   styleUrl: './abos-detail.component.scss'
@@ -47,13 +50,23 @@ export class AbosDetailComponent {
 
     protected readonly Period = Period;
     protected readonly Object = Object;
+    protected readonly Breakpoints = Breakpoints;
+
 
   constructor(
+    protected breakpointObserver: BreakpointObserver,
     public abosStore: AbosStoreV2,
   ) {
   }
 
-  getValueCtrl (field : string) {
-    return this.abosStore.selectedItemFg?.get(field);
+  isTrue (field : string) {
+    return this.abosStore.selectedItemFg!.get(field)?.value
   }
+
+  removeMe() {
+    const id = this.abosStore.selectedItemFg?.get('id')?.value;
+    this.abosStore.removeItem(id)
+    this.abosStore.setSelectedFg(null);
+  }
+
 }
