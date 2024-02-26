@@ -1,20 +1,21 @@
+@if (abosStore.selectedItemFg) {
+  <app-abos-detail></app-abos-detail>
+} @else {
+  <ng-container *ngIf="(abosStore.abos$ | async) as abos">
+    <ng-container *ngIf="abos.length > 0">
+      <app-abos-list></app-abos-list>
+    </ng-container>
 
-<ng-container *ngIf="(abosStore.abos$ | async) as abos">
-  <ng-container *ngIf="abos.length > 0">
-    <app-abos-list></app-abos-list>
+    <ng-container *ngIf="abos.length == 0">
+      <span>Start creating an abo... </span>
+    </ng-container>
   </ng-container>
 
-  <ng-container *ngIf="abos.length == 0">
-    <span>Start creating an abo... </span>
-  </ng-container>
-</ng-container>
 
-
-<!-- on add, remove the other stuff - only for mobile view... -->
-<button mat-fab color="warn" class="add-button"
-        aria-label="add item button"
-        (click)="onAdd()">
-  <mat-icon>add</mat-icon>
-</button>
-
-<!--   <app-dashboard-detail></app-dashboard-detail>   -->
+  <!-- on add, remove the other stuff - only for mobile view... -->
+  <button mat-fab color="warn" class="add-button"
+          aria-label="add item button"
+          (click)="onAdd()">
+    <mat-icon>add</mat-icon>
+  </button>
+}

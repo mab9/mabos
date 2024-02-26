@@ -9,6 +9,7 @@ import {AbosListComponent} from "../abos-list/abos-list.component";
 import {AbosStoreV2} from "../../../stores/abosV2.store";
 import {Abo} from "../../../model/abos.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbosDetailComponent} from "../abos-detail/abos-detail.component";
 
 @Component({
   selector: 'app-abos',
@@ -21,7 +22,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
     MatIcon,
     NgIf,
     AbosListComponent,
-    AsyncPipe
+    AsyncPipe,
+    AbosDetailComponent
   ],
   templateUrl: './abos-main.component.html',
   styleUrl: './abos-main.component.scss'
