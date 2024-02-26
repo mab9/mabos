@@ -16,6 +16,7 @@ public interface AboRepository extends CrudRepository<Abo, Long> {
 
     Collection<Abo> findByUserEmail(String userEmail);
 
+    // todo consider deactivation date, current date and auto renewal. lets say, abo was renewed 2 times, then deactivated...
     @Modifying
     @Query(value = "UPDATE abo SET is_active = false " +
             "WHERE is_active = true " +
