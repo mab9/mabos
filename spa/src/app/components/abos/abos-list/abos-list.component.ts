@@ -22,6 +22,7 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {map, Observable} from "rxjs";
+import {AbosStoreV2} from "../../../stores/abosV2.store";
 
 
 @Component({
@@ -72,7 +73,7 @@ export class AbosListComponent {
   searchKey: string = '';
 
   constructor(
-    public abosStore: AbosStore,
+    public abosStore: AbosStoreV2,
     protected breakpointObserver: BreakpointObserver,
     private fb: FormBuilder,
   ) {

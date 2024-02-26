@@ -1,10 +1,19 @@
 
+<ng-container *ngIf="(abosStore.abos$ | async) as abos">
+  <ng-container *ngIf="abos.length > 0">
+    <app-abos-list></app-abos-list>
+  </ng-container>
 
-<app-abos-list></app-abos-list>
+  <ng-container *ngIf="abos.length == 0">
+    <span>Start creating an abo... </span>
+  </ng-container>
+</ng-container>
+
 
 <!-- on add, remove the other stuff - only for mobile view... -->
 <button mat-fab color="warn" class="add-button"
-        aria-label="add item button">
+        aria-label="add item button"
+        (click)="onAdd()">
   <mat-icon>add</mat-icon>
 </button>
 
