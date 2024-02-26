@@ -12,6 +12,7 @@ import {MessagesService} from "./services/messages.service";
 import {AbosStore} from "./stores/abos.store";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
+import {AbosStoreV2} from "./stores/abosV2.store";
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
     public authStore: AuthStore,
     private readonly keycloak: KeycloakService,
     private messageService : MessagesService,
-    public aboStore : AbosStore,
+    public aboStore : AbosStoreV2,
     public breakpointObserver: BreakpointObserver,
   ) {
 
@@ -48,6 +49,10 @@ export class AppComponent implements OnInit {
 
   raiseMessage() {
     this.messageService.showMessages("This function is not implemented at the moment");
+  }
+
+  back() {
+    this.aboStore.setSelectedFg(null);
   }
 
   protected readonly Breakpoints = Breakpoints;

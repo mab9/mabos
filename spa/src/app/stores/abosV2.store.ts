@@ -13,6 +13,8 @@ import {FormGroup} from "@angular/forms";
 export class AbosStoreV2 implements OnDestroy {
 
   public selectedItemFg: FormGroup | null = null;
+  private subjectSel = new BehaviorSubject<Abo | null>(null)
+  public aboSelection$ = this.subjectSel.asObservable();
 
   private today = new Date();
   private changeSubjects = new Map<number, Subject<Abo>>();
@@ -107,8 +109,9 @@ export class AbosStoreV2 implements OnDestroy {
     }
   }
 
-  setSelectedFg(selection : FormGroup) {
+  setSelectedFg(selection : FormGroup | null) {
     this.selectedItemFg = selection;
+    this.subjectSel.next(selection?.value);
   }
 
   createItem() {
