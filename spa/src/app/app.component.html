@@ -2,68 +2,37 @@
   <mat-toolbar color="primary" class="sticky-toolbar">
 
     <mat-toolbar-row>
+      <button *ngIf="aboStore.aboSelection$ | async" mat-icon-button (click)="back()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <span *ngIf="aboStore.aboSelection$ | async"> {{ aboStore.selectedItemFg?.value['title'] }} </span>
+      <img *ngIf="!(aboStore.aboSelection$ | async)" src="./assets/mabos-logo-1.png" alt="Mabos Logo" class="logo">
+      <span *ngIf="!(aboStore.aboSelection$ | async)" class="custom-margin-right">Mabos</span>
 
-      <!-- hack stuff to test 'go back' flow -->
-      @if (breakpointObserver.isMatched([Breakpoints.XSmall, Breakpoints.Small])) {
+      <span class="example-spacer"></span>
 
-
-
-        @if (aboStore.aboSelection$ | async) {
-          <button mat-icon-button (click)="back()"><mat-icon>arrow_back_ios</mat-icon></button>
-          <span> {{ aboStore.selectedItemFg?.value['title'] }} </span>
-        } @else {
-          <img src="./assets/mabos-logo-1.png" alt="Mabos Logo" class="logo">
-          <span class="custom-margin-right">Mabos</span>
-
-          <span class="example-spacer"></span>
-
-          <ng-container *ngIf="authStore.isLoggedIn$  | async">
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu  #menu="matMenu" xPosition="before">
-              <div *ngIf="(authStore.user$  | async) as user" mat-menu-item>
-                <span> {{ user.email }} </span>
-              </div>
-
-              <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos'" mat-menu-item><mat-icon>category</mat-icon><span>Abos</span></button>
-              <button  (click)="logout()"                                           mat-menu-item><mat-icon>logout</mat-icon><span>Logout</span></button>
-            </mat-menu>
-          </ng-container>
-          <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()" mat-icon-button><mat-icon >login</mat-icon></button>
-        }
-
-
-
-
-
-      } @else {
-        <img src="./assets/mabos-logo-1.png" alt="Mabos Logo" class="logo">
-        <span class="custom-margin-right">Mabos</span>
-
-
-          <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/abos'"          mat-icon-button><mat-icon>category</mat-icon></button>
-          <div *ngIf="(aboStore.abosTotalExpiringThisMonth$  | async) as totalExpiring" [matBadge]="totalExpiring"
-               matBadgeColor="warn" class="">soon expiring</div>
-          <span class="example-spacer"></span>
-
-          <ng-container *ngIf="(authStore.user$  | async) as user">{{ user.email }} </ng-container>
-
-          <button mat-icon-button (click)="raiseMessage()"><mat-icon>share</mat-icon></button>
-      }
-
-
-
-
-
-
-
-
+      <button *ngIf="authStore.isLoggedIn$ | async" [matMenuTriggerFor]="menu" mat-icon-button aria-label="icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <div *ngIf="authStore.user$ | async as user" mat-menu-item>
+          <span>{{ user.email }}</span>
+        </div>
+        <button *ngIf="authStore.isLoggedIn$ | async" [routerLink]="'/abos'" mat-menu-item>
+          <mat-icon>category</mat-icon><span>Abos</span>
+        </button>
+        <button (click)="logout()" mat-menu-item>
+          <mat-icon>logout</mat-icon><span>Logout</span>
+        </button>
+      </mat-menu>
+      <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()" mat-icon-button>
+        <mat-icon>login</mat-icon>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 
 </header>
 
 <main class="content">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </main>

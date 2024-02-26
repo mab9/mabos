@@ -69,7 +69,7 @@ export class AbosListComponent {
   protected readonly Breakpoints = Breakpoints;
 
 
-  filteredAbos$: Observable<Abo[]> | undefined; // Your Observable source from the store
+  filteredAbos$: Observable<Abo[]> | undefined;
   searchKey: string = '';
 
   constructor(
