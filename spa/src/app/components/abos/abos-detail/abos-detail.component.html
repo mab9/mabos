@@ -38,11 +38,16 @@
           </mat-select>
         </mat-form-field>
 
+        <div class="width-full toggler">
+          <mat-chip highlighted="true">
+            Costs per year {{ this.abosStore.selectedItemFg?.get('costsPerYear')!.value | currency:'CHF '  }}
+          </mat-chip>
+        </div>
+
 
         <!-- DESCRIPTION -->
         <mat-form-field appearance="outline" class="width-full">
           <mat-label>Description</mat-label>
-          <mat-label>Textarea</mat-label>
           <textarea matInput placeholder="for my dog" formControlName="description"></textarea>
         </mat-form-field>
 
@@ -65,10 +70,8 @@
 
 
 
-
+        <!-- EXP. REMINDER  -->
         <div class="width-full toggler">
-
-          <!-- EXP. REMINDER  -->
           <mat-slide-toggle [color]="'primary'" formControlName="expReminder"> {{ isTrue('expReminder') ? 'deactivate' : 'activate' }} email reminders </mat-slide-toggle>
         </div>
 
@@ -93,7 +96,7 @@
         <button class="width-full" mat-raised-button color="warn" (click)="removeMe()">Remove me</button>
 
 
-        <!-- <pre>{{ selectedItemFg.value | json }}</pre> -->
+         <pre>{{ abosStore.setSelectedFg | json }}</pre>
 
       </mat-card-content>
     </mat-card>

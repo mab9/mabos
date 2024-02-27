@@ -8,7 +8,7 @@ import {MatInput} from "@angular/material/input";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {NgIf} from "@angular/common";
+import {AsyncPipe, CurrencyPipe, JsonPipe, NgIf} from "@angular/common";
 import {PeriodPipe} from "../../../pipes/period.pipe";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AbosStoreV2} from "../../../stores/abosV2.store";
@@ -41,7 +41,10 @@ import {MatButton} from "@angular/material/button";
     ReactiveFormsModule,
     MatChip,
     MatChipOption,
-    MatButton
+    MatButton,
+    AsyncPipe,
+    JsonPipe,
+    CurrencyPipe
   ],
   templateUrl: './abos-detail.component.html',
   styleUrl: './abos-detail.component.scss'
@@ -52,12 +55,13 @@ export class AbosDetailComponent {
     protected readonly Object = Object;
     protected readonly Breakpoints = Breakpoints;
 
-
   constructor(
     protected breakpointObserver: BreakpointObserver,
     public abosStore: AbosStoreV2,
   ) {
   }
+
+
 
   isTrue (field : string) {
     return this.abosStore.selectedItemFg!.get(field)?.value

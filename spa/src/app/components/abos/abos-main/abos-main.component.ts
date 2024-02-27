@@ -57,6 +57,7 @@ export class AbosMainComponent {
       isAutoRenewal: abo.isAutoRenewal,
       startDate: abo.startDate,
       isExpiringThisMonth : abo.isExpiringThisMonth,
+      costsPerYear: 0,
 
       expReminder: abo.expReminder,
       expReminderPeriod: abo.expReminderPeriod,
@@ -75,6 +76,14 @@ export class AbosMainComponent {
       this.setActiveness(value, 'startDate', formGroup)
     })
 
+    formGroup.get('price')?.valueChanges.subscribe(price => {
+      this.updateAboCostsPerYear()
+    })
+
+    formGroup.get('period')?.valueChanges.subscribe(_ => {
+      this.updateAboCostsPerYear()
+    })
+
     // init at least!
     const expReminderValue = formGroup.get('expReminder')?.value;
     const isAutoRenewalValue = formGroup.get('isAutoRenewal')?.value;
@@ -83,11 +92,22 @@ export class AbosMainComponent {
     this.setActiveness(expReminderValue, 'expReminderPeriodAmounts', formGroup)
     this.setActiveness(isAutoRenewalValue, 'startDate', formGroup)
 
+    this.updateAboCostsPerYear();
 
     formGroup.valueChanges.subscribe((item : Abo) => {
       this.abosStore.saveItemDebounce(item.id!, item);
     })
     return formGroup;
+  }
+
+  private updateAboCostsPerYear() {
+    const formGroup = this.abosStore.selectedItemFg!;
+    if (formGroup == null) {
+      return;
+    }
+    const abo : Abo = { ...formGroup.getRawValue(), isEditing: false };
+    const price = abo.price > 0 ? this.abosStore.calcAboPricePerYear(abo) : 0;
+    formGroup.get('costsPerYear')!.setValue(price);
   }
 
   private setActiveness(isActive: boolean, attribute : string, formGroup : FormGroup) {

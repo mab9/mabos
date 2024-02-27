@@ -89,6 +89,11 @@ export class AbosStoreV2 implements OnDestroy {
     }
   }
 
+  calcAboPricePerYear(abo: Abo) {
+    const price = this.normalizePriceToPricePerYear(abo);
+    return this.roundUpToNearestFiveCents(price);
+  }
+
   normalizePriceToPricePerYear(abo: Abo) {
     return 12 * this.normalizePriceToPricePerMonth(abo);
   }

@@ -14,6 +14,7 @@ export interface Abo {
   // meta data
   isEditing: boolean;
   isExpiringThisMonth: boolean;
+  costsPerYear: number;
 
   // // Reminder
   expReminder: boolean;
@@ -30,6 +31,7 @@ export const createAbo = (today = new Date(), period = Period.MONTH): Abo => {
     period: period,
     active: false,
     description: '',
+    costsPerYear: 0,
     isEditing: false,
     isExpiringThisMonth: false,
     isAutoRenewal: false,

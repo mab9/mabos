@@ -3,7 +3,7 @@
 } @else {
   <ng-container *ngIf="(abosStore.abos$ | async) as abos">
     <ng-container *ngIf="abos.length > 0">
-      <app-abos-list></app-abos-list>
+      <app-abos-list (onSelectItem)="onSelectItem($event)"></app-abos-list>
     </ng-container>
 
     <ng-container *ngIf="abos.length == 0">
