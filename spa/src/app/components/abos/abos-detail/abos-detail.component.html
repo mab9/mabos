@@ -40,7 +40,7 @@
 
         <div class="width-full toggler">
           <mat-chip highlighted="true">
-            Costs per year {{ this.abosStore.selectedItemFg?.get('costsPerYear')!.value | currency:'CHF '  }}
+            Costs per year: {{ this.abosStore.selectedItemFg?.get('costsPerYear')?.value | number:'1.2-2' }}.-
           </mat-chip>
         </div>
 

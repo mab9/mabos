@@ -94,7 +94,7 @@ export class AbosMainComponent {
     this.setActiveness(expReminderValue, 'expReminderPeriodAmounts', formGroup)
     this.setActiveness(isAutoRenewalValue, 'startDate', formGroup)
 
-    this.updateAboCostsPerYear();
+    this.updateAboCostsPerYear(formGroup);
 
     formGroup.valueChanges.subscribe((item : Abo) => {
       this.abosStore.saveItemDebounce(item.id!, item);
@@ -102,8 +102,11 @@ export class AbosMainComponent {
     return formGroup;
   }
 
-  private updateAboCostsPerYear() {
-    const formGroup = this.abosStore.selectedItemFg!;
+  private updateAboCostsPerYear(hacky: FormGroup | null = null) {
+    let formGroup = this.abosStore.selectedItemFg!;
+    if (formGroup == null && hacky != null) {
+      formGroup = hacky;
+    }
     if (formGroup == null) {
       return;
     }

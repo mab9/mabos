@@ -8,7 +8,7 @@ import {MatInput} from "@angular/material/input";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
-import {AsyncPipe, CurrencyPipe, JsonPipe, NgIf} from "@angular/common";
+import {AsyncPipe, CurrencyPipe, DecimalPipe, JsonPipe, NgIf} from "@angular/common";
 import {PeriodPipe} from "../../../pipes/period.pipe";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AbosStoreV2} from "../../../stores/abosV2.store";
@@ -44,7 +44,8 @@ import {MatButton} from "@angular/material/button";
     MatButton,
     AsyncPipe,
     JsonPipe,
-    CurrencyPipe
+    CurrencyPipe,
+    DecimalPipe
   ],
   templateUrl: './abos-detail.component.html',
   styleUrl: './abos-detail.component.scss'
