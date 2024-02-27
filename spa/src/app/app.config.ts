@@ -1,4 +1,4 @@
-import {ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, isDevMode} from '@angular/core';
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
@@ -8,6 +8,7 @@ import {HttpClientModule, provideHttpClient, withFetch, withXsrfConfiguration} f
 import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core";
 import {KeycloakService} from "keycloak-angular";
 import {providerKeycloakBearerInterceptor, providerKeycloakInitializer} from "./providers/keycloak.provider";
+import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
 
@@ -24,11 +25,14 @@ export const appConfig: ApplicationConfig = {
         cookieName: 'XSRF-TOKEN',
         headerName: 'X-XSRF-TOKEN',
       },
-
     )),
     {provide: MAT_DATE_LOCALE, useValue: 'de'},
     provideClientHydration(),
     provideAnimations(),
     importProvidersFrom(HttpClientModule),
-  ]
+    provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    })
+]
 };
