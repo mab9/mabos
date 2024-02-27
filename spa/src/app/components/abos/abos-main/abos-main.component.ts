@@ -10,6 +10,7 @@ import {AbosStoreV2} from "../../../stores/abosV2.store";
 import {Abo} from "../../../model/abos.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AbosDetailComponent} from "../abos-detail/abos-detail.component";
+import {AbosOverviewComponent} from "../abos-overview/abos-overview.component";
 
 @Component({
   selector: 'app-abos',
@@ -23,7 +24,8 @@ import {AbosDetailComponent} from "../abos-detail/abos-detail.component";
     NgIf,
     AbosListComponent,
     AsyncPipe,
-    AbosDetailComponent
+    AbosDetailComponent,
+    AbosOverviewComponent
   ],
   templateUrl: './abos-main.component.html',
   styleUrl: './abos-main.component.scss'

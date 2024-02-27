@@ -2,7 +2,11 @@
   <app-abos-detail></app-abos-detail>
 } @else {
   <ng-container *ngIf="(abosStore.abos$ | async) as abos">
+    <app-abos-overview></app-abos-overview>
+
     <ng-container *ngIf="abos.length > 0">
+
+
       <app-abos-list (onSelectItem)="onSelectItem($event)"></app-abos-list>
     </ng-container>
 
