@@ -67,25 +67,34 @@ export class AbosMainComponent {
 
   private onChangeValueUpdateBehaveiour(formGroup : FormGroup) {
     formGroup.get('expReminder')?.valueChanges.subscribe((value : boolean) => {
-      this.updateExpReminderActiveness(value, formGroup);
+      this.setActiveness(value, 'expReminderPeriod', formGroup)
+      this.setActiveness(value, 'expReminderPeriodAmounts', formGroup)
     })
 
-    this.updateExpReminderActiveness(formGroup.get('expReminder')?.value, formGroup);
+    formGroup.get('isAutoRenewal')?.valueChanges.subscribe((value : boolean) => {
+      this.setActiveness(value, 'startDate', formGroup)
+    })
+
+    // init at least!
+    const expReminderValue = formGroup.get('expReminder')?.value;
+    const isAutoRenewalValue = formGroup.get('isAutoRenewal')?.value;
+
+    this.setActiveness(expReminderValue, 'expReminderPeriod', formGroup)
+    this.setActiveness(expReminderValue, 'expReminderPeriodAmounts', formGroup)
+    this.setActiveness(isAutoRenewalValue, 'startDate', formGroup)
+
+
     formGroup.valueChanges.subscribe((item : Abo) => {
       this.abosStore.saveItemDebounce(item.id!, item);
     })
-
-    // init connected fields.
     return formGroup;
   }
 
-  private updateExpReminderActiveness(isActive : boolean, formGroup : FormGroup) {
+  private setActiveness(isActive: boolean, attribute : string, formGroup : FormGroup) {
     if (isActive) {
-      formGroup.get('expReminderPeriod')?.enable()
-      formGroup.get('expReminderPeriodAmounts')?.enable()
+      formGroup.get(attribute)?.enable()
     } else {
-      formGroup.get('expReminderPeriod')?.disable()
-      formGroup.get('expReminderPeriodAmounts')?.disable()
+      formGroup.get(attribute)?.disable()
     }
   }
 }

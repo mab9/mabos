@@ -20,13 +20,6 @@
 
           </mat-slide-toggle>
         </div>
-        <!-- IS EXP. THIS MONTH -->
-        <!-- IS AUTO RENEWAL -->
-        <div class="width-full toggler">
-          <mat-slide-toggle class="width-full" [color]="'primary'" formControlName="isAutoRenewal">
-            {{ isTrue('isAutoRenewal') ? 'deactivate' : 'activate' }} auto renewal
-          </mat-slide-toggle>
-        </div>
 
 
         <!-- PRICE -->
@@ -37,13 +30,29 @@
 
         <!-- PERIOD -->
         <mat-form-field appearance="outline" class="width-full">
-          <mat-label>Period</mat-label>
+          <mat-label>Subscription Period</mat-label>
           <mat-select formControlName="period" placeholder="Week">
             @for (item of Object.keys(Period); track item) {
               <mat-option [value]="item">{{ item | period }}</mat-option>
             }
           </mat-select>
         </mat-form-field>
+
+
+        <!-- DESCRIPTION -->
+        <mat-form-field appearance="outline" class="width-full">
+          <mat-label>Description</mat-label>
+          <mat-label>Textarea</mat-label>
+          <textarea matInput placeholder="for my dog" formControlName="description"></textarea>
+        </mat-form-field>
+
+        <!-- IS AUTO RENEWAL -->
+        <div class="width-full toggler">
+          <mat-slide-toggle class="width-full" [color]="'primary'" formControlName="isAutoRenewal">
+            {{ isTrue('isAutoRenewal') ? 'deactivate' : 'activate' }} auto renewal
+          </mat-slide-toggle>
+        </div>
+
 
         <!-- START DATE -->
         <mat-form-field appearance="outline" class="width-full" style="margin-bottom: 0.75rem">
@@ -55,12 +64,6 @@
         </mat-form-field>
 
 
-        <!-- DESCRIPTION -->
-        <mat-form-field appearance="outline" class="width-full">
-          <mat-label>Description</mat-label>
-          <mat-label>Textarea</mat-label>
-          <textarea matInput placeholder="for my dog" formControlName="description"></textarea>
-        </mat-form-field>
 
 
         <div class="width-full toggler">

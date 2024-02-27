@@ -117,6 +117,7 @@ export class AbosStoreV2 implements OnDestroy {
   }
 
   setSelectedFg(selection : FormGroup | null) {
+    window.scroll(0, 0);
     this.selectedItemFg = selection;
     this.subjectSel.next(selection?.value);
   }
