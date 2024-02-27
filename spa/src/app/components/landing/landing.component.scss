@@ -1,5 +1,40 @@
 .landing {
   border-radius: 30%;
-  max-width: 100%;
-  height: auto;
+  max-width: 80%;
+  height: 100%;
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(720deg);
+  }
+}
+
+.spin-animation {
+  animation: spin 3s ease-in-out;
+}
+
+.special-words {
+  font-size: x-large;
+  font-weight: bold;
+  font-style: initial;
+  margin-right: 0.4rem;
+}
+
+.animated-text span {
+  margin-top: 4rem;
+  opacity: 0.1;
+  animation: fade-in 0.5s forwards;
+  color: #d74e14;
+  font-size: xxx-large;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
 }
