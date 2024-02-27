@@ -19,7 +19,7 @@ export class LandingComponent implements AfterViewInit {
 
   constructor() {
     this.startSpin();
-    const phrase = "Start tracking your abo expenses now!";
+    const phrase = "Start tracking your subscription expenses now!";
     this.text = phrase.split(' ');
     // Start the text animation just before the logo animation finishes
     setTimeout(() => {

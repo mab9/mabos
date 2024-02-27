@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AsyncPipe, CommonModule, NgIf} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -8,9 +8,6 @@ import {MatSidenavContainer, MatSidenavModule} from "@angular/material/sidenav";
 import {MatBadge} from "@angular/material/badge";
 import {KeycloakService} from "keycloak-angular";
 import {AuthStore} from "./stores/auth.store";
-import {MessagesService} from "./services/messages.service";
-import {AbosStore} from "./stores/abos.store";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {AbosStoreV2} from "./stores/abosV2.store";
 
@@ -27,9 +24,7 @@ export class AppComponent implements OnInit {
   constructor(
     public authStore: AuthStore,
     private readonly keycloak: KeycloakService,
-    private messageService : MessagesService,
     public aboStore : AbosStoreV2,
-    public breakpointObserver: BreakpointObserver,
   ) {
 
   }
@@ -47,13 +42,7 @@ export class AppComponent implements OnInit {
     this.authStore.logout();
   }
 
-  raiseMessage() {
-    this.messageService.showMessages("This function is not implemented at the moment");
-  }
-
   back() {
     this.aboStore.setSelectedFg(null);
   }
-
-  protected readonly Breakpoints = Breakpoints;
 }

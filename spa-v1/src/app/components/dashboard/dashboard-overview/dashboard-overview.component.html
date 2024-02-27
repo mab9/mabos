@@ -13,14 +13,14 @@
 </mat-card>
 <mat-card class="card">
   <mat-card-header>
-    <mat-card-title>Abo counts and expirations</mat-card-title>
+    <mat-card-title>Subscription counts and expirations</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
     <mat-list>
-      <mat-list-item>{{ abosStore.abosCount$ | async }} total abos </mat-list-item>
-      <mat-list-item>{{ abosStore.abosActive$ | async }} total active abos</mat-list-item>
-      <mat-list-item>{{ abosStore.abosTotalExpiringThisMonth$ | async }} abos expiring this month</mat-list-item>
+      <mat-list-item>{{ abosStore.abosCount$ | async }} total subscriptions </mat-list-item>
+      <mat-list-item>{{ abosStore.abosActive$ | async }} total active subscriptions</mat-list-item>
+      <mat-list-item>{{ abosStore.abosTotalExpiringThisMonth$ | async }} subscriptions expiring this month</mat-list-item>
     </mat-list>
   </mat-card-content>
 

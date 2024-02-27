@@ -1,7 +1,7 @@
 <ng-container *ngIf="(abosStore.abos$| async) as abos">
   <ng-container *ngIf="abos.length > 4">
     <mat-form-field style="width: 100%">
-      <input [(ngModel)]="searchKey" matInput (input)="updateFilter()" placeholder="Search abos">
+      <input [(ngModel)]="searchKey" matInput (input)="updateFilter()" placeholder="Search subscriptions">
     </mat-form-field>
   </ng-container>
 </ng-container>

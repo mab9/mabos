@@ -2,6 +2,8 @@
   border-radius: 30%;
   max-width: 80%;
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 
@@ -16,6 +18,13 @@
 
 .spin-animation {
   animation: spin 3s ease-in-out;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.no-scroll {
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .special-words {
@@ -26,6 +35,8 @@
 }
 
 .animated-text span {
+  overflow-x: hidden;
+  overflow-y: hidden;
   margin-top: 4rem;
   opacity: 0.1;
   animation: fade-in 0.5s forwards;

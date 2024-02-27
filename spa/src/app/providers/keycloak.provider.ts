@@ -14,6 +14,7 @@ const initializeKeycloak = (keycloak: KeycloakService) => {
       initOptions: {
         pkceMethod: "S256", // todo check why this property is not working
         redirectUri: environment.keycloak.initOptions_redirectUri,
+        onLoad: 'check-sso', // silently checks if there's an existing session without redirecting the user.
         //onLoad: 'login-required', // auto login when session is still available.
       },
       enableBearerInterceptor: true,
