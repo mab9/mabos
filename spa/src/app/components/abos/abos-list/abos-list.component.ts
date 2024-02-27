@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
-import {AsyncPipe, CurrencyPipe, NgIf} from "@angular/common";
+import {AsyncPipe, CurrencyPipe, DecimalPipe, NgClass, NgIf} from "@angular/common";
 import {
   MatCell,
   MatCellDef,
@@ -61,7 +61,9 @@ import {AbosStoreV2} from "../../../stores/abosV2.store";
     MatHeaderCellDef,
     MatFooterCellDef,
     MatFormField,
-    MatInput
+    MatInput,
+    DecimalPipe,
+    NgClass
   ],
   templateUrl: './abos-list.component.html',
   styleUrl: './abos-list.component.scss'
