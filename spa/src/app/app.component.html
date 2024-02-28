@@ -2,7 +2,7 @@
   <mat-toolbar color="primary" class="sticky-toolbar">
 
     <mat-toolbar-row>
-      <button *ngIf="aboStore.aboSelection$ | async" mat-icon-button (click)="back()">
+      <button *ngIf="aboStore.aboSelection$ | async" mat-icon-button (click)="back()" aria-label="back to home button">
         <mat-icon>arrow_back_ios</mat-icon>
       </button>
       <span *ngIf="aboStore.aboSelection$ | async"> {{ aboStore.selectedItemFg?.value['title'] }} </span>
@@ -11,18 +11,18 @@
 
       <span class="example-spacer"></span>
 
-      <button *ngIf="authStore.isLoggedIn$ | async" [matMenuTriggerFor]="menu" mat-icon-button aria-label="icon-button with a menu">
+      <button *ngIf="authStore.isLoggedIn$ | async" [matMenuTriggerFor]="menu" mat-icon-button aria-label="menu button">
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <div *ngIf="authStore.user$ | async as user" mat-menu-item>
           <span>{{ user.email }}</span>
         </div>
-        <button (click)="logout()" mat-menu-item>
+        <button (click)="logout()" mat-menu-item aria-label="logout button">
           <mat-icon>logout</mat-icon><span>Logout</span>
         </button>
       </mat-menu>
-      <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()" mat-icon-button>
+      <button *ngIf="authStore.isLoggedOut$ | async" (click)="login()" mat-icon-button aria-label="login button">
         <mat-icon>login</mat-icon>
       </button>
     </mat-toolbar-row>
