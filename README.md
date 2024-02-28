@@ -7,9 +7,9 @@
 ![GitHub forks](https://img.shields.io/github/forks/mab9/mabos?style=social)
 <!--![Twitter Follow](https://img.shields.io/twitter/follow/mab9?style=social)-->
 
-mabos is a tool to track abo expenses and expirations. To that it servers as a test project to try some architectural concepts.
+mabos is a tool to track subscription expenses and expirations. To that it servers as a test project to try some architectural concepts.
 
-![mabos-overview](spa-v1/src/assets/mabos-overview.png "mabos-overview")
+![pwa home view](spa/src/assets/pwa.png "pwa home view")
 
 ## Local development
 
@@ -23,6 +23,7 @@ Start project - Linux and macOS:
 0. git clone https://github.com/mab9/mabos.git
 1. cd mabos
 2. docker compose -f compose-local.yml up -d
+3. cd spa && npm installs
 3. cd spa && npm run start
 4. cd backent && ../mvnw spring-boot:run -Dspring-boot.run.profiles=local
 ```
@@ -90,13 +91,14 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 
 ## My next ideas
 
-- Style frontend 
-- Add a PWA
-- Write frontend with plain vanilla JS
-- Write frontend with bootstrap
-- Add extra features to improve ABO tracking - observability.
-- Add logging and monitor features
-- Provide kubernetes resources for k8s deployment
+- [x] Simple frontend styling improvements 
+- [x] Add a PWA
+- [ ] Optimize resource footprint
+- [ ] Write frontend with plain vanilla JS
+- [ ] Write frontend with tailwind
+- [ ] Add subscription tagging and create filters 
+- [ ] Add logging and monitor features
+- [ ] Provide kubernetes resources for k8s deployment
 
 ## Contributors
 
