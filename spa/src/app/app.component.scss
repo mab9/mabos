@@ -21,18 +21,25 @@
 
 /* Basic styling for content */
 .content {
-  margin: 56px auto 20px; // top (left, right, bottom)
+  position: fixed;
+  top: 64px;
+  height: calc(100vh - 64px); /* 100vh is the full viewport height, subtract the total vertical margins and possibly header/footer if any */
   padding: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 100%;
   max-width: 100%; /* Use full width on smaller screens */
   box-sizing: border-box; /* Ensures padding does not affect the set width */
   overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 /* Responsive design adjustments */
 @media (max-width: 768px) { /* For tablets and below */
   .content {
-    margin-bottom: 10px;
     padding: 1rem;
+    top: 57px;
+    height: calc(100vh - 57px); /* 100vh is the full viewport height, subtract the total vertical margins and possibly header/footer if any */
   }
 }
 
