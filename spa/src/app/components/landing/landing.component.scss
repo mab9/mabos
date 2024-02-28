@@ -1,7 +1,6 @@
 .landing {
   border-radius: 30%;
   max-width: 80%;
-  height: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -32,6 +31,14 @@
   font-weight: bold;
   font-style: initial;
   margin-right: 0.4rem;
+}
+
+.fancy-text span {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin-top: 4rem;
+  color: #d74e14;
+  font-size: xxx-large;
 }
 
 .animated-text span {

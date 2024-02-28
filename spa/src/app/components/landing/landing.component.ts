@@ -12,7 +12,7 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
 })
-export class LandingComponent implements AfterContentInit {
+export class LandingComponent { // implements AfterContentInit {
 
   isSpinning = false;
   text: string[] = [];
