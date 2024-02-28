@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
@@ -11,13 +11,16 @@ import {NgForOf, NgIf} from "@angular/common";
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
 })
-export class LandingComponent implements AfterViewInit {
+export class LandingComponent implements AfterContentInit {
 
   isSpinning = false;
   text: string[] = [];
   triggerStartTextAnimation = false;
 
   constructor() {
+  }
+
+  ngAfterContentInit(): void {
     this.startSpin();
     const phrase = "Start tracking your subscription expenses now!";
     this.text = phrase.split(' ');
@@ -25,10 +28,6 @@ export class LandingComponent implements AfterViewInit {
     setTimeout(() => {
       this.startTextAnimation(); // This could simply set a flag to start the animation
     }, 1500); // Adjust the time as needed
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   startTextAnimation() {
