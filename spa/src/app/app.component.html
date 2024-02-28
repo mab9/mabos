@@ -6,7 +6,7 @@
         <mat-icon>arrow_back_ios</mat-icon>
       </button>
       <span *ngIf="aboStore.aboSelection$ | async"> {{ aboStore.selectedItemFg?.value['title'] }} </span>
-      <img *ngIf="!(aboStore.aboSelection$ | async)" src="./assets/mabos-logo-1.png" alt="Mabos Logo" class="logo">
+      <img *ngIf="!(aboStore.aboSelection$ | async)" src="./assets/icons/icon-128x128.png" alt="Mabos Logo" class="logo">
       <span *ngIf="!(aboStore.aboSelection$ | async)" class="custom-margin-right">Mabos</span>
 
       <span class="example-spacer"></span>
@@ -18,9 +18,6 @@
         <div *ngIf="authStore.user$ | async as user" mat-menu-item>
           <span>{{ user.email }}</span>
         </div>
-        <button *ngIf="authStore.isLoggedIn$ | async" [routerLink]="'/abos'" mat-menu-item>
-          <mat-icon>category</mat-icon><span>Mobile Test</span>
-        </button>
         <button (click)="logout()" mat-menu-item>
           <mat-icon>logout</mat-icon><span>Logout</span>
         </button>

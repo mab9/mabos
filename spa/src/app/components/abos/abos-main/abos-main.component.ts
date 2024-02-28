@@ -6,7 +6,7 @@ import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {AbosListComponent} from "../abos-list/abos-list.component";
-import {AbosStoreV2} from "../../../stores/abosV2.store";
+import {AbosStore} from "../../../stores/abos.store";
 import {Abo} from "../../../model/abos.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AbosDetailComponent} from "../abos-detail/abos-detail.component";
@@ -34,7 +34,7 @@ export class AbosMainComponent {
 
   constructor(
     private fb: FormBuilder,
-    public abosStore : AbosStoreV2,) {
+    public abosStore : AbosStore,) {
   }
 
   onAdd() {

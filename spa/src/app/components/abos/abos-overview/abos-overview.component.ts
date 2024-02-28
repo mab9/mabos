@@ -6,7 +6,7 @@ import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {AsyncPipe, DecimalPipe, NgIf} from "@angular/common";
 import {AbosListComponent} from "../abos-list/abos-list.component";
-import {AbosStoreV2} from "../../../stores/abosV2.store";
+import {AbosStore} from "../../../stores/abos.store";
 import {AbosDetailComponent} from "../abos-detail/abos-detail.component";
 import {
   MatAccordion,
@@ -46,6 +46,6 @@ export class AbosOverviewComponent {
 
   panelOpenState = false;
   constructor(
-    public abosStore : AbosStoreV2,) {
+    public abosStore : AbosStore,) {
   }
 }

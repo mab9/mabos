@@ -9,7 +9,7 @@ import {MatBadge} from "@angular/material/badge";
 import {KeycloakService} from "keycloak-angular";
 import {AuthStore} from "./stores/auth.store";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
-import {AbosStoreV2} from "./stores/abosV2.store";
+import {AbosStore} from "./stores/abos.store";
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   constructor(
     public authStore: AuthStore,
     private readonly keycloak: KeycloakService,
-    public aboStore : AbosStoreV2,
+    public aboStore : AbosStore,
   ) {
 
   }

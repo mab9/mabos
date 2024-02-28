@@ -11,7 +11,7 @@ import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {AsyncPipe, CurrencyPipe, DecimalPipe, JsonPipe, NgIf} from "@angular/common";
 import {PeriodPipe} from "../../../pipes/period.pipe";
 import {ReactiveFormsModule} from "@angular/forms";
-import {AbosStoreV2} from "../../../stores/abosV2.store";
+import {AbosStore} from "../../../stores/abos.store";
 import {MatChip, MatChipOption} from "@angular/material/chips";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {MatButton} from "@angular/material/button";
@@ -58,7 +58,7 @@ export class AbosDetailComponent {
 
   constructor(
     protected breakpointObserver: BreakpointObserver,
-    public abosStore: AbosStoreV2,
+    public abosStore: AbosStore,
   ) {
   }
 

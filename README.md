@@ -48,7 +48,7 @@ build images
 Export keycloak realm - can be imported on keycloak startup
 
       docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file'
-      docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./deployment/mabos-realm.json
+      docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./deployment/realm-mabos.json
 
 
 ## Server deployment
