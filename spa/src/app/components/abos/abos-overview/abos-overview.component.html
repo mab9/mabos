@@ -2,7 +2,7 @@
   <mat-expansion-panel (opened)="panelOpenState = true"
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
-      <mat-panel-title>Your expenses</mat-panel-title>
+      <mat-panel-title>My expenses</mat-panel-title>
     </mat-expansion-panel-header>
 
     <p>Costs per year:           <span class="align-decimal">{{ abosStore.abosTotalYearlyPrice$ | async | number:'1.2-2' }}.-</span></p>

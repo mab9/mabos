@@ -26,7 +26,7 @@ export const createAbo = (today = new Date(), period = Period.MONTH): Abo => {
   const formattedDate = format(today, 'yyyy-MM-dd');
   return {
     id: null,
-    title: 'New Abo',
+    title: 'New subs...',
     price: 0,
     period: period,
     active: false,
