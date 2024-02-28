@@ -16,7 +16,7 @@
         <div class="width-full toggler">
           <!-- ACTIVE -->
           <mat-slide-toggle class="width-full" [color]="'primary'" style="width: 220px;" formControlName="active">
-            {{ isTrue('active') ? 'deactivate' : 'activate' }} abo
+            {{ isTrue('active') ? 'deactivate' : 'activate' }} subscription
 
           </mat-slide-toggle>
         </div>
@@ -51,15 +51,22 @@
           <textarea matInput placeholder="for my dog" formControlName="description"></textarea>
         </mat-form-field>
 
-        <!-- IS AUTO RENEWAL -->
-        <div class="width-full toggler">
-          <mat-slide-toggle class="width-full" [color]="'primary'" formControlName="isAutoRenewal">
-            {{ isTrue('isAutoRenewal') ? 'deactivate' : 'activate' }} auto renewal
-          </mat-slide-toggle>
-        </div>
 
 
-        <!-- START DATE -->
+
+
+     <ng-container *ngIf="false">
+       <!-- HIDE UNTIL FULLY IMPLEMENTED -->
+
+       <!-- IS AUTO RENEWAL -->
+     <div class="width-full toggler">
+       <mat-slide-toggle class="width-full" [color]="'primary'" formControlName="isAutoRenewal">
+         {{ isTrue('isAutoRenewal') ? 'deactivate' : 'activate' }} auto renewal
+       </mat-slide-toggle>
+     </div>
+
+
+     <!-- START DATE -->
         <mat-form-field appearance="outline" class="width-full" style="margin-bottom: 0.75rem">
           <mat-label>Start Date</mat-label>
           <input matInput [matDatepicker]="picker" placeholder="11.24.2023" formControlName="startDate">
@@ -92,11 +99,14 @@
           </mat-select>
         </mat-form-field>
 
+     </ng-container>
 
         <button class="width-full" mat-raised-button color="warn" (click)="removeMe()" aria-label="remove subscription button">Remove me</button>
 
+        <!--  <pre>{{ abosStore.setSelectedFg | json }}</pre> -->
 
-         <pre>{{ abosStore.setSelectedFg | json }}</pre>
+
+
 
       </mat-card-content>
     </mat-card>
