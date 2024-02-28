@@ -1,5 +1,6 @@
 import {AfterContentInit, AfterViewInit, Component} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-landing',
@@ -17,7 +18,7 @@ export class LandingComponent implements AfterContentInit {
   text: string[] = [];
   triggerStartTextAnimation = false;
 
-  constructor() {
+  constructor(public breakPointObserver : BreakpointObserver) {
   }
 
   ngAfterContentInit(): void {
@@ -39,4 +40,7 @@ export class LandingComponent implements AfterContentInit {
     this.isSpinning = false; // reset in case of animation shall run again.
     this.isSpinning = true;
   }
+
+  protected readonly BreakpointObserver = BreakpointObserver;
+  protected readonly Breakpoints = Breakpoints;
 }
