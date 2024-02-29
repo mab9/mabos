@@ -1,0 +1,39 @@
+<div class="no-scroll"
+     style="display: flex; justify-content: center; margin-top: 6rem; align-items: center">
+
+
+  <!--
+
+  <img *ngIf="breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="landing" src="assets/mabos-logo-small.webp"
+       alt="landing page image" [class.spin-animation]="isSpinning" (click)="startSpin()">
+  <img *ngIf="!breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="landing" src="assets/mabos-logo.webp"
+       alt="landing page image" [class.spin-animation]="isSpinning" (click)="startSpin()">
+  -->
+
+  <img *ngIf="breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="landing" src="assets/mabos-logo-small.webp"
+       alt="landing page image">
+  <img *ngIf="!breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="landing" src="assets/mabos-logo.webp"
+       alt="landing page image">
+</div>
+
+<div class="fancy-text">
+  <span class="special-words">Start</span>
+  <span>tracking your subscription expenses </span>
+  <span class="special-words">now!</span>
+</div>
+
+<!--
+<div class="animated-text" *ngIf="triggerStartTextAnimation">
+  <span *ngFor="let word of text; let i = index" [style.animation-delay]="i * 0.4 + 's'">
+    @if (['start', 'now!'].includes(word.toLowerCase())) {
+      <span class="special-words">{{ word }}</span>
+    } @else {
+      {{ word }}
+    }
+   -->
+    <!-- add space after each word -->
+    <span> </span>
+<!--
+  </span>
+</div>
+-->

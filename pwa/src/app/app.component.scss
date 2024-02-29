@@ -1,0 +1,63 @@
+.sticky-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  height: 35px;
+  width: 35px;
+  margin-right: 0.75rem;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.custom-margin-right {
+  margin-right: 0.75rem;
+}
+
+
+/* Basic styling for content */
+.content {
+  position: fixed;
+  top: 64px;
+  height: calc(100vh - 64px); /* 100vh is the full viewport height, subtract the total vertical margins and possibly header/footer if any */
+  padding: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 100%;
+  max-width: 100%; /* Use full width on smaller screens */
+  box-sizing: border-box; /* Ensures padding does not affect the set width */
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) { /* For tablets and below */
+  .content {
+    padding: 1rem;
+    top: 57px;
+    height: calc(100vh - 57px); /* 100vh is the full viewport height, subtract the total vertical margins and possibly header/footer if any */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) { /* For landscape tablets and small desktops */
+  .content {
+    width: 80%; /* Slightly narrower width for medium screens */
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1399px) { /* For desktops */
+  .content {
+    width: 80%; /* Optimal reading width for large screens */
+  }
+}
+
+@media (min-width: 1400px) { /* For large desktops */
+  .content {
+    width: 60%; /* Optimal reading width for large screens */
+  }
+}
+

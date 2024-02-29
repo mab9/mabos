@@ -10,7 +10,7 @@ export const environment = {
     config_realm: 'mabos-realm',
     config_clientId: 'mabos-public-client',
     initOptions_pkceMethod: "S256", // todo check why this property is not working
-    initOptions_redirectUri: 'http://localhost:4200/abos',
+    initOptions_redirectUri: 'http://localhost:4200/dashboard',
     logout_redirectUri: 'http://localhost:4200/landing',
   }
 };

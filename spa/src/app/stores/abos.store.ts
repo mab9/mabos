@@ -6,7 +6,6 @@ import {addMonths, subDays} from "date-fns";
 import {AbosService} from "../services/abos.service";
 import {isSameYearAndMonth} from "../util/date.util";
 import {FormGroup} from "@angular/forms";
-import {AuthStore} from "./auth.store";
 
 @Injectable({
   providedIn: "root" // one instance for the whole application
@@ -14,8 +13,6 @@ import {AuthStore} from "./auth.store";
 export class AbosStore implements OnDestroy {
 
   public selectedItemFg: FormGroup | null = null;
-  private subjectSel = new BehaviorSubject<Abo | null>(null)
-  public aboSelection$ = this.subjectSel.asObservable();
 
   private today = new Date();
   private changeSubjects = new Map<number, Subject<Abo>>();
@@ -48,16 +45,10 @@ export class AbosStore implements OnDestroy {
   );
 
   constructor(
-    private authStore: AuthStore,
     private abosService: AbosService,
   ) {
-    // initial load
-    this.authStore.isLoggedIn$.subscribe(isLoggeIn => {
-        if (isLoggeIn) {
-          // memory leak on destroy ;-)
-          this.abosService.getAll().subscribe(items => this.subject.next(items));
-        }
-    })
+    // inital load
+    this.abosService.getAll().subscribe(items => this.subject.next(items));
   }
 
 // "2023-07-16", "2024-07-01",
@@ -89,11 +80,6 @@ export class AbosStore implements OnDestroy {
     }
   }
 
-  calcAboPricePerYear(abo: Abo) {
-    const price = this.normalizePriceToPricePerYear(abo);
-    return this.roundUpToNearestFiveCents(price);
-  }
-
   normalizePriceToPricePerYear(abo: Abo) {
     return 12 * this.normalizePriceToPricePerMonth(abo);
   }
@@ -121,10 +107,8 @@ export class AbosStore implements OnDestroy {
     }
   }
 
-  setSelectedFg(selection : FormGroup | null) {
-    window.scroll(0, 0);
+  setSelectedFg(selection : FormGroup) {
     this.selectedItemFg = selection;
-    this.subjectSel.next(selection?.value);
   }
 
   createItem() {

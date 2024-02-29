@@ -8,6 +8,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      SPA_PROJECT: ./pwa
 
     steps:
     - uses: actions/checkout@v3
@@ -27,7 +29,7 @@ jobs:
 
     - name: Install npm dependencies
       run: npm install
-      working-directory: ./spa
+      working-directory: ${{ env.SPA_PROJECT }}
 
 
     # linting must be configured first on SPA
@@ -42,11 +44,11 @@ jobs:
 
     - name: Build Angular for production
       run: npm run build
-      working-directory: ./spa
+      working-directory: ${{ env.SPA_PROJECT }}
 
     - name: Build Docker Image
       run: docker build -t mabru/mabos-spa:latest .
-      working-directory: ./spa
+      working-directory: ${{ env.SPA_PROJECT }}
 
     - name: Push to Docker Registry
       run: |

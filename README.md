@@ -9,9 +9,9 @@
 
 mabos is a tool to track subscription expenses and expirations. To that it servers as a test project to try some architectural concepts.
 
-![pwa home view](spa/src/assets/pwa.png "pwa home view")
+![pwa home view](pwa/src/assets/pwa.png "pwa home view")
 
-## Local development
+## Basics  development
 
 Requirements:
 - Java 21
@@ -28,10 +28,15 @@ Start project - Linux and macOS:
 4. cd backent && ../mvnw spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
-### SPA Notes - Frontend
+### Frontend
 
-- see package.json scripts.
-- icons 4 angular material: https://fonts.google.com/icons
+1. see PWA for progressive web app 
+2. see SPA for simple web single page application for desktop viewport
+
+
+Frontend is built with Angular Material: 
+- some infos located in package.json file.
+- icons 4 angular material: https://fonts.google.com/icons.
 
 
 ### Some docker commands
@@ -49,29 +54,6 @@ Export keycloak realm - can be imported on keycloak startup
 
       docker exec -i mabos-keycloak-1 /bin/sh -c '/opt/keycloak/bin/kc.sh export --realm mabos-realm --file /tmp/mabos-realm.json --users realm_file'
       docker cp mabos-keycloak-1:/tmp/mabos-realm.json ./deployment/realm-mabos.json
-
-
-## Server deployment
-
-Keycloak is using the Postgres DB in an own schema named keycloak.
-Make sure, that the initial DB scripts are executed to be able to start keycloak.
-The init scripts are located in the folder db at project root.
-
-
-1. start postgres, keycloak, backent and frontend with docker compose
-2. provide env file with parametrized secrets: .secrets.server.env
-3. ensure, that DB was setup correctly.
-
-   docker compose --env-file ./deployment/.secrets.local.env -f compose-server.yml up -d # if you want to test server compose on local env
-   docker compose --env-file ./deployment/.secrets.server.env -f compose-server.yml up -d
-   docker compose --env-file ./deployment/.secrets.server.env -f compose.yml up -d
-
-Side notes
-
-    To connect from a container to another container inside the same network:
-    - use the service name -> spa, backent, postgres or keycloak
-    - use the containers port, not the exposed port on the host system (8080 for keycloak)
-
 
 
 
@@ -93,7 +75,7 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 
 - [x] Simple frontend styling improvements 
 - [x] Add a PWA
-- [ ] Optimize resource footprint
+- [x] Optimize resource footprint with Lighthouse
 - [ ] Write frontend with plain vanilla JS
 - [ ] Write frontend with tailwind
 - [ ] Add subscription tagging and create filters 
