@@ -19,6 +19,7 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "../dialog/dialog.component";
 import {Router} from "@angular/router";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-profile',
@@ -60,12 +61,13 @@ export class ProfileComponent {
   constructor(
     public dialog: MatDialog,
     private router: Router,
+    private breakPointObserver : BreakpointObserver,
     public authStore : AuthStore) {
   }
 
   public removeMe() {
     const dialogSubscription = this.dialog.open(DialogComponent, {
-      width: '40%',
+      width: '100%',
       enterAnimationDuration : '250ms',
       exitAnimationDuration : '250ms',
     });
