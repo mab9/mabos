@@ -23,8 +23,7 @@
         <div>
           <p class="abo-info-column">
             {{ element.title }}
-            <span *ngIf="element.isExpiringThisMonth" class="mat-small"
-                  style="color: orangered;"><b>is expiring</b></span>
+            <!--<span *ngIf="element.isExpiringThisMonth" class="mat-small" style="color: orangered;"><b>is expiring</b></span> -->
           </p>
           <p class="abo-info-column"><span class="font-extra-small">{{ element.price | number:'1.2-2' }}.- per {{ element.period | period }}</span></p>
 

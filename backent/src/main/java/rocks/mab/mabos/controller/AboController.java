@@ -1,12 +1,9 @@
 package rocks.mab.mabos.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import rocks.mab.mabos.model.Abo;
-import rocks.mab.mabos.model.User;
 import rocks.mab.mabos.service.AboService;
-import rocks.mab.mabos.service.UserService;
 
 import java.util.Collection;
 
@@ -15,7 +12,6 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class AboController {
 
-    @Autowired
     private final AboService aboService;
 
     @GetMapping

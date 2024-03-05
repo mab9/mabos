@@ -7,7 +7,7 @@ services:
   spa:
     image: mabru/mabos-spa:latest
     pull_policy: always
-    restart: always
+    restart: unless-stopped
     #ports:
     #  - 4200:80
     networks:
@@ -16,7 +16,7 @@ services:
   backent:
     image: mabru/mabos-backent:latest
     pull_policy: always
-    restart: always
+    restart: unless-stopped
     depends_on:
       - postgres
       - keycloak
@@ -24,6 +24,7 @@ services:
     #  - 8080:8080
     environment:
       CORS_ALLOWED_ORIGIN: https://abos.mab.rocks
+      #LOGGING_LEVEL_ROOT: DEBUG
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
@@ -33,6 +34,7 @@ services:
 
   postgres:
     image: postgres:latest
+    restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -47,6 +49,7 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:23.0.0
+    restart: unless-stopped
     depends_on:
       - postgres
     command: ['start-dev', '--import-realm']
