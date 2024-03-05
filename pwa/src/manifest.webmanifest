@@ -6,8 +6,35 @@
   "theme_color": "#3f51b5",
   "background_color": "#ffffff",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "scope": "./",
   "start_url": "./",
+  "launch_handler": {
+      "client_mode": "auto"
+  },
+  "screenshots" : [
+    {
+      "src": "assets/screenshot-1.jpg",
+      "sizes": "720x1600",
+      "type": "image/jpg",
+      "form_factor": "narrow",
+      "label": "Landing page of Mabos app"
+    },
+    {
+      "src": "assets/screenshot-2.jpg",
+      "sizes": "720x1600",
+      "type": "image/jpg",
+      "form_factor": "narrow",
+      "label": "Homescreen of Mabos app"
+    },
+    {
+      "src": "assets/screenshot-2.jpg",
+      "sizes": "720x1600",
+      "type": "image/jpg",
+      "form_factor": "narrow",
+      "label": "Create subscription of Mabos app"
+    },
+   ]
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
