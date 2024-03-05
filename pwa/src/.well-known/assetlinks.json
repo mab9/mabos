@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "rocks.mab.abos",
+        "sha256_cert_fingerprints": ["B4:AB:01:02:A6:4E:C7:96:9F:53:B4:A5:AE:C6:1D:F3:84:F6:0A:D8:51:F0:82:87:FA:5C:7F:F2:F9:6D:A8:AC"]
+      }
+    }]
