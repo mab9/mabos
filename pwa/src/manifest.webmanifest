@@ -1,5 +1,7 @@
 {
+  "id": "mabos-mab9",
   "name": "mabos",
+  "description": "Mabos is a tool to track subscription expenses and expirations.",
   "short_name": "mabos",
   "theme_color": "#3f51b5",
   "background_color": "#ffffff",
