@@ -1,0 +1,10 @@
+
+
+<mat-card *ngIf="authStore.user$ | async as user">
+  <mat-card-content>
+    <p><label>email: </label> {{ user.email }}  </p>
+    <p><label>name: </label> {{ user.name }}  </p>
+    <p><label>role: </label>{{ user.role }}  </p>
+    <p><label>account create date: </label> {{ user.createDate | date : 'dd.MM.yyyy' }}  </p>
+  </mat-card-content>
+</mat-card>

@@ -16,7 +16,7 @@
       </button>
       <mat-menu #menu="matMenu">
         <div *ngIf="authStore.user$ | async as user" mat-menu-item>
-          <span>{{ user.email }}</span>
+          <span [routerLink]="'/profile'">{{ user.email }}</span>
         </div>
         <button (click)="logout()" mat-menu-item aria-label="logout button">
           <mat-icon>logout</mat-icon><span>Logout</span>
