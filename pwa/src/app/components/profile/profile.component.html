@@ -6,5 +6,14 @@
     <p><label>name: </label> {{ user.name }}  </p>
     <p><label>role: </label>{{ user.role }}  </p>
     <p><label>account create date: </label> {{ user.createDate | date : 'dd.MM.yyyy' }}  </p>
+
+    <button class="width-full"
+            mat-raised-button color="warn"
+            (click)="removeMe()"
+            matTooltip="Delete my profile and all my data permanently."
+            aria-label="remove me and my data button">
+      Remove me and my data
+    </button>
+
   </mat-card-content>
 </mat-card>

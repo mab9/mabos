@@ -15,6 +15,10 @@ import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {PeriodPipe} from "../../pipes/period.pipe";
+import {MatTooltip} from "@angular/material/tooltip";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogComponent} from "../dialog/dialog.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -43,17 +47,36 @@ import {PeriodPipe} from "../../pipes/period.pipe";
     MatSlideToggle,
     MatSuffix,
     PeriodPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTooltip
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
 
-  constructor(public authStore : AuthStore) {
-  }
-
-
   protected readonly Period = Period;
   protected readonly Object = Object;
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    public authStore : AuthStore) {
+  }
+
+  public removeMe() {
+    const dialogSubscription = this.dialog.open(DialogComponent, {
+      width: '40%',
+      enterAnimationDuration : '250ms',
+      exitAnimationDuration : '250ms',
+    });
+
+    dialogSubscription.afterClosed().subscribe(decision => {
+      if (decision === 'delete') {
+        alert("profile deletion not implemented at the moment.");
+        // todo this will delete the profile in the futur and redirect to landing page.
+        this.router.navigate(['/abos']);
+
+      }
+    })
+  }
 }
