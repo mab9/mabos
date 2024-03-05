@@ -31,16 +31,21 @@ export class AppComponent implements OnInit {
   ) {
 
     this.updates.versionUpdates.subscribe(evt => {
+      alert("version update " + evt)
       console.info("version update", evt)
       switch (evt.type) {
         case 'VERSION_DETECTED':
+          alert(`Downloading new app version: ${evt.version.hash}`);
           console.log(`Downloading new app version: ${evt.version.hash}`);
           break;
         case 'VERSION_READY':
+          alert(`Current app version: ${evt.currentVersion.hash}`);
           console.log(`Current app version: ${evt.currentVersion.hash}`);
+          alert(`New app version ready for use: ${evt.latestVersion.hash}`);
           console.log(`New app version ready for use: ${evt.latestVersion.hash}`);
           break;
         case 'VERSION_INSTALLATION_FAILED':
+          alert(`Failed to install app version '${evt.version.hash}': ${evt.error}`);
           console.log(`Failed to install app version '${evt.version.hash}': ${evt.error}`);
           break;
       }
@@ -51,9 +56,27 @@ export class AppComponent implements OnInit {
     // that don't support the Badging API.
     if ('setAppBadge' in navigator) {
       navigator.setAppBadge(1)
-        .then(() => console.log('Badge set!'))
-        .catch((error) => console.error('Error setting badge:', error));
+        .then(() => alert('Badge set!'))
+        .catch((error) => alert('Error setting badge: ' + error));
     }
+
+    window.addEventListener("online",  function(){
+      console.log("You are online!");
+      // @ts-ignore
+      navigator.serviceWorker.controller.postMessage({
+        type: `IS_ONLINE`
+        // add more properties if needed
+      });
+    });
+    window.addEventListener("offline", function(){
+      console.log("Oh no, you lost your network connection.");
+
+      // @ts-ignore
+      navigator.serviceWorker.controller.postMessage({
+        type: `IS_OFFLINE`
+        // add more properties if needed
+      });
+    });
 
     // clear navigator.clearAppBadge();
 
@@ -66,6 +89,52 @@ export class AppComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((result) => console.info("geo location", result))
       //console.log( "WORKER: all clients are now controlled by me! Mwahahaha!" );
     });
+
+    self.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'IS_OFFLINE') {
+        // take relevant actions
+        console.info("service worker detected that he is offline")
+      }
+      if (event.data && event.data.type === 'IS_ONLINE') {
+        // take relevant actions
+        console.info("service worker detected that he is online")
+
+      }
+    });
+
+    function isPushSupported() {
+      //checks if user has granted permission to Push notifications
+      if (Notification.permission === 'denied') {
+        alert('User has blocked push notification.');
+        return;
+      }
+
+      //Checks if current browser supports Push notification
+      if (!('PushManager' in window)) {
+        alert('Sorry, Push notification isn\'t supported in your browser.');
+        return;
+      }
+
+      //Get `push notification` subscription id
+
+      //If `serviceWorker` is registered and ready
+      navigator.serviceWorker.ready
+        .then(function (registration) {
+          registration.pushManager.getSubscription()
+            .catch(function (error) {
+              alert('Error occurred while enabling push ' +  error);
+              console.error('Error occurred while enabling push ', error);
+            });
+        });
+
+
+    }
+
+
+
+
+    isPushSupported();
+
 
   }
   public async ngOnInit() {
