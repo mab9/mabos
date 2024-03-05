@@ -16,7 +16,7 @@
   - item details auf eigener route
   - header titel anpassen
 - offline modus für PWA? 
-- 
+- Objekt erstellen, auf Antwort warten und weiter...
 
 
 ## Routing und Navigation in Angular: Desktop vs. Mobile
@@ -49,3 +49,10 @@ Entscheidungshilfe:
     Mobile Apps: Profitieren von History-Navigation. Item ID im URL-Pfad oder als Query Param ist empfehlenswert.
 
 Wähle basierend auf deiner App-Struktur und dem Nutzererlebnis, das du bieten möchtest.
+
+
+## offline capabilities
+
+https://docs.pwabuilder.com/#/home/native-features?id=background-sync
+
+https://microsoft.github.io/win-student-devs/#/30DaysOfPWA/core-concepts/04

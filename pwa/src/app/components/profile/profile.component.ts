@@ -61,7 +61,6 @@ export class ProfileComponent {
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private breakPointObserver : BreakpointObserver,
     public authStore : AuthStore) {
   }
 
@@ -77,7 +76,6 @@ export class ProfileComponent {
         alert("profile deletion not implemented at the moment.");
         // todo this will delete the profile in the futur and redirect to landing page.
         this.router.navigate(['/abos']);
-
       }
     })
   }
