@@ -38,9 +38,9 @@ jobs:
       working-directory: ${{ env.SPA_PROJECT }}
 
 # is running into errors. check why
-#    - name: Run tests
-#      run: npm run test
-#      working-directory: ./spa
+    - name: Run tests
+      run: npm run test
+      working-directory: ${{ env.SPA_PROJECT }}
 
     - name: Build Angular for production
       run: npm run build
