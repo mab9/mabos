@@ -42,8 +42,8 @@ export class MessagesService {
     return this.openSnackBar(message);
   }
 
-  openSnackBar(message : string, snackBarOpenDurationInSeconds = 3) {
-    return this._snackBar.open(message, "close me",
+  openSnackBar(message : string, action = "close me", snackBarOpenDurationInSeconds = 3) {
+    return this._snackBar.open(message, action,
       {
         horizontalPosition: 'center',
         verticalPosition: 'bottom',

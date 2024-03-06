@@ -11,6 +11,7 @@ import {AuthStore} from "./stores/auth.store";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {AbosStore} from "./stores/abos.store";
 import {SwUpdate} from "@angular/service-worker";
+import {MessagesService} from "./services/messages.service";
 
 @Component({
   selector: 'app-root',
@@ -24,10 +25,10 @@ import {SwUpdate} from "@angular/service-worker";
 export class AppComponent implements OnInit {
   constructor(
     public authStore: AuthStore,
-
-    private updates: SwUpdate,
     private readonly keycloak: KeycloakService,
     public aboStore : AbosStore,
+    private swUpdate : SwUpdate,
+    public messageService : MessagesService,
   ) {
     this.somePwaTests()
   }
@@ -40,113 +41,29 @@ export class AppComponent implements OnInit {
   }
 
   private somePwaTests() {
-    this.updates.versionUpdates.subscribe(evt => {
-      alert("version update " + evt)
-      console.info("version update", evt)
-      switch (evt.type) {
-        case 'VERSION_DETECTED':
-          alert(`Downloading new app version: ${evt.version.hash}`);
-          console.log(`Downloading new app version: ${evt.version.hash}`);
-          break;
-        case 'VERSION_READY':
-          alert(`Current app version: ${evt.currentVersion.hash}`);
-          console.log(`Current app version: ${evt.currentVersion.hash}`);
-          alert(`New app version ready for use: ${evt.latestVersion.hash}`);
-          console.log(`New app version ready for use: ${evt.latestVersion.hash}`);
-          break;
-        case 'VERSION_INSTALLATION_FAILED':
-          alert(`Failed to install app version '${evt.version.hash}': ${evt.error}`);
-          console.log(`Failed to install app version '${evt.version.hash}': ${evt.error}`);
-          break;
-      }
-    });
-
-    // Remember to always include checks for feature availability ('setAppBadge' in navigator)
-    // before attempting to use it, to ensure your application doesn't throw errors on browsers
-    // that don't support the Badging API.
-    if ('setAppBadge' in navigator) {
-      navigator.setAppBadge(1)
-        .then(() => alert('Badge set!'))
-        .catch((error) => alert('Error setting badge: ' + error));
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.checkForUpdate().then(isUpdateAvailable => {
+        if (isUpdateAvailable) {
+          const snackBarRef = this.messageService.openSnackBar('New version available', 'Reload', 6);
+          snackBarRef.onAction().subscribe(() => {
+            this.swUpdate.activateUpdate().then(() => document.location.reload());
+          });
+        }
+        });
     }
-
-    window.addEventListener("online",  function(){
-      console.log("You are online!");
-      // @ts-ignore
-      navigator.serviceWorker.controller.postMessage({
-        type: `IS_ONLINE`
-        // add more properties if needed
-      });
-    });
-    window.addEventListener("offline", function(){
-      console.log("Oh no, you lost your network connection.");
-
-      // @ts-ignore
-      navigator.serviceWorker.controller.postMessage({
-        type: `IS_OFFLINE`
-        // add more properties if needed
-      });
-    });
-
-    // clear navigator.clearAppBadge();
-
-    Notification.requestPermission().then(result => {
-      console.info("requested permissions - answer. This is needed for push notifications ", result)
-    });
-
 
 
     navigator.geolocation.getCurrentPosition((result) => {
       console.info("geo location", result)
     })
 
-    // @ts-ignore
-    navigator.serviceWorker.controller.addEventListener('message ',(event) => {
-      console.info("test service worker message", event)
+    window.addEventListener("online",  () => {
+      this.messageService.showMessages("You are back online.")
     });
 
-    self.addEventListener('message', (event) => {
-      console.info("service worker message", event)
-      if (event.data && event.data.type === 'IS_OFFLINE') {
-        // take relevant actions
-        console.info("service worker detected that he is offline")
-      }
-      if (event.data && event.data.type === 'IS_ONLINE') {
-        // take relevant actions
-        console.info("service worker detected that he is online")
-
-      }
+    window.addEventListener("offline",  () => {
+      this.messageService.showMessages("Oh no, you went offline!")
     });
-
-    function isPushSupported() {
-      //checks if user has granted permission to Push notifications
-      if (Notification.permission === 'denied') {
-        alert('User has blocked push notification.');
-        return;
-      }
-
-      //Checks if current browser supports Push notification
-      if (!('PushManager' in window)) {
-        alert('Sorry, Push notification isn\'t supported in your browser.');
-        return;
-      }
-
-      //Get `push notification` subscription id
-
-      //If `serviceWorker` is registered and ready
-      navigator.serviceWorker.ready
-        .then(function (registration) {
-          registration.pushManager.getSubscription()
-            .catch(function (error) {
-              alert('Error occurred while enabling push ' +  error);
-              console.error('Error occurred while enabling push ', error);
-            });
-        });
-
-
-    }
-
-     isPushSupported();
   }
 
   public login() {
