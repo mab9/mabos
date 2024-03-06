@@ -1,10 +1,10 @@
-import {ActivatedRouteSnapshot, CanActivateFn, Router, UrlTree} from "@angular/router";
+import {CanActivateFn, Router, UrlTree} from "@angular/router";
 import {Observable} from "rxjs";
 import {inject} from "@angular/core";
 import {KeycloakService} from "keycloak-angular";
 import {RouteConstants} from "../constants/route.constants";
 
-export const AuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot):
+export const AuthGuard: CanActivateFn = () :
 
   Observable<boolean | UrlTree>
   | Promise<boolean | UrlTree>

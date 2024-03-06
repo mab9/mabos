@@ -2,9 +2,7 @@ import {Injectable, OnDestroy} from "@angular/core";
 import {BehaviorSubject, debounceTime, map, Observable, Subject, tap} from "rxjs";
 import {Abo, createAbo} from "../model/abos.model";
 import {Period} from "../model/period.enum";
-import {addMonths, subDays} from "date-fns";
 import {AbosService} from "../services/abos.service";
-import {isSameYearAndMonth} from "../util/date.util";
 import {FormGroup} from "@angular/forms";
 import {AuthStore} from "./auth.store";
 
@@ -20,10 +18,7 @@ export class AbosStore implements OnDestroy {
   private today = new Date();
   private changeSubjects = new Map<number, Subject<Abo>>();
   private subject = new BehaviorSubject<Abo[]>([])
-  abos$ = this.subject.asObservable().pipe(
-    map(abos => abos.map(abo => ({...abo, isExpiringThisMonth: this.isExpiringThisMonth(abo, this.today)}))),
-  );
-
+  abos$ = this.subject.asObservable();
 
   abosCount$: Observable<number> = this.abos$.pipe(
     map(abos => abos.length)
@@ -43,10 +38,6 @@ export class AbosStore implements OnDestroy {
     map(total => this.roundUpToNearestFiveCents(total))
   );
 
-  abosTotalExpiringThisMonth$: Observable<number> = this.abos$.pipe(
-    map(abos => abos.filter(abo => abo.isExpiringThisMonth).length)
-  );
-
   constructor(
     private authStore: AuthStore,
     private abosService: AbosService,
@@ -58,35 +49,6 @@ export class AbosStore implements OnDestroy {
           this.abosService.getAll().subscribe(items => this.subject.next(items));
         }
     })
-  }
-
-// "2023-07-16", "2024-07-01",
-  // todo replace this stuff to abo object.
-  public isExpiringThisMonth(abo: Abo, currentDate: Date) {
-    if (!abo.active) {
-      return false;
-    }
-
-    const aboPeriodInMonths = this.getPeriodInMonth(abo);
-    const aboStartDate = new Date(abo.startDate);
-    let expiringDate = addMonths(aboStartDate, aboPeriodInMonths); // exp plus 1 tag. denn es läuft ja am tag davor ab!
-    expiringDate = subDays(expiringDate, 1); // exp plus 1 tag. denn es läuft ja am tag davor ab!
-
-    while (true) {
-      if (expiringDate >= currentDate) {
-        return isSameYearAndMonth(expiringDate, currentDate);
-      }
-
-      if (isSameYearAndMonth(expiringDate, currentDate) && aboPeriodInMonths > 1) {
-        return true;
-      }
-
-      if (!abo.isAutoRenewal) {
-        return false;
-      }
-
-      expiringDate = addMonths(expiringDate, aboPeriodInMonths);
-    }
   }
 
   calcAboPricePerYear(abo: Abo) {
@@ -154,13 +116,6 @@ export class AbosStore implements OnDestroy {
     this.subject.next(newItems);
     this.abosService.delete(itemId).subscribe();
   }
-
-  saveItem(itemId: number, changes: Partial<Abo>) {
-    // we do not show any loading indicator because changes are reflected instantly.
-    const newItem = this.reflectChanges(itemId, changes);
-    this.abosService.put(newItem).subscribe();
-  }
-
 
   private reflectChanges(itemId: number, changes: Partial<Abo>): Abo {
     // has a ref to the latest emitted value - to the current list.

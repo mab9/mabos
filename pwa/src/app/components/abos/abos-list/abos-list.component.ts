@@ -71,8 +71,8 @@ import {AbosStore} from "../../../stores/abos.store";
 export class AbosListComponent {
 
 
-  @Output('onSelectItem')
-  private onSelectItemEvent = new EventEmitter<Abo>;
+  @Output()
+  private selectItem = new EventEmitter<Abo>;
 
   /*
     The selected Item should be handled at one place. Since this is the consolidation of
@@ -105,7 +105,6 @@ export class AbosListComponent {
     // Implement filtering logic here
     // For example, checking if the abo's name includes the search key:
 
-    // @ts-ignore
     return abo.title.toLowerCase().includes(searchKey.toLowerCase());
   }
 
@@ -126,7 +125,7 @@ export class AbosListComponent {
   }
 
   onSelectItem(abo: Abo) {
-    this.onSelectItemEvent.emit(abo);
+    this.selectItem.emit(abo);
   }
 
   onChangeItem(item : Abo) {

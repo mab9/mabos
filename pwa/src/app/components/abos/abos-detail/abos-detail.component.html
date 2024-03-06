@@ -40,7 +40,9 @@
 
         <div class="width-full toggler">
           <mat-chip highlighted="true">
-            Costs per year: {{ this.abosStore.selectedItemFg?.get('costsPerYear')?.value | number:'1.2-2' }}.-
+            <ng-container *ngIf="abosStore.selectedItemFg.get('costsPerYear')">
+              Costs per year:  {{ abosStore.selectedItemFg.get('costsPerYear')!.value | number:'1.2-2' }}
+            </ng-container>
           </mat-chip>
         </div>
 

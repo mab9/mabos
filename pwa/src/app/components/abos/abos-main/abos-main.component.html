@@ -8,10 +8,10 @@
     <ng-container *ngIf="abos.length > 0">
 
 
-      <app-abos-list (onSelectItem)="onSelectItem($event)"></app-abos-list>
+      <app-abos-list (selectItem)="onSelectItem($event)"></app-abos-list>
     </ng-container>
 
-    <ng-container *ngIf="abos.length == 0">
+    <ng-container *ngIf="abos.length === 0">
       <span>Start creating a subscription... </span>
     </ng-container>
   </ng-container>

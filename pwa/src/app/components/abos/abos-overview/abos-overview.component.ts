@@ -1,7 +1,4 @@
 import {Component} from '@angular/core';
-import {DashboardDetailComponent} from "../../dashboard/dashboard-detail/dashboard-detail.component";
-import {DashboardMainComponent} from "../../dashboard/dashboard-main/dashboard-main.component";
-import {DashboardOverviewComponent} from "../../dashboard/dashboard-overview/dashboard-overview.component";
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {AsyncPipe, DecimalPipe, NgIf} from "@angular/common";
@@ -21,9 +18,6 @@ import {MatDivider} from "@angular/material/divider";
   selector: 'app-abos-overview',
   standalone: true,
   imports: [
-    DashboardDetailComponent,
-    DashboardMainComponent,
-    DashboardOverviewComponent,
     MatFabButton,
     MatIcon,
     NgIf,

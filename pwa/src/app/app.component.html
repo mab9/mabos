@@ -6,8 +6,8 @@
         <mat-icon>arrow_back_ios</mat-icon>
       </button>
       <span *ngIf="aboStore.aboSelection$ | async"> {{ aboStore.selectedItemFg?.value['title'] }} </span>
-      <img *ngIf="!(aboStore.aboSelection$ | async)" src="./assets/icons/icon-128x128.png" alt="Mabos Logo" class="logo">
-      <span *ngIf="!(aboStore.aboSelection$ | async)" class="custom-margin-right">Mabos</span>
+      <img *ngIf="(aboStore.aboSelection$ | async) === null" src="./assets/icons/icon-128x128.png" alt="Mabos Logo" class="logo">
+      <span *ngIf="(aboStore.aboSelection$ | async) === null" class="custom-margin-right">Mabos</span>
 
       <span class="example-spacer"></span>
 

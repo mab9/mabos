@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AsyncPipe, DatePipe, DecimalPipe, NgIf} from "@angular/common";
 import {MatMenuItem} from "@angular/material/menu";
 import {AuthStore} from "../../stores/auth.store";
@@ -19,7 +19,6 @@ import {MatTooltip} from "@angular/material/tooltip";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "../dialog/dialog.component";
 import {Router} from "@angular/router";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-profile',

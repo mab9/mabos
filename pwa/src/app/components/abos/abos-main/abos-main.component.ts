@@ -1,7 +1,4 @@
-import { Component } from '@angular/core';
-import {DashboardDetailComponent} from "../../dashboard/dashboard-detail/dashboard-detail.component";
-import {DashboardMainComponent} from "../../dashboard/dashboard-main/dashboard-main.component";
-import {DashboardOverviewComponent} from "../../dashboard/dashboard-overview/dashboard-overview.component";
+import {Component} from '@angular/core';
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {AsyncPipe, NgIf} from "@angular/common";
@@ -16,9 +13,6 @@ import {AbosOverviewComponent} from "../abos-overview/abos-overview.component";
   selector: 'app-abos',
   standalone: true,
   imports: [
-    DashboardDetailComponent,
-    DashboardMainComponent,
-    DashboardOverviewComponent,
     MatFabButton,
     MatIcon,
     NgIf,
@@ -58,7 +52,6 @@ export class AbosMainComponent {
       description: abo.description,
       isAutoRenewal: abo.isAutoRenewal,
       startDate: abo.startDate,
-      isExpiringThisMonth : abo.isExpiringThisMonth,
       costsPerYear: 0,
 
       expReminder: abo.expReminder,
@@ -78,11 +71,11 @@ export class AbosMainComponent {
       this.setActiveness(value, 'startDate', formGroup)
     })
 
-    formGroup.get('price')?.valueChanges.subscribe(price => {
+    formGroup.get('price')?.valueChanges.subscribe(() => {
       this.updateAboCostsPerYear()
     })
 
-    formGroup.get('period')?.valueChanges.subscribe(_ => {
+    formGroup.get('period')?.valueChanges.subscribe(() => {
       this.updateAboCostsPerYear()
     })
 
