@@ -32,13 +32,14 @@ export class AbosMainComponent {
   }
 
   onAdd() {
-    const newAbo = this.abosStore.createItem();
-    this.onSelectItem(newAbo);
+    // quick fix solution to keep track for item ids.
+    // because of routing, view and data handling concept changed when moving from from desktop to mobile view,
+    this.abosStore.createItem().subscribe(abo => {
+      this.onSelectItem(abo)
+    });
   }
 
   onSelectItem(abo: Abo) {
-    // todo  update ID of abo, when abo was created
-    console.info("update selected item", abo)
     this.abosStore.setSelectedFg(this.newAbo(abo));
   }
 
