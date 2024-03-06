@@ -29,7 +29,17 @@ export class AppComponent implements OnInit {
     private readonly keycloak: KeycloakService,
     public aboStore : AbosStore,
   ) {
+    this.somePwaTests()
+  }
 
+
+  public async ngOnInit() {
+    if (this.keycloak.isLoggedIn()) {
+      this.authStore.loadMe();
+    }
+  }
+
+  private somePwaTests() {
     this.updates.versionUpdates.subscribe(evt => {
       alert("version update " + evt)
       console.info("version update", evt)
@@ -84,13 +94,19 @@ export class AppComponent implements OnInit {
       console.info("requested permissions - answer. This is needed for push notifications ", result)
     });
 
-    self.addEventListener( "activate", function( event ){
-      console.log( "WORKER: activation event in progress." );
-      navigator.geolocation.getCurrentPosition((result) => console.info("geo location", result))
-      //console.log( "WORKER: all clients are now controlled by me! Mwahahaha!" );
+
+
+    navigator.geolocation.getCurrentPosition((result) => {
+      console.info("geo location", result)
+    })
+
+    // @ts-ignore
+    navigator.serviceWorker.controller.addEventListener('message ',(event) => {
+      console.info("test service worker message", event)
     });
 
     self.addEventListener('message', (event) => {
+      console.info("service worker message", event)
       if (event.data && event.data.type === 'IS_OFFLINE') {
         // take relevant actions
         console.info("service worker detected that he is offline")
@@ -130,17 +146,7 @@ export class AppComponent implements OnInit {
 
     }
 
-
-
-
-    isPushSupported();
-
-
-  }
-  public async ngOnInit() {
-    if (this.keycloak.isLoggedIn()) {
-      this.authStore.loadMe();
-    }
+     isPushSupported();
   }
 
   public login() {
