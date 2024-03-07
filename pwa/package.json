@@ -9,6 +9,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
     "serve:ssr:mabos": "node dist/mabos/server/server.mjs",
     "profile": "npm run build --stats-json && npx webpack-bundle-analyzer ./dist/mabos/stats.json",
     "lint": "ng lint"

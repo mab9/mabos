@@ -39,7 +39,7 @@ jobs:
 
 # is running into errors. check why
     - name: Run tests
-      run: npm run test
+      run: npm run test:headless
       working-directory: ${{ env.SPA_PROJECT }}
 
     - name: Build Angular for production
