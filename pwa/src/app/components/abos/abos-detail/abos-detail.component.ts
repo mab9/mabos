@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Period} from "../../../model/period.enum";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
@@ -13,8 +13,8 @@ import {PeriodPipe} from "../../../pipes/period.pipe";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AbosStore} from "../../../stores/abos.store";
 import {MatChip, MatChipOption} from "@angular/material/chips";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {MatButton} from "@angular/material/button";
+import {NavigationService} from "../../../services/navigation.service";
 
 @Component({
   selector: 'app-abos-detail',
@@ -54,15 +54,13 @@ export class AbosDetailComponent {
 
     protected readonly Period = Period;
     protected readonly Object = Object;
-    protected readonly Breakpoints = Breakpoints;
 
   constructor(
-    protected breakpointObserver: BreakpointObserver,
     public abosStore: AbosStore,
+    private naviService : NavigationService,
   ) {
+    this.naviService.setNaviDataDetailPage('Subscription details')
   }
-
-
 
   isTrue (field : string) {
     return this.abosStore.selectedItemFg!.get(field)?.value
@@ -71,7 +69,6 @@ export class AbosDetailComponent {
   removeMe() {
     const id = this.abosStore.selectedItemFg?.get('id')?.value;
     this.abosStore.removeItem(id)
-    this.abosStore.setSelectedFg(null);
+    this.naviService.goHome();
   }
-
 }

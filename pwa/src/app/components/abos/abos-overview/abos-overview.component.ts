@@ -8,7 +8,8 @@ import {AbosDetailComponent} from "../abos-detail/abos-detail.component";
 import {
   MatAccordion,
   MatExpansionPanel,
-  MatExpansionPanelDescription, MatExpansionPanelHeader,
+  MatExpansionPanelDescription,
+  MatExpansionPanelHeader,
   MatExpansionPanelTitle,
 } from "@angular/material/expansion";
 import {MatGridTile} from "@angular/material/grid-list";
@@ -40,6 +41,7 @@ export class AbosOverviewComponent {
 
   panelOpenState = false;
   constructor(
-    public abosStore : AbosStore,) {
+    public abosStore : AbosStore,
+    ) {
   }
 }

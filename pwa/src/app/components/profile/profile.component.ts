@@ -18,7 +18,8 @@ import {PeriodPipe} from "../../pipes/period.pipe";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "../dialog/dialog.component";
-import {Router} from "@angular/router";
+import {NavigationService} from "../../services/navigation.service";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
   selector: 'app-profile',
@@ -59,8 +60,11 @@ export class ProfileComponent {
   protected readonly Object = Object;
   constructor(
     public dialog: MatDialog,
-    private router: Router,
+    private naviService : NavigationService,
+    private messageService: MessagesService,
     public authStore : AuthStore) {
+
+    this.naviService.setNaviDataDetailPage('My profile');
   }
 
   public removeMe() {
@@ -72,9 +76,9 @@ export class ProfileComponent {
 
     dialogSubscription.afterClosed().subscribe(decision => {
       if (decision === 'delete') {
-        alert("profile deletion not implemented at the moment.");
         // todo this will delete the profile in the futur and redirect to landing page.
-        this.router.navigate(['/abos']);
+        this.messageService.showMessages("Function not implemented at the moment.")
+        this.naviService.goHome()
       }
     })
   }
