@@ -31,13 +31,10 @@ jobs:
       run: npm install
       working-directory: ${{ env.SPA_PROJECT }}
 
-
-    # linting must be configured first on SPA
     - name: Run linter
       run: npm run lint
       working-directory: ${{ env.SPA_PROJECT }}
 
-# is running into errors. check why
     - name: Run tests
       run: npm run test:headless
       working-directory: ${{ env.SPA_PROJECT }}
