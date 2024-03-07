@@ -40,6 +40,7 @@ public class AboService {
         }
 
         if (user.getEmail().equals(optionalItem.get().getUserEmail())) {
+            item.setUserEmail(user.getEmail());
             return aboRepository.save(item);
         }
         return null;

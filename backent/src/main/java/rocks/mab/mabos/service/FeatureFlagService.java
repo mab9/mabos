@@ -31,6 +31,7 @@ public class FeatureFlagService {
         }
 
         if (user.getEmail().equals(optionalItem.get().getUserEmail())) {
+            item.setUserEmail(user.getEmail());
             return featureFlagRepository.save(item);
         }
         return null;

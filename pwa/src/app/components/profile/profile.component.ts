@@ -25,7 +25,7 @@ import {
   MatCellDef,
   MatColumnDef,
   MatFooterCell,
-  MatHeaderCell,
+  MatHeaderCell, MatHeaderCellDef,
   MatHeaderRow,
   MatHeaderRowDef,
   MatRow,
@@ -76,7 +76,8 @@ import {FeatureFlag} from "../../model/feature-flag.model";
     MatRowDef,
     MatSort,
     MatSortHeader,
-    MatTable
+    MatTable,
+    MatHeaderCellDef
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -97,8 +98,8 @@ export class ProfileComponent {
     this.naviService.setNaviDataDetailPage('My profile');
   }
 
-  trackById(index: number, item: FeatureFlag): number | null {
-    return item.id;
+  trackByFeature(index: number, item: FeatureFlag): string | null {
+    return item.feature;
   }
 
   onChangeItem(item : FeatureFlag) {

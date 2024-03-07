@@ -35,24 +35,6 @@ export class FeatureFlagsStore implements OnDestroy {
     return this.isActive(FeatureFlagEnum.NAV);
   }
 
-  /*
-    saveItemDebounce(itemId: number, changes: Partial<Abo>) {
-    const newItem = this.reflectChanges(itemId, changes);
-    if (!this.changeSubjects.has(itemId)) {
-      const subject = new Subject<Abo>();
-      subject.pipe(
-        debounceTime(1000)
-      ).subscribe(latestItem => {
-        this.abosService.put(latestItem).subscribe();
-      });
-      this.changeSubjects.set(itemId, subject);
-    }
-
-    // Push the latest item to the Subject
-    this.changeSubjects.get(itemId)!.next(newItem);
-  }
-   */
-
   save(featureFlag : FeatureFlag) {
     this.featureFlagService.put(featureFlag).subscribe();
     if (!this.changeSubjects.has(featureFlag.id)) {
