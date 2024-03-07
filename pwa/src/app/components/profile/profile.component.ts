@@ -20,6 +20,21 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "../dialog/dialog.component";
 import {NavigationService} from "../../services/navigation.service";
 import {MessagesService} from "../../services/messages.service";
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatFooterCell,
+  MatHeaderCell,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable
+} from "@angular/material/table";
+import {MatSort, MatSortHeader} from "@angular/material/sort";
+import {FeatureFlagsStore} from "../../stores/feature-flags.store";
+import {FeatureFlag} from "../../model/feature-flag.model";
 
 @Component({
   selector: 'app-profile',
@@ -49,7 +64,19 @@ import {MessagesService} from "../../services/messages.service";
     MatSuffix,
     PeriodPipe,
     ReactiveFormsModule,
-    MatTooltip
+    MatTooltip,
+    MatCell,
+    MatCellDef,
+    MatColumnDef,
+    MatFooterCell,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatRow,
+    MatRowDef,
+    MatSort,
+    MatSortHeader,
+    MatTable
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -58,13 +85,24 @@ export class ProfileComponent {
 
   protected readonly Period = Period;
   protected readonly Object = Object;
+  displayedColumns: string[] = ['feature', 'flag'];
+
   constructor(
     public dialog: MatDialog,
     private naviService : NavigationService,
     private messageService: MessagesService,
+    public featureFlagStore : FeatureFlagsStore,
     public authStore : AuthStore) {
 
     this.naviService.setNaviDataDetailPage('My profile');
+  }
+
+  trackById(index: number, item: FeatureFlag): number | null {
+    return item.id;
+  }
+
+  onChangeItem(item : FeatureFlag) {
+    this.featureFlagStore.save(item);
   }
 
   public removeMe() {
