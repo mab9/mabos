@@ -94,6 +94,12 @@ export class AbosStore implements OnDestroy {
     return this.abosService.post(newItem);
   }
 
+  addToAbos(abo : Abo) {
+    const currentData = this.subject.value;
+    const updatedData = [...currentData, abo];
+    this.subject.next(updatedData);
+  }
+
   createItemAsync() {
     const newItem = createAbo(new Date(), Period.MONTH);
     const currentData = this.subject.value;

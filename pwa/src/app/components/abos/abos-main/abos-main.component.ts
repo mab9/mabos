@@ -35,6 +35,8 @@ export class AbosMainComponent {
     // quick fix solution to keep track for item ids.
     // because of routing, view and data handling concept changed when moving from from desktop to mobile view,
     this.abosStore.createItem().subscribe(abo => {
+      // todo remove me - quick fix for demo case
+      this.abosStore.addToAbos(abo);
       this.onSelectItem(abo)
     });
   }
