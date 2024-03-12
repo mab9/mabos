@@ -4,6 +4,11 @@
 ## Links
 - https://www.pwabuilder.com
 - https://developer.mozilla.org/en-US/docs/Web/Manifest
+- https://search.google.com
+- SEO Check: https://seorch.de/
+- Keyword tool: https://keywordtool.io/
+- Keyword tool alternativen: https://www.onlinesolutionsgroup.de/blog/keyword-tool-alternativen-kostenlos/#1_Google_Suggest
+- seo meta one click extension für chrome 
 
 
 - lighthouse google chrome add one 
