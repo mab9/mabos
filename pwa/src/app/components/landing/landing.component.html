@@ -18,8 +18,7 @@
   </div>
 
   <div class="center-features">
-    <h2 class="text-color-primary">features</h2>
-
+    <span class="down-text">features</span>
     <button mat-icon-button (click)="scrollToFeatures()" aria-label="scroll down to features overview button">
       <mat-icon color="primary">keyboard_double_arrow_down</mat-icon>
     </button>
@@ -29,6 +28,32 @@
 
 <section id="features-container">
 
+  <div class="center-features">
+
+    <h2 class="down-text">Costs control</h2>
 
 
+    <div class="feature-table">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <ng-container matColumnDef="feature">
+        <td mat-cell *matCellDef="let element"> {{ element.feature }} </td>
+      </ng-container>
+
+      <tr mat-row *matRowDef="let row; columns: ['feature'];"></tr>
+    </table>
+    </div>
+
+
+
+    <img class="image-feature"
+         src="assets/feature-view-1.png"
+         alt="landing page feature section image">
+
+    <button class="subscribe-btn" mat-flat-button color="warn" aria-label="subscribe to mabos button">subscribe</button>
+
+  </div>
 </section>

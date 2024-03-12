@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {MatIcon} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatCell, MatCellDef, MatColumnDef, MatRow, MatRowDef, MatTable} from "@angular/material/table";
 
 @Component({
   selector: 'app-landing',
@@ -11,7 +12,14 @@ import {MatIconButton} from "@angular/material/button";
     NgForOf,
     NgIf,
     MatIcon,
-    MatIconButton
+    MatIconButton,
+    MatButton,
+    MatTable,
+    MatColumnDef,
+    MatCell,
+    MatRow,
+    MatRowDef,
+    MatCellDef
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
@@ -24,7 +32,18 @@ export class LandingComponent {
   protected readonly BreakpointObserver = BreakpointObserver;
   protected readonly Breakpoints = Breakpoints;
 
+  dataSource = [
+    { feature: 'Control your subscription expenses' },
+    { feature: 'Monthly and yearly costs overview' },
+    { feature: 'Plan your expenses' },
+    // Add more features here
+  ];
+
   scrollToFeatures() {
       document.getElementById('features-container')?.scrollIntoView({behavior: 'smooth'});
+  }
+
+  scrollToLanding() {
+    document.getElementById('landing-container')?.scrollIntoView({behavior: 'smooth'});
   }
 }
