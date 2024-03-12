@@ -1,17 +1,34 @@
-<div class="no-scroll"
-     style="display: flex; justify-content: center; margin-top: 6rem; align-items: center">
+<div id="landing-container">
+  <div class="landing-image-container">
 
-  <img *ngIf="breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="landing" src="assets/mabos-logo-small.webp"
-       alt="landing page image">
-  <img *ngIf="!breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="landing" src="assets/mabos-logo.webp"
-       alt="landing page image">
+    <img *ngIf="breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="image-landing"
+         src="assets/mabos-logo-small.webp"
+         alt="landing page image">
+    <img *ngIf="!breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="image-landing"
+         src="assets/mabos-logo.webp"
+         alt="landing page image">
+  </div>
+
+  <div class="fancy-text">
+    <h1>
+      <span class="special-words">Start</span>
+      <span>tracking your subscription expenses </span>
+      <span class="special-words">now!</span>
+    </h1>
+  </div>
+
+  <div class="center-features">
+    <h2 class="text-color-primary">features</h2>
+
+    <button mat-icon-button (click)="scrollToFeatures()" aria-label="scroll down to features overview button">
+      <mat-icon color="primary">keyboard_double_arrow_down</mat-icon>
+    </button>
+  </div>
 </div>
 
-<div class="fancy-text">
-  <h1>
-  <span class="special-words">Start</span>
-  <span>tracking your subscription expenses </span>
-  <span class="special-words">now!</span>
-  </h1>
-</div>
 
+<section id="features-container">
+
+
+
+</section>

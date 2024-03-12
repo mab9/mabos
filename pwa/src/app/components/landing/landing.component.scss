@@ -1,29 +1,17 @@
-.landing {
+.image-landing {
   border-radius: 30%;
   max-width: 80%;
   overflow-x: hidden;
   overflow-y: hidden;
 }
 
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(720deg);
-  }
-}
-
-.spin-animation {
-  animation: spin 3s ease-in-out;
+.landing-image-container {
   overflow-x: hidden;
   overflow-y: hidden;
-}
-
-.no-scroll {
-  overflow-x: hidden;
-  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  padding-top: 6rem;
+  align-items: center
 }
 
 .special-words {
@@ -41,18 +29,19 @@
   font-size: xxx-large;
 }
 
-.animated-text span {
-  overflow-x: hidden;
-  overflow-y: hidden;
-  margin-top: 4rem;
-  opacity: 0.1;
-  animation: fade-in 0.5s forwards;
-  color: #d74e14;
-  font-size: xxx-large;
+
+.text-color-primary {
+  color: #3f51b5;
 }
 
-@keyframes fade-in {
-  to {
-    opacity: 1;
-  }
+#landing-container, #features-container {
+  height: calc(100vh - 57px);
+/*  border: 1px solid  #d74e14*/
+}
+
+.center-features {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
