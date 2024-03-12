@@ -1,7 +1,7 @@
 <main class="main">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <img src="./assets/mabos-logo-1.png" alt="Mabos Logo" class="logo">
+      <img src="./assets/mabos-logo-1.png" alt="Mabos Logo" title="Mabos logo" class="logo">
       <span>Mabos</span>
 
       <button *ngIf="authStore.isLoggedIn$  | async" [routerLink]="'/dashboard'"     mat-icon-button><mat-icon>dashboard</mat-icon></button>

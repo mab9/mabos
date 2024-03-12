@@ -3,10 +3,10 @@
 
     <img *ngIf="breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="image-landing"
          src="assets/mabos-logo-small.webp"
-         alt="landing page image">
+         alt="landing page image" title="landing page image">
     <img *ngIf="!breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="image-landing"
          src="assets/mabos-logo.webp"
-         alt="landing page image">
+         alt="landing page image" title="landing page image">
   </div>
 
   <div class="fancy-text">
@@ -51,6 +51,7 @@
 
     <img class="image-feature"
          src="assets/feature-view-1.png"
+         title="landing page feature section image"
          alt="landing page feature section image">
 
     <button class="subscribe-btn" mat-flat-button color="warn" (click)="notImplemented()" aria-label="subscribe to mabos button">subscribe</button>
