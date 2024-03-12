@@ -15,12 +15,7 @@ public class FeatureFlagsController {
     private final FeatureFlagService featureFlagService;
 
     @GetMapping
-    public Collection<FeatureFlag> getUserAbos() {
-        return featureFlagService.getAllMyFeatureFlags();
-    }
-
-    @PutMapping("{id}")
-    public FeatureFlag update(@PathVariable Long id, @RequestBody FeatureFlag item) {
-        return featureFlagService.update(item);
+    public Iterable<FeatureFlag> getFeatureFlags() {
+        return featureFlagService.getAll();
     }
 }

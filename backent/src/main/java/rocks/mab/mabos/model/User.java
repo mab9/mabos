@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Entity
@@ -17,6 +18,9 @@ public class User {
     private String email;
     private String name;
     private String role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<UsersFeatureFlag> userFeatureFlags;
 
     private boolean sendEmailReminders;
 

@@ -8,7 +8,4 @@ import java.util.Collection;
 
 @Repository
 public interface FeatureFlagRepository extends CrudRepository<FeatureFlag, Long> {
-
-    Collection<FeatureFlag> findByUserEmail(String userEmail);
-
 }

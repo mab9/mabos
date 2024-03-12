@@ -1,5 +1,5 @@
 -- user is a reserved keyword
-CREATE TABLE users (
+CREATE TABLE mabos.users (
                       user_id SERIAL PRIMARY KEY,
                       email VARCHAR(100) UNIQUE NOT NULL,
                       name VARCHAR(100) NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE users (
                       create_date TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
 
-CREATE TABLE abo (
+CREATE TABLE mabos.abo (
                      id BIGSERIAL PRIMARY KEY,
                      user_email VARCHAR(100) NOT NULL,
                      title VARCHAR(100) NOT NULL,
