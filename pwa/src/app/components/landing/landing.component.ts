@@ -43,7 +43,7 @@ export class LandingComponent {
       document.getElementById('features-container')?.scrollIntoView({behavior: 'smooth'});
   }
 
-  scrollToLanding() {
-    document.getElementById('landing-container')?.scrollIntoView({behavior: 'smooth'});
+  notImplemented() {
+    alert('redirect not implemented for the moment. go to login and register.')
   }
 }

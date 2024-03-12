@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://abos.mab.rocks/sitemap.xml
