@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DataJpaTest
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase
-@Disabled
+@Disabled("H2 DB can't execute postgres specific statements - V5 migration scripts.")
 public class AboRepositoryTest {
 
     @Autowired
