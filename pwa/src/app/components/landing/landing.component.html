@@ -32,6 +32,8 @@
 <section id="features-container">
 
 
+  <div (swipe)="swiper()">swipe me test</div>
+  <div (swipe)="swipe($event)" >swipe me test2</div>
 
   <div class="center-features" (click)="click()" (keyup.enter)="click()" tabindex="0" (swipeleft)="nextFeature()" (swiperight)="previousFeature()">
 

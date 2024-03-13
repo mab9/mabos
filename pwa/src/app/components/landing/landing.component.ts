@@ -26,7 +26,7 @@ import {ViewPortService} from "../../services/view-port.service";
 })
 export class LandingComponent {
 
-  protected currentIndex = 1;
+  protected currentIndex = 0;
   protected features = Array.of("never forget","monthly and yearly expense overview","expense grouping", "free and open source")
 
   constructor(public viewPortService : ViewPortService) {
@@ -48,7 +48,7 @@ export class LandingComponent {
   }
 
   nextFeature() {
-    console.info("swipe right")
+    alert("swipe right")
 
     if (this.currentIndex === this.features.length) {
       return;
@@ -58,7 +58,7 @@ export class LandingComponent {
   }
 
   previousFeature() {
-    console.info("swipe left")
+    alert("swipe left")
     if (this.currentIndex === 0) {
       return;
     } else {
@@ -68,5 +68,14 @@ export class LandingComponent {
 
   click() {
     console.info("click")
+  }
+
+  swipe(event : Event) {
+    alert("Swipe alert " + event.type)
+
+  }
+
+  swiper() {
+    alert("Swiper alert")
   }
 }

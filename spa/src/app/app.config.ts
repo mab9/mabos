@@ -3,8 +3,9 @@ import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
 import {
-  HAMMER_GESTURE_CONFIG, HAMMER_LOADER,
-  HammerGestureConfig, HammerModule,
+  HAMMER_GESTURE_CONFIG,
+  HammerGestureConfig,
+  HammerModule,
   provideClientHydration
 } from '@angular/platform-browser';
 import {provideAnimations} from '@angular/platform-browser/animations';
@@ -14,17 +15,19 @@ import {KeycloakService} from "keycloak-angular";
 import {providerKeycloakBearerInterceptor, providerKeycloakInitializer} from "./providers/keycloak.provider";
 
 
-
 export const appConfig: ApplicationConfig = {
 
   providers: [
+    importProvidersFrom(HttpClientModule, HammerModule),
+
     provideRouter(routes),
+    provideAnimations(),
     provideNativeDateAdapter(),
     KeycloakService,
     providerKeycloakInitializer,
     providerKeycloakBearerInterceptor,
+
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
-    importProvidersFrom(HammerModule),
     provideHttpClient(
       withFetch(),
       withXsrfConfiguration(
@@ -36,7 +39,5 @@ export const appConfig: ApplicationConfig = {
     )),
     {provide: MAT_DATE_LOCALE, useValue: 'de'},
     provideClientHydration(),
-    provideAnimations(),
-    importProvidersFrom(HttpClientModule),
   ]
 };

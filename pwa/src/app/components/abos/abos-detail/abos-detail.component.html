@@ -26,7 +26,7 @@
           <mat-label>Tag</mat-label>
           <mat-select formControlName="tag" placeholder="Groceries">
             @for (item of Object.keys(TagsEnum); track item) {
-              <mat-option [value]="item">{{ item }}</mat-option>
+              <mat-option [value]="item">{{ item | tag }}</mat-option>
             }
           </mat-select>
         </mat-form-field>

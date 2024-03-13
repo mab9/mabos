@@ -1,7 +1,7 @@
 <ng-container *ngIf="(abosGroupedByTagsAndMonthlyCosts$ | async) as data">
 
   <ng-container *ngIf="data.size > 0">
-    <div style="display: block;">
+    <div style="display: block; max-width: 25rem">
       <canvas baseChart
               [options]="chartOptions"
               [type]="chartType"

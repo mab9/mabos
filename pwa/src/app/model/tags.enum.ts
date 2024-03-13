@@ -1,11 +1,11 @@
 export enum TagsEnum {
-  HOUSING = 'HOUSING', // rent, mortgage, utilities,
-  GROCERIES = 'GROCERIES', // shopping, dining out, food, drinks
-  MOBILITY = 'MOBILITY', // public transport, gas, vehicle maintenance
-  ENTERTAINMENT = 'ENTERTAINMENT', // streaming services, cinema, books, games
-  HEALTH = 'HEALTH', // medications, doctor visits, gym membership
   EDUCATION = 'EDUCATION', // courses, books
+  ENTERTAINMENT = 'ENTERTAINMENT', // streaming services, cinema, books, games
+  GROCERIES = 'GROCERIES', // shopping, dining out, food, drinks
+  HEALTH = 'HEALTH', // medications, doctor visits, gym membership
+  HOUSING = 'HOUSING', // rent, mortgage, utilities,
   INSURANCE = 'INSURANCE', // health insurance, car, mobile
+  MOBILITY = 'MOBILITY', // public transport, gas, vehicle maintenance
   OTHER = 'OTHER',
 }
 

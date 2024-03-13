@@ -16,6 +16,7 @@ import {MatChip, MatChipOption} from "@angular/material/chips";
 import {MatButton} from "@angular/material/button";
 import {NavigationService} from "../../../services/navigation.service";
 import {TagsEnum} from "../../../model/tags.enum";
+import {TagPipe} from "../../../pipes/tag.pipe";
 
 @Component({
   selector: 'app-abos-detail',
@@ -46,7 +47,8 @@ import {TagsEnum} from "../../../model/tags.enum";
     AsyncPipe,
     JsonPipe,
     CurrencyPipe,
-    DecimalPipe
+    DecimalPipe,
+    TagPipe
   ],
   templateUrl: './abos-detail.component.html',
   styleUrl: './abos-detail.component.scss'
