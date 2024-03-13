@@ -29,6 +29,8 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {map, Observable} from "rxjs";
 import {AbosStore} from "../../../stores/abos.store";
+import {TagPipe} from "../../../pipes/tag.pipe";
+import {TagsEnum, TagsEnumColors} from "../../../model/tags.enum";
 
 
 @Component({
@@ -63,7 +65,8 @@ import {AbosStore} from "../../../stores/abos.store";
     MatFormField,
     MatInput,
     DecimalPipe,
-    NgClass
+    NgClass,
+    TagPipe
   ],
   templateUrl: './abos-list.component.html',
   styleUrl: './abos-list.component.scss'
@@ -98,6 +101,10 @@ export class AbosListComponent {
         this.displayedColumns = ['title', 'price', 'period', 'active', 'remove'];
       }
     })
+  }
+
+  getTagColor(tagName : string) : string {
+    return TagsEnumColors[tagName as keyof typeof TagsEnum]
   }
 
   filterAbo(abo: Abo, searchKey: string): boolean {

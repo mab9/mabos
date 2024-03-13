@@ -25,7 +25,17 @@
             {{ element.title }}
             <!--<span *ngIf="element.isExpiringThisMonth" class="mat-small" style="color: orangered;"><b>is expiring</b></span> -->
           </p>
-          <p class="info-column"><span class="font-extra-small">{{ element.price | number:'1.2-2' }}.- per {{ element.period | period }}</span></p>
+          <p class="info-column">
+
+            <!-- create component -->
+                    <span class="chart-legend-item">
+                      <span class="tag-dot" [style.background-color]="getTagColor(element.tag)"></span>
+                      {{ element.tag | tag }}
+
+                      {{ element.price | number:'1.2-2' }}.- per {{ element.period | period }}
+                    </span>
+
+          </p>
 
         </div>
 

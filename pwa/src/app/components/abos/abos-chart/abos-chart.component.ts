@@ -7,7 +7,7 @@ import {ChartConfiguration, ChartType} from "chart.js";
 import {BaseChartDirective} from "ng2-charts";
 import {map, Observable} from "rxjs";
 import {Abo} from "../../../model/abos.model";
-import {TagsEnumColors, TagsEnum} from "../../../model/tags.enum";
+import {TagsEnum, TagsEnumColors} from "../../../model/tags.enum";
 import {TagPipe} from "../../../pipes/tag.pipe";
 
 @Component({
@@ -72,7 +72,6 @@ export class AbosChartComponent implements OnInit {
 
         this.chartData.labels!.push(this.tagPipe.transform(key));
         this.chartData.datasets[0].data.push(value);
-        // @ts-ignore
         back.push(TagsEnumColors[key])
       });
 
@@ -86,7 +85,7 @@ export class AbosChartComponent implements OnInit {
         this.chart.update();
       }
 
-      this.tagsWithColors = Array.from(values).map(([key, value]) => ({
+      this.tagsWithColors = Array.from(values).map(([key]) => ({
         name: key, // Assuming you want the 'key' as 'name'
         color: TagsEnumColors[key as keyof typeof TagsEnum]
       }));
@@ -97,6 +96,8 @@ export class AbosChartComponent implements OnInit {
     return TagsEnumColors[tag];
   }
 
+  // disable unexpected any rule to be able to use the function as generic as possible.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private groupBy<T>(arr: T[], fn: (item: T) => any) {
     return arr.reduce<Record<string, T[]>>((prev, curr) => {
       const groupKey = fn(curr);

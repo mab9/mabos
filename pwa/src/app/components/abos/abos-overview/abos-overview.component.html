@@ -15,18 +15,23 @@
 
   </mat-expansion-panel>
 </mat-accordion>
-<br>
 
-<mat-accordion>
-  <mat-expansion-panel (opened)="panelOpenStateChart = true"
-                       (closed)="panelOpenStateChart = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title>My monthly expenses chart</mat-panel-title>
-    </mat-expansion-panel-header>
+<ng-container *ngIf="(abosStore.abosActive$ | async) as activeCount">
 
-    <p>Costs per month:          <span class="align-decimal">{{ abosStore.abosTotalMonthlyCosts$ | async | number:'1.2-2' }}.-</span></p>
+  @if (activeCount > 0) {
+    <br>
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenStateChart = true"
+                           (closed)="panelOpenStateChart = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>My monthly expenses chart</mat-panel-title>
+        </mat-expansion-panel-header>
 
-    <app-abos-chart></app-abos-chart>
+        <p>Costs per month:          <span class="align-decimal">{{ abosStore.abosTotalMonthlyCosts$ | async | number:'1.2-2' }}.-</span></p>
 
-  </mat-expansion-panel>
-</mat-accordion>
+        <app-abos-chart></app-abos-chart>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  }
+</ng-container>
