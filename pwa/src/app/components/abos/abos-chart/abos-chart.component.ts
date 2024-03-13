@@ -32,7 +32,7 @@ export class AbosChartComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   private tagPipe = new TagPipe();
-  public abosGroupedByTagsAndMonthlyCosts$: Observable<Map<string, number>> | null = null;
+  public abosGroupedByTagsAndMonthlyCosts$: Observable<Map<TagsEnum, number>> | null = null;
   public chartOptions: ChartConfiguration['options'] = {responsive: true,};
   public chartType: ChartType = 'pie';
   public chartLegend = false;
@@ -48,13 +48,9 @@ export class AbosChartComponent implements OnInit {
     ]
   };
 
-  tagsWithColors;
+  tagsWithColors: { name: TagsEnum; color: string; }[] | undefined = undefined;
 
   constructor(public abosStore: AbosStore,) {
-    this.tagsWithColors = Object.entries(TagsEnum).map(([key, value]) => ({
-      name: value,
-      color: TagsEnumColors[key as keyof typeof TagsEnum]
-    }));
 
     this.abosGroupedByTagsAndMonthlyCosts$ = this.abosStore.abos$.pipe(
       map(abos => abos.filter(abo => abo.active)),
@@ -89,10 +85,15 @@ export class AbosChartComponent implements OnInit {
       if (this.chart) {
         this.chart.update();
       }
+
+      this.tagsWithColors = Array.from(values).map(([key, value]) => ({
+        name: key, // Assuming you want the 'key' as 'name'
+        color: TagsEnumColors[key as keyof typeof TagsEnum]
+      }));
     });
   }
 
-  public tagColor(tag : TagsEnum) {
+  public tagColor(tag: TagsEnum) {
     return TagsEnumColors[tag];
   }
 
@@ -101,27 +102,24 @@ export class AbosChartComponent implements OnInit {
       const groupKey = fn(curr);
       const group = prev[groupKey] || [];
       group.push(curr);
-      return { ...prev, [groupKey]: group };
+      return {...prev, [groupKey]: group};
     }, {});
   }
 
-  private groupByTag(abos : Abo[]) {
+  private groupByTag(abos: Abo[]): Record<TagsEnum, Abo[]> {
     return this.groupBy(abos, (a) => a.tag)
   }
 
-  private sumTotalPerGroup(groupKey: string, abos: Abo[]): [string, number] {
+  private sumTotalPerGroup(groupKey: TagsEnum, abos: Abo[]): [TagsEnum, number] {
     const total = abos.reduce((acc, abo) => acc + this.abosStore.normalizePriceToPricePerMonth(abo), 0);
     return [groupKey, this.abosStore.roundUpToNearestFiveCents(total)];
   }
 
-  private createMapTagsByMontlyCosts(groups : Record<string, Abo[]>) : Map<string, number> {
-    return new Map<string, number>(
+  private createMapTagsByMontlyCosts(groups: Record<TagsEnum, Abo[]>): Map<TagsEnum, number> {
+    return new Map<TagsEnum, number>(
       Object.entries(groups).map(([groupKey, abos]) =>
-        this.sumTotalPerGroup(groupKey, abos)
+        this.sumTotalPerGroup(groupKey as TagsEnum, abos)
       )
     )
   }
-
-
-  protected readonly TagsEnumColors = TagsEnumColors;
 }
