@@ -29,8 +29,10 @@
 
             <!-- create component -->
                     <span class="chart-legend-item">
-                      <span class="tag-dot" [style.background-color]="getTagColor(element.tag)"></span>
-                      {{ element.tag | tag }}
+                      <ng-container *ngIf="element.tag">
+                        <span class="tag-dot" [style.background-color]="getTagColor(element.tag)"></span>
+                        {{ element.tag | tag }}
+                      </ng-container>
 
                       {{ element.price | number:'1.2-2' }}.- per {{ element.period | period }}
                     </span>
