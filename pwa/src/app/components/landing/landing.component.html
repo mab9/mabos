@@ -33,7 +33,7 @@
 
 
 
-  <div class="center-features" (click)="click()" (swipeleft)="nextFeature()" (swiperight)="previousFeature()">
+  <div class="center-features" (click)="click()" (keyup.enter)="click()" tabindex="0" (swipeleft)="nextFeature()" (swiperight)="previousFeature()">
 
     <div class="dots">
       <span *ngFor="let feature of features; let i = index" [class.active-dot]="i === currentIndex">•</span>
