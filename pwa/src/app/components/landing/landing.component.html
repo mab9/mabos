@@ -31,31 +31,70 @@
 
 <section id="features-container">
 
-  <div class="center-features">
-
-    <h2 class="down-text">Costs control</h2>
 
 
-    <div class="feature-table">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+  <div class="center-features" (click)="click()" (swipeleft)="nextFeature()" (swiperight)="previousFeature()">
 
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-      <ng-container matColumnDef="feature">
-        <td mat-cell *matCellDef="let element"> {{ element.feature }} </td>
-      </ng-container>
-
-      <tr mat-row *matRowDef="let row; columns: ['feature'];"></tr>
-    </table>
+    <div class="dots">
+      <span *ngFor="let feature of features; let i = index" [class.active-dot]="i === currentIndex">•</span>
     </div>
 
 
+    <ng-container *ngIf="currentIndex === 0">
 
-    <img class="image-feature"
-         src="assets/feature-view-1.png"
-         title="landing page feature section image"
-         alt="landing page feature section image">
+      <h2 class="down-text">Costs control</h2>
+
+
+      <div class="feature-table">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <ng-container matColumnDef="feature">
+          <td mat-cell *matCellDef="let element"> {{ element.feature }} </td>
+        </ng-container>
+
+        <tr mat-row *matRowDef="let row; columns: ['feature'];"></tr>
+      </table>
+      </div>
+
+
+
+      <img class="image-feature"
+           src="assets/feature-view-1.png"
+           title="landing page feature section image"
+           alt="landing page feature section image">
+
+    </ng-container>
+
+    <ng-container *ngIf="currentIndex === 1">
+
+      <h2 class="down-text">Expense grouping</h2>
+
+
+      <div class="feature-table">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+          <ng-container matColumnDef="feature">
+            <td mat-cell *matCellDef="let element"> {{ element.feature }} </td>
+          </ng-container>
+
+          <tr mat-row *matRowDef="let row; columns: ['feature'];"></tr>
+        </table>
+      </div>
+
+
+
+      <img class="image-feature"
+           src="assets/feature-view-1.png"
+           title="landing page feature section image"
+           alt="landing page feature section image">
+
+    </ng-container>
 
     <button class="subscribe-btn" mat-flat-button color="warn" (click)="notImplemented()" aria-label="subscribe to mabos button">subscribe</button>
 

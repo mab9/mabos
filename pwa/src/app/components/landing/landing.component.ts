@@ -26,6 +26,9 @@ import {ViewPortService} from "../../services/view-port.service";
 })
 export class LandingComponent {
 
+  protected currentIndex = 1;
+  protected features = Array.of("never forget","monthly and yearly expense overview","expense grouping", "free and open source")
+
   constructor(public viewPortService : ViewPortService) {
   }
 
@@ -42,5 +45,28 @@ export class LandingComponent {
 
   notImplemented() {
     alert('redirect not implemented for the moment. go to login and register.')
+  }
+
+  nextFeature() {
+    console.info("swipe right")
+
+    if (this.currentIndex === this.features.length) {
+      return;
+    } else {
+      this.currentIndex += 1;
+    }
+  }
+
+  previousFeature() {
+    console.info("swipe left")
+    if (this.currentIndex === 0) {
+      return;
+    } else {
+      this.currentIndex -= 1;
+    }
+  }
+
+  click() {
+    console.info("click")
   }
 }
