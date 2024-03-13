@@ -22,7 +22,7 @@ import {MatChip} from "@angular/material/chips";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatSort, MatSortHeader} from "@angular/material/sort";
 import {PeriodPipe} from "../../../pipes/period.pipe";
-import {FormBuilder, FormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {Abo} from "../../../model/abos.model";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {MatFormField} from "@angular/material/form-field";
@@ -87,7 +87,6 @@ export class AbosListComponent {
   constructor(
     public abosStore: AbosStore,
     protected breakpointObserver: BreakpointObserver,
-    private fb: FormBuilder,
   ) {
 
     this.updateFilter();

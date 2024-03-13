@@ -1,12 +1,15 @@
 <div id="landing-container">
   <div class="landing-image-container">
 
-    <img *ngIf="breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="image-landing"
-         src="assets/mabos-logo-small.webp"
-         alt="landing page image" title="landing page image">
-    <img *ngIf="!breakPointObserver.isMatched([Breakpoints.Small, Breakpoints.XSmall])" class="image-landing"
-         src="assets/mabos-logo.webp"
-         alt="landing page image" title="landing page image">
+    @if (viewPortService.isMobile()) {
+      <img class="image-landing"
+           src="assets/mabos-logo-small.webp"
+           alt="landing page image" title="landing page image">
+    } @else {
+      <img class="image-landing"
+           src="assets/mabos-logo.webp"
+           alt="landing page image" title="landing page image">
+    }
   </div>
 
   <div class="fancy-text">

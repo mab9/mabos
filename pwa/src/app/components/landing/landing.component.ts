@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatCell, MatCellDef, MatColumnDef, MatRow, MatRowDef, MatTable} from "@angular/material/table";
+import {ViewPortService} from "../../services/view-port.service";
 
 @Component({
   selector: 'app-landing',
@@ -26,11 +26,8 @@ import {MatCell, MatCellDef, MatColumnDef, MatRow, MatRowDef, MatTable} from "@a
 })
 export class LandingComponent {
 
-  constructor(public breakPointObserver : BreakpointObserver) {
+  constructor(public viewPortService : ViewPortService) {
   }
-
-  protected readonly BreakpointObserver = BreakpointObserver;
-  protected readonly Breakpoints = Breakpoints;
 
   dataSource = [
     { feature: 'Control your subscription expenses' },
