@@ -21,15 +21,15 @@
   <mat-expansion-panel (opened)="panelOpenStateChart = true"
                        (closed)="panelOpenStateChart = false">
     <mat-expansion-panel-header>
-      <mat-panel-title>My Charts</mat-panel-title>
+      <mat-panel-title>My Chart</mat-panel-title>
     </mat-expansion-panel-header>
 
     <p>Costs per year:           <span class="align-decimal">{{ abosStore.abosTotalYearlyPrice$ | async | number:'1.2-2' }}.-</span></p>
     <p>Costs per month:          <span class="align-decimal">{{ abosStore.abosTotalMonthlyCosts$ | async | number:'1.2-2' }}.-</span></p>
 
-    <p><mat-divider></mat-divider></p>
-
     <app-abos-chart></app-abos-chart>
+
+    <br>
 
     <!-- Tags Display -->
     <div style="display: flex; flex-wrap: wrap; gap: 4px; align-items: center;">

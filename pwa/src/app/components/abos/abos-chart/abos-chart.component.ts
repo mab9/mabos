@@ -1,10 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {AbosStore} from "../../../stores/abos.store";
-import {BarController, ChartConfiguration, ChartType} from "chart.js";
+import {ChartConfiguration, ChartType} from "chart.js";
 import {BaseChartDirective} from "ng2-charts";
+import {map, Observable} from "rxjs";
+import {Abo} from "../../../model/abos.model";
+import {TagsEnumColors} from "../../../model/tags.enum";
+import {TagPipe} from "../../../pipes/tag.pipe";
 
 @Component({
   selector: 'app-abos-chart',
@@ -19,31 +23,91 @@ import {BaseChartDirective} from "ng2-charts";
   templateUrl: './abos-chart.component.html',
   styleUrl: './abos-chart.component.scss'
 })
-export class AbosChartComponent {
+export class AbosChartComponent implements OnInit {
 
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-  };
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
+  // reference to be able to repaint on abo updates.
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  public barChartData: ChartConfiguration['data'] = {
-    labels: [], // Tag names here
+  private tagPipe = new TagPipe();
+  public abosGroupedByTagsAndMonthlyCosts$: Observable<Map<string, number>> | null = null;
+  public chartOptions: ChartConfiguration['options'] = {responsive: true,};
+  public chartType: ChartType = 'pie';
+  public chartLegend = false;
+  public chartData: ChartConfiguration['data'] = {
+    labels: new Array<string>,
     datasets: [
-      { data: [], label: 'Expenses per Tag' } // Expenses here
+      {
+        data: [],
+        backgroundColor: new Array<string>,
+        //hoverBackgroundColor : new Array<string>,
+        label: ' Expenses per Month',
+      }
     ]
   };
 
-  constructor(public abosStore : AbosStore,) {
-    this.prepareChartData();
+  constructor(public abosStore: AbosStore,) {
+    this.abosGroupedByTagsAndMonthlyCosts$ = this.abosStore.abos$.pipe(
+      map(abos => abos.filter(abo => abo.active)),
+      map(abos => abos.filter(abo => abo.tag)),
+      map(abos => this.groupByTag(abos)),
+      map(groups => this.createMapTagsByMontlyCosts(groups))
+    );
   }
 
-  prepareChartData(): void {
-    // Assuming you have a service or method to fetch or calculate these values
-    const tags = ['Housing', 'Groceries', 'Mobility', 'Entertainment', 'Health', 'Education', 'Insurance'];
-    const expenses = [1200, 600, 300, 150, 200, 100, 250]; // Example expenses
+  ngOnInit() {
+    this.abosGroupedByTagsAndMonthlyCosts$!.subscribe(values => {
+      this.chartData.labels = [];
+      this.chartData.datasets[0].data = [];
+      this.chartData.datasets[0].backgroundColor = new Array<string>;
 
-    this.barChartData.labels = tags;
-    this.barChartData.datasets[0].data = expenses;
+      const back = new Array<string>;
+
+      values.forEach((value, key) => {
+
+        this.chartData.labels!.push(this.tagPipe.transform(key));
+        this.chartData.datasets[0].data.push(value);
+        // @ts-ignore
+        back.push(TagsEnumColors[key])
+      });
+
+      // somehow it does not work to directly push to backgroundColor array.
+      this.chartData.datasets[0].backgroundColor = back;
+
+      // Trigger an update to the chart manually.
+      // This is a common requirement for chart libraries like Chart.js when used within Angular,
+      // as changes to the data may not automatically cause the chart to re-render.
+      if (this.chart) {
+        this.chart.update();
+      }
+    });
   }
+
+
+  private groupBy<T>(arr: T[], fn: (item: T) => any) {
+    return arr.reduce<Record<string, T[]>>((prev, curr) => {
+      const groupKey = fn(curr);
+      const group = prev[groupKey] || [];
+      group.push(curr);
+      return { ...prev, [groupKey]: group };
+    }, {});
+  }
+
+  private groupByTag(abos : Abo[]) {
+    return this.groupBy(abos, (a) => a.tag)
+  }
+
+  private sumTotalPerGroup(groupKey: string, abos: Abo[]): [string, number] {
+    const total = abos.reduce((acc, abo) => acc + this.abosStore.normalizePriceToPricePerMonth(abo), 0);
+    return [groupKey, this.abosStore.roundUpToNearestFiveCents(total)];
+  }
+
+  private createMapTagsByMontlyCosts(groups : Record<string, Abo[]>) : Map<string, number> {
+    return new Map<string, number>(
+      Object.entries(groups).map(([groupKey, abos]) =>
+        this.sumTotalPerGroup(groupKey, abos)
+      )
+    )
+  }
+
+
 }
