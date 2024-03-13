@@ -52,6 +52,7 @@ export class AbosMainComponent {
       price: abo.price,
       period: abo.period,
       active: abo.active,
+      tag: abo.tag,
       description: abo.description,
       isAutoRenewal: abo.isAutoRenewal,
       startDate: abo.startDate,

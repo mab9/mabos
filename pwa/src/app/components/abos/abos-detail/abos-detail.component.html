@@ -21,6 +21,16 @@
           </mat-slide-toggle>
         </div>
 
+        <!-- TAG -->
+        <mat-form-field appearance="outline" class="width-full">
+          <mat-label>Tag</mat-label>
+          <mat-select formControlName="tag" placeholder="Groceries">
+            @for (item of Object.keys(TagsEnum); track item) {
+              <mat-option [value]="item">{{ item }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
 
         <!-- PRICE -->
         <mat-form-field appearance="outline" class="width-full">

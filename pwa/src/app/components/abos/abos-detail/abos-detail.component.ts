@@ -15,6 +15,7 @@ import {AbosStore} from "../../../stores/abos.store";
 import {MatChip, MatChipOption} from "@angular/material/chips";
 import {MatButton} from "@angular/material/button";
 import {NavigationService} from "../../../services/navigation.service";
+import {TagsEnum} from "../../../model/tags.enum";
 
 @Component({
   selector: 'app-abos-detail',
@@ -71,4 +72,6 @@ export class AbosDetailComponent {
     this.abosStore.removeItem(id)
     this.naviService.goHome();
   }
+
+  protected readonly TagsEnum = TagsEnum;
 }

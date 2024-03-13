@@ -1,5 +1,6 @@
 import {Period} from "./period.enum";
 import {format} from "date-fns";
+import {TagsEnum} from "./tags.enum";
 
 export interface Abo {
   id: number | null;
@@ -10,6 +11,7 @@ export interface Abo {
   description: string;
   startDate: string;
   isAutoRenewal: boolean;
+  tag: TagsEnum | null,
 
   // meta data
   isEditing: boolean;
@@ -29,6 +31,7 @@ export const createAbo = (today = new Date(), period = Period.MONTH): Abo => {
     price: 0,
     period: period,
     active: false,
+    tag: null,
     description: '',
     costsPerYear: 0,
     isEditing: false,

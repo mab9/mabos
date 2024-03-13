@@ -24,6 +24,8 @@ public class Abo {
     private boolean isAutoRenewal;
     private LocalDate startDate;
 
+    @Enumerated(value = EnumType.STRING)
+    private Tag tag;
 
     // // Reminders
     private boolean isExpReminderActive;
