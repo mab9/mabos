@@ -29,18 +29,5 @@
 
     <app-abos-chart></app-abos-chart>
 
-    <br>
-
-    <!-- Tags Display -->
-    <div style="display: flex; flex-wrap: wrap; gap: 4px; align-items: center;">
-      <ng-container *ngFor="let tag of tagsWithColors">
-
-        <span style="display: flex; align-items: center; gap: 5px; font-size: xx-small">
-          <span class="tag-dot" [style.background-color]="tag.color" style="height: 8px; width: 8px; border-radius: 50%;"></span>
-          {{ tag.name | tag }}
-        </span>
-      </ng-container>
-    </div>
-
   </mat-expansion-panel>
 </mat-accordion>

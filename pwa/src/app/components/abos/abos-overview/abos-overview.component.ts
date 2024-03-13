@@ -14,7 +14,6 @@ import {
 } from "@angular/material/expansion";
 import {MatGridTile} from "@angular/material/grid-list";
 import {MatDivider} from "@angular/material/divider";
-import {TagsEnum, TagsEnumColors} from "../../../model/tags.enum";
 import {TagPipe} from "../../../pipes/tag.pipe";
 import {AbosChartComponent} from "../abos-chart/abos-chart.component";
 
@@ -47,16 +46,9 @@ export class AbosOverviewComponent {
 
   panelOpenState = false;
   panelOpenStateChart = false;
-  tagsWithColors;
   constructor(
     public abosStore : AbosStore,
     ) {
-    this.tagsWithColors = Object.entries(TagsEnum).map(([key, value]) => ({
-      name: value,
-      color: TagsEnumColors[key as keyof typeof TagsEnum]
-    }));
   }
 
-  protected readonly TagsEnum = TagsEnum;
-  protected readonly TagsEnumColors = TagsEnumColors;
 }

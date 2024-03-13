@@ -1,0 +1,21 @@
+
+
+.tag-dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: xx-small;
+}

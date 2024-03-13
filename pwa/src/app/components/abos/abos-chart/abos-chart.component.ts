@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {AbosStore} from "../../../stores/abos.store";
 import {ChartConfiguration, ChartType} from "chart.js";
 import {BaseChartDirective} from "ng2-charts";
 import {map, Observable} from "rxjs";
 import {Abo} from "../../../model/abos.model";
-import {TagsEnumColors} from "../../../model/tags.enum";
+import {TagsEnumColors, TagsEnum} from "../../../model/tags.enum";
 import {TagPipe} from "../../../pipes/tag.pipe";
 
 @Component({
@@ -19,6 +19,9 @@ import {TagPipe} from "../../../pipes/tag.pipe";
     NgIf,
     AsyncPipe,
     BaseChartDirective,
+    NgForOf,
+    TagPipe,
+    JsonPipe,
   ],
   templateUrl: './abos-chart.component.html',
   styleUrl: './abos-chart.component.scss'
@@ -45,7 +48,14 @@ export class AbosChartComponent implements OnInit {
     ]
   };
 
+  tagsWithColors;
+
   constructor(public abosStore: AbosStore,) {
+    this.tagsWithColors = Object.entries(TagsEnum).map(([key, value]) => ({
+      name: value,
+      color: TagsEnumColors[key as keyof typeof TagsEnum]
+    }));
+
     this.abosGroupedByTagsAndMonthlyCosts$ = this.abosStore.abos$.pipe(
       map(abos => abos.filter(abo => abo.active)),
       map(abos => abos.filter(abo => abo.tag)),
@@ -82,6 +92,9 @@ export class AbosChartComponent implements OnInit {
     });
   }
 
+  public tagColor(tag : TagsEnum) {
+    return TagsEnumColors[tag];
+  }
 
   private groupBy<T>(arr: T[], fn: (item: T) => any) {
     return arr.reduce<Record<string, T[]>>((prev, curr) => {
@@ -110,4 +123,5 @@ export class AbosChartComponent implements OnInit {
   }
 
 
+  protected readonly TagsEnumColors = TagsEnumColors;
 }

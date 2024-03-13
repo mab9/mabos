@@ -6,3 +6,30 @@
           [legend]="chartLegend">
   </canvas>
 </div>
+
+<br>
+
+<!-- Tags Display -->
+<div class="chart-legend">
+  <ng-container *ngFor="let tag of tagsWithColors">
+
+        <span class="chart-legend-item">
+          <span class="tag-dot" [style.background-color]="tag.color"></span>
+
+          {{ tag.name | tag }}
+        </span>
+  </ng-container>
+</div>
+
+<!--
+<div *ngIf="(abosGroupedByTagsAndMonthlyCosts$ | async) as data">
+  <ng-container *ngFor="let item of data.entries()">
+
+    <span class="chart-legend-item">
+          <span class="tag-dot" [style.background-color]="tagColor(item.at(0)!)"></span>
+              {{ item.at(0)!.toString() | tag }}
+        </span>
+   </ng-container>
+
+</div>
+-->
