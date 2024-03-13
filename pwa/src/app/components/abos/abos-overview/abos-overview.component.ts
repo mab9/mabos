@@ -16,6 +16,7 @@ import {MatGridTile} from "@angular/material/grid-list";
 import {MatDivider} from "@angular/material/divider";
 import {TagsEnum, TagsEnumColors} from "../../../model/tags.enum";
 import {TagPipe} from "../../../pipes/tag.pipe";
+import {AbosChartComponent} from "../abos-chart/abos-chart.component";
 
 @Component({
   selector: 'app-abos-overview',
@@ -36,7 +37,8 @@ import {TagPipe} from "../../../pipes/tag.pipe";
     DecimalPipe,
     MatDivider,
     NgForOf,
-    TagPipe
+    TagPipe,
+    AbosChartComponent
   ],
   templateUrl: './abos-overview.component.html',
   styleUrl: './abos-overview.component.scss'

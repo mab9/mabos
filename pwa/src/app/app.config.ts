@@ -9,6 +9,7 @@ import {MAT_DATE_LOCALE, provideNativeDateAdapter} from "@angular/material/core"
 import {KeycloakService} from "keycloak-angular";
 import {providerKeycloakBearerInterceptor, providerKeycloakInitializer} from "./providers/keycloak.provider";
 import { provideServiceWorker } from '@angular/service-worker';
+import {provideCharts, withDefaultRegisterables} from "ng2-charts";
 
 export const appConfig: ApplicationConfig = {
 
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     KeycloakService,
     providerKeycloakInitializer,
     providerKeycloakBearerInterceptor,
+    provideCharts(withDefaultRegisterables()),
     provideHttpClient(
       withFetch(),
       withXsrfConfiguration(
