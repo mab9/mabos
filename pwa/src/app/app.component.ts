@@ -54,10 +54,10 @@ export class AppComponent implements OnInit {
         });
     }
 
-
-    navigator.geolocation.getCurrentPosition((result) => {
-      console.info("geo location", result)
-    })
+    // this is for native api tests. but we don't want to bother the user.
+    //navigator.geolocation.getCurrentPosition((result) => {
+    //  console.info("geo location", result)
+    //})
 
     window.addEventListener("online",  () => {
       this.messageService.showMessages("You are back online.")
