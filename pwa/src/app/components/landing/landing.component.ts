@@ -4,6 +4,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatCell, MatCellDef, MatColumnDef, MatRow, MatRowDef, MatTable} from "@angular/material/table";
 import {ViewPortService} from "../../services/view-port.service";
+import {MatDivider} from "@angular/material/divider";
 
 @Component({
   selector: 'app-landing',
@@ -19,7 +20,8 @@ import {ViewPortService} from "../../services/view-port.service";
     MatCell,
     MatRow,
     MatRowDef,
-    MatCellDef
+    MatCellDef,
+    MatDivider
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
@@ -27,15 +29,22 @@ import {ViewPortService} from "../../services/view-port.service";
 export class LandingComponent {
 
   protected currentIndex = 0;
-  protected features = Array.of("never forget","monthly and yearly expense overview","expense grouping", "free and open source")
+  //protected features = Array.of("never forget","monthly and yearly expense overview","expense grouping", "free and open source")
 
   constructor(public viewPortService : ViewPortService) {
   }
 
   dataSource = [
-    { feature: 'Control your subscription expenses' },
-    { feature: 'Monthly and yearly costs overview' },
-    { feature: 'Plan your expenses' },
+    [
+      { row: 'Gather expenses' },
+      { row: 'Expenses overview' },
+    ],
+
+    [
+      { row: 'Expense tagging' },
+      { row: 'Chart overview' },
+    ]
+
     // Add more features here
   ];
 
@@ -48,7 +57,7 @@ export class LandingComponent {
   }
 
   nextFeature() {
-    if (this.currentIndex === this.features.length) {
+    if (this.currentIndex === this.dataSource.length -1) {
       return;
     } else {
       this.currentIndex += 1;

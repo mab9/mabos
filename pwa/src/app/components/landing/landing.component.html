@@ -34,7 +34,7 @@
   <div class="center-features" tabindex="0" (swipeleft)="nextFeature()" (swiperight)="previousFeature()">
 
     <div class="dots">
-      <span *ngFor="let feature of features; let i = index" [class.active-dot]="i === currentIndex">•</span>
+      <span *ngFor="let items of dataSource; let i = index" [class.active-dot]="i === currentIndex">•</span>
     </div>
 
 
@@ -44,16 +44,16 @@
 
 
       <div class="feature-table">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+      <table mat-table [dataSource]="dataSource[currentIndex]" class="mat-elevation-z0">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
-        <ng-container matColumnDef="feature">
-          <td mat-cell *matCellDef="let element"> {{ element.feature }} </td>
+        <ng-container matColumnDef="row">
+          <td mat-cell *matCellDef="let element"> {{ element.row }} </td>
         </ng-container>
 
-        <tr mat-row *matRowDef="let row; columns: ['feature'];"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['row'];"></tr>
       </table>
       </div>
 
@@ -68,27 +68,26 @@
 
     <ng-container *ngIf="currentIndex === 1">
 
-      <h2 class="down-text">Expense grouping</h2>
+      <h2 class="down-text">Tagging and Chart view</h2>
 
 
       <div class="feature-table">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+        <table mat-table [dataSource]="dataSource[currentIndex]" class="mat-elevation-z0">
 
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
 
-          <ng-container matColumnDef="feature">
-            <td mat-cell *matCellDef="let element"> {{ element.feature }} </td>
+          <ng-container matColumnDef="row">
+            <td mat-cell *matCellDef="let element"> {{ element.row }} </td>
           </ng-container>
 
-          <tr mat-row *matRowDef="let row; columns: ['feature'];"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['row'];"></tr>
         </table>
       </div>
 
 
-
       <img class="image-feature"
-           src="assets/feature-view-1.png"
+           src="assets/feature-view-2.png"
            title="landing page feature section image"
            alt="landing page feature section image">
 
