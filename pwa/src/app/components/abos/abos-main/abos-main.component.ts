@@ -8,6 +8,7 @@ import {Abo} from "../../../model/abos.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AbosDetailComponent} from "../abos-detail/abos-detail.component";
 import {AbosOverviewComponent} from "../abos-overview/abos-overview.component";
+import {NavigationService} from "../../../services/navigation.service";
 
 @Component({
   selector: 'app-abos',
@@ -28,6 +29,7 @@ export class AbosMainComponent {
 
   constructor(
     private fb: FormBuilder,
+    private naviService : NavigationService,
     public abosStore : AbosStore,) {
   }
 
@@ -43,6 +45,7 @@ export class AbosMainComponent {
 
   onSelectItem(abo: Abo) {
     this.abosStore.setSelectedFg(this.newAbo(abo));
+    this.naviService.goTo('/abos/' + abo.id)
   }
 
   private newAbo(abo: Abo): FormGroup {

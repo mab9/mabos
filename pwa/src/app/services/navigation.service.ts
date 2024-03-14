@@ -29,4 +29,8 @@ export class NavigationService {
     this.router.navigate(['/abos']);
     this.currentPageNaviDataSubject.next(this.defaultPageNaviData);
   }
+
+  goTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

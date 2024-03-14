@@ -1,6 +1,4 @@
-@if (abosStore.selectedItemFg) {
-  <app-abos-detail></app-abos-detail>
-} @else {
+
   <ng-container *ngIf="(abosStore.abos$ | async) as abos">
     <app-abos-overview></app-abos-overview>
 
@@ -23,4 +21,4 @@
           (click)="onAdd()">
     <mat-icon>add</mat-icon>
   </button>
-}
+
