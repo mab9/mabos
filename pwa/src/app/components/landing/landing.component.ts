@@ -48,8 +48,6 @@ export class LandingComponent {
   }
 
   nextFeature() {
-    alert("swipe right")
-
     if (this.currentIndex === this.features.length) {
       return;
     } else {
@@ -58,24 +56,10 @@ export class LandingComponent {
   }
 
   previousFeature() {
-    alert("swipe left")
     if (this.currentIndex === 0) {
       return;
     } else {
       this.currentIndex -= 1;
     }
-  }
-
-  click() {
-    console.info("click")
-  }
-
-  swipe(event : Event) {
-    alert("Swipe alert " + event.type)
-
-  }
-
-  swiper() {
-    alert("Swiper alert")
   }
 }
