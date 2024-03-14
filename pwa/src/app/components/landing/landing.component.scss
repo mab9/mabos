@@ -64,6 +64,10 @@
   align-content: center;
 }
 
+.feature-transformation {
+  transition: transform 2s ease-in-out;
+}
+
 .center-features {
   display: flex;
   flex-direction: column;
@@ -89,4 +93,14 @@
 
 .active-dot {
   color: #d74e14;
+}
+
+.mat-card-enter {
+  transform: translateX(0);
+  transition: transform 0.5s ease-in-out;
+}
+
+.mat-card-leave {
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
 }

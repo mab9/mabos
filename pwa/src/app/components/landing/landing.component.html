@@ -29,16 +29,16 @@
 </div>
 
 
-<section id="features-container">
+<section id="features-container" (swipeup)="scrollToTop($event)" (swipeleft)="nextFeature()" (swiperight)="previousFeature()">
 
-  <div class="center-features" tabindex="0" (swipeleft)="nextFeature()" (swiperight)="previousFeature()">
+  <div class="center-features" tabindex="0">
 
     <div class="dots">
-      <span *ngFor="let items of dataSource; let i = index" [class.active-dot]="i === currentIndex">•</span>
+      <span *ngFor="let items of dataSource; let i = index" [class.active-dot]="showCard(i)">•</span>
     </div>
 
 
-    <ng-container *ngIf="currentIndex === 0">
+    <ng-container class="feature-transformation" *ngIf="showCard(0)" [class.mat-card-enter]="showCard(0)" [class.mat-card-leave]="!showCard(0)">
 
       <h2 class="down-text">Costs control</h2>
 
@@ -66,7 +66,7 @@
 
     </ng-container>
 
-    <ng-container *ngIf="currentIndex === 1">
+    <ng-container class="feature-transformation" *ngIf="showCard(1)" [class.mat-card-enter]="showCard(1)" [class.mat-card-leave]="!showCard(1)">
 
       <h2 class="down-text">Tagging and Chart view</h2>
 

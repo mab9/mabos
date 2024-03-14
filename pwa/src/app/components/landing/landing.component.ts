@@ -52,8 +52,17 @@ export class LandingComponent {
       document.getElementById('features-container')?.scrollIntoView({behavior: 'smooth'});
   }
 
+  scrollToTop(event : Event) {
+    console.info("scroll to top - somehow not working", event)
+    document.getElementById('landing-container')?.scrollIntoView({behavior: 'smooth'});
+  }
+
   notImplemented() {
     alert('redirect not implemented for the moment. go to login and register.')
+  }
+
+  showCard(index: number): boolean {
+    return index === this.currentIndex;
   }
 
   nextFeature() {
